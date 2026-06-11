@@ -1,0 +1,36 @@
+[
+  {
+    "id": "troubleshoot-vmverification",
+    "prompt": "I'm getting VMVerificationOrDeserializationError when deploying my Move contract with Walrus dependencies to testnet.",
+    "expected_output": "Check Move.toml: use testnet-contracts/walrus subdir, correct rev, and delete Move.lock. Use edition 2024.",
+    "expectations": [
+      "Identifies Move.toml dependency misconfiguration as the cause",
+      "Mentions testnet-contracts/walrus as the correct subdir for testnet",
+      "Recommends deleting Move.lock and rebuilding",
+      "Mentions checking the edition is 2024 not 2024.beta"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/available-networks"]
+  },
+  {
+    "id": "troubleshoot-tip-exceeded",
+    "prompt": "I get 'Tip amount exceeds the maximum allowed tip' when uploading via the TypeScript SDK.",
+    "expected_output": "Increase sendTip.max in the upload relay configuration. Check the relay's tip-config endpoint.",
+    "expectations": [
+      "Identifies the upload relay tip configuration as the issue",
+      "Shows how to increase sendTip.max in the uploadRelay config",
+      "Mentions checking the relay's /v1/tip-config endpoint"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/storing-blobs"]
+  },
+  {
+    "id": "troubleshoot-no-gas",
+    "prompt": "I get 'Cannot find gas coin for signer address' when trying to store a blob.",
+    "expected_output": "The wallet has no SUI. Fund the address with SUI tokens for gas fees.",
+    "expectations": [
+      "Identifies the wallet has no SUI tokens",
+      "Recommends funding the address with SUI",
+      "Mentions sui client faucet for testnet or exchange for mainnet"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/walrus-cli"]
+  }
+]

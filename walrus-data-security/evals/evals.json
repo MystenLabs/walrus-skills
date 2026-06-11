@@ -1,0 +1,25 @@
+[
+  {
+    "id": "security-encrypt-before-upload",
+    "prompt": "I want to store private user documents on Walrus. How do I keep them private?",
+    "expected_output": "Encrypt before uploading. All Walrus blobs are public. Use Seal for onchain access control or any encryption library.",
+    "expectations": [
+      "Clearly states all Walrus blobs are public by default",
+      "Recommends encrypting data before uploading",
+      "Mentions Seal as the recommended solution for onchain access control",
+      "States that blob IDs are not secrets"
+    ],
+    "sources": ["https://docs.wal.app/docs/data-security"]
+  },
+  {
+    "id": "security-seal-sender",
+    "prompt": "I'm getting 'Transaction was not signed by the correct sender' when trying to decrypt with Seal. What's wrong?",
+    "expected_output": "Set tx.setSender(address) on the PTB before passing it to Seal. The sender must match the decrypting address.",
+    "expectations": [
+      "Identifies the missing tx.setSender(address) call as the cause",
+      "Shows the tx.setSender(address) code",
+      "Explains the sender must match the address requesting decryption"
+    ],
+    "sources": ["https://docs.wal.app/docs/data-security"]
+  }
+]

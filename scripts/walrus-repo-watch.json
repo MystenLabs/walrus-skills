@@ -1,0 +1,32 @@
+{
+  "walrus-cli": [
+    "docs/content/walrus-client/"
+  ],
+  "walrus-http-api": [
+    "docs/content/http-api/"
+  ],
+  "walrus-ts-sdk": [
+    "docs/content/typescript-sdk/"
+  ],
+  "walrus-quilts": [
+    "docs/content/walrus-client/quilts.mdx",
+    "docs/content/http-api/quilt-http-apis.mdx"
+  ],
+  "walrus-move-integration": [
+    "docs/examples/move/walrus_dep/",
+    "contracts/walrus/sources/"
+  ],
+  "walrus-sites": [
+    "docs/content/sites/"
+  ],
+  "walrus-data-security": [
+    "docs/content/data-security.mdx"
+  ],
+  "walrus-blob-lifecycle": [
+    "docs/content/walrus-client/managing-blobs.mdx",
+    "docs/content/large-uploads.mdx"
+  ],
+  "walrus-storage-costs": [
+    "docs/content/system-overview/storage-costs.mdx"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "http-api-store-blob",
+    "prompt": "How do I store a file on Walrus using curl?",
+    "expected_output": "Shows PUT request to publisher /v1/blobs with epochs parameter and upload-file flag.",
+    "expectations": [
+      "Shows a curl -X PUT command to $PUBLISHER/v1/blobs",
+      "Includes the epochs query parameter",
+      "Uses --upload-file for file uploads or -d for string data",
+      "Mentions that there is no public mainnet publisher"
+    ],
+    "sources": ["https://docs.wal.app/docs/http-api/storing-blobs"]
+  },
+  {
+    "id": "http-api-read-blob",
+    "prompt": "How do I download a blob from Walrus using its blob ID?",
+    "expected_output": "Shows GET request to aggregator /v1/blobs/<BLOB_ID> with -o flag for output.",
+    "expectations": [
+      "Shows a curl GET to $AGGREGATOR/v1/blobs/<BLOB_ID>",
+      "Mentions the -o flag for writing to a file",
+      "Mentions that public aggregators are available on both testnet and mainnet",
+      "Does not confuse aggregator (read) with publisher (write)"
+    ],
+    "sources": ["https://docs.wal.app/docs/http-api/reading-blobs"]
+  },
+  {
+    "id": "http-api-no-mainnet-publisher",
+    "prompt": "What publisher URL should I use for Walrus mainnet?",
+    "expected_output": "There is no public mainnet publisher. Use the upload relay, TypeScript SDK, or run your own.",
+    "expectations": [
+      "Clearly states there is no public unauthenticated publisher on mainnet",
+      "Suggests alternatives: upload relay, TypeScript SDK, CLI, or self-hosted publisher",
+      "Mentions the upload relay URL if applicable",
+      "Does not provide a fake or outdated publisher URL"
+    ],
+    "sources": ["https://docs.wal.app/docs/http-api/storing-blobs"]
+  }
+]

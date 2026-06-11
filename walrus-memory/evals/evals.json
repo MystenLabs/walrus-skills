@@ -1,0 +1,65 @@
+[
+  {
+    "id": "memory-what-is-it",
+    "prompt": "What is Walrus Memory and how does it work?",
+    "expected_output": "Explains Walrus Memory as persistent, portable, encrypted memory for AI agents built on Walrus and Sui. Covers remember/recall/analyze operations, Seal encryption, and the relayer architecture.",
+    "expectations": [
+      "Describes Walrus Memory as persistent, portable memory for AI agents",
+      "Mentions that memories are Seal-encrypted and stored on Walrus",
+      "Lists the core operations: remember, recall, analyze",
+      "Mentions the relayer as the backend service handling encryption and storage",
+      "Mentions that memory is scoped by owner + namespace"
+    ],
+    "sources": ["https://docs.wal.app/walrus-memory/getting-started/what-is-walrus-memory"]
+  },
+  {
+    "id": "memory-ts-quickstart",
+    "prompt": "How do I store and recall a memory using the TypeScript SDK?",
+    "expected_output": "Shows installation of @mysten-incubation/memwal, MemWal.create with key/accountId/serverUrl/namespace, remember + waitForRememberJob, and recall with a query.",
+    "expectations": [
+      "Shows npm install @mysten-incubation/memwal",
+      "Shows MemWal.create with key, accountId, serverUrl, and namespace",
+      "Shows the remember method and explains it is async (returns job_id)",
+      "Shows waitForRememberJob or rememberAndWait for confirmation",
+      "Shows recall with a query parameter"
+    ],
+    "sources": ["https://docs.wal.app/walrus-memory/sdk/quick-start"]
+  },
+  {
+    "id": "memory-mcp-setup",
+    "prompt": "How do I set up Walrus Memory MCP in Claude Code?",
+    "expected_output": "Run npx login command, then claude mcp add. Shows the exact command and explains the auth flow.",
+    "expectations": [
+      "Shows the login command: npx -y @mysten-incubation/memwal-mcp login --prod",
+      "Shows the Claude Code command: claude mcp add --scope user memwal -- npx -y @mysten-incubation/memwal-mcp",
+      "Mentions restarting the client after adding",
+      "Mentions the six available MCP tools (memwal_remember, memwal_recall, etc.)"
+    ],
+    "sources": ["https://docs.wal.app/walrus-memory/mcp/quick-start"]
+  },
+  {
+    "id": "memory-namespace-isolation",
+    "prompt": "How do memory spaces and namespaces work in Walrus Memory?",
+    "expected_output": "A memory space is owner + namespace + app ID. Namespaces group memories. Different namespaces are fully isolated.",
+    "expectations": [
+      "Explains memory space as the combination of owner address + namespace + app ID",
+      "States that namespaces isolate memories from each other",
+      "Mentions that one user can have multiple namespaces",
+      "Explains that recall only searches within the specified memory space"
+    ],
+    "sources": ["https://docs.wal.app/walrus-memory/fundamentals/concepts/memory-space"]
+  },
+  {
+    "id": "memory-python-quickstart",
+    "prompt": "How do I use Walrus Memory from Python?",
+    "expected_output": "pip install memwal, MemWal.create with key/account_id/env, remember_and_wait, recall with RecallParams.",
+    "expectations": [
+      "Shows pip install memwal",
+      "Shows MemWal.create with key, account_id, and env or server_url",
+      "Mentions async (MemWal) and sync (MemWalSync) clients",
+      "Shows remember_and_wait or remember for storing",
+      "Shows recall with RecallParams"
+    ],
+    "sources": ["https://docs.wal.app/walrus-memory/python-sdk/quick-start"]
+  }
+]

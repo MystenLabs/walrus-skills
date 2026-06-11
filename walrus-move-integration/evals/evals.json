@@ -1,0 +1,38 @@
+[
+  {
+    "id": "move-wrap-blob",
+    "prompt": "How do I wrap a Walrus Blob in my own Move struct?",
+    "expected_output": "Create a struct with key ability containing a Blob field and its own UID. Shows the WrappedBlob pattern.",
+    "expectations": [
+      "Shows a struct with key ability and id: UID field",
+      "Includes a blob: Blob field using walrus::blob::Blob",
+      "Shows using object::new(ctx) for the UID",
+      "Uses the use walrus::blob::Blob import"
+    ],
+    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+  },
+  {
+    "id": "move-testnet-deps",
+    "prompt": "What does my Move.toml look like to use Walrus on testnet?",
+    "expected_output": "Shows Move.toml with Walrus dependency using testnet-contracts/walrus subdir and edition 2024.",
+    "expectations": [
+      "Uses subdir = 'testnet-contracts/walrus' (not 'contracts/walrus') for testnet",
+      "Uses edition = '2024' (not '2024.beta')",
+      "Includes the Walrus git dependency pointing to MystenLabs/walrus",
+      "Does not hardcode package IDs that may be stale"
+    ],
+    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+  },
+  {
+    "id": "move-vmverification-error",
+    "prompt": "I get VMVerificationOrDeserializationError when publishing my Move contract that depends on Walrus to testnet. How do I fix it?",
+    "expected_output": "Check Move.toml: wrong subdir (use testnet-contracts/walrus), wrong rev, or stale Move.lock. Delete Move.lock and rebuild.",
+    "expectations": [
+      "Identifies Move.toml dependency misconfiguration as the likely cause",
+      "Mentions the testnet-contracts/walrus subdir requirement for testnet",
+      "Recommends deleting Move.lock and rebuilding",
+      "Mentions checking the rev matches what is deployed on-chain"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/available-networks"]
+  }
+]

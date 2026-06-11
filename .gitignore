@@ -1,0 +1,6 @@
+node_modules/
+.env
+scripts/eval-results.json
+scripts/code-eval-results.json
+scripts/.source-hashes.json
+.DS_Store

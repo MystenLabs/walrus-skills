@@ -1,0 +1,41 @@
+[
+  {
+    "id": "overview-what-is-walrus",
+    "prompt": "What is Walrus and how does it work?",
+    "expected_output": "Explains Walrus as a decentralized blob storage protocol on Sui with erasure coding, three-layer architecture, and public-by-default data.",
+    "expectations": [
+      "Describes Walrus as a decentralized storage protocol built on Sui",
+      "Mentions erasure coding (RedStuff) for distributing data across storage nodes",
+      "Explains the three layers: client, storage nodes, Sui blockchain",
+      "States that all blobs are public by default",
+      "Mentions the Point of Availability (PoA) concept"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/core-concepts"]
+  },
+  {
+    "id": "overview-blob-id-vs-object-id",
+    "prompt": "What is the difference between a blob ID and a Sui object ID in Walrus?",
+    "expected_output": "Blob ID is a content hash (URL-safe base64) for reading. Object ID is a Sui hex ID for lifecycle operations. Same content = same blob ID but different object IDs per upload.",
+    "expectations": [
+      "Explains blob ID is content-addressed (derived from blob content)",
+      "Explains object ID is a Sui on-chain identifier (0x... hex)",
+      "States that same content produces the same blob ID",
+      "States that each upload creates a different object ID even for identical content",
+      "Clarifies blob ID is for reading, object ID is for lifecycle operations (extend, delete, share)"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/core-concepts"]
+  },
+  {
+    "id": "overview-which-tool",
+    "prompt": "I want to store files on Walrus from my web app. Should I use the CLI, HTTP API, or TypeScript SDK?",
+    "expected_output": "For a web app, use the TypeScript SDK with an upload relay for browser uploads. HTTP API is simpler for server-side. CLI is for terminal/scripting.",
+    "expectations": [
+      "Recommends the TypeScript SDK for web app integration",
+      "Mentions the upload relay for browser-based uploads",
+      "Mentions the HTTP API as an alternative for server-side code",
+      "Mentions the CLI for terminal/scripting use cases",
+      "Does not recommend the CLI as the primary choice for a web app"
+    ],
+    "sources": ["https://docs.wal.app/docs/typescript-sdk/sdks"]
+  }
+]

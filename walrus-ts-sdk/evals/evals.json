@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ts-sdk-init",
+    "prompt": "How do I initialize a WalrusClient in TypeScript to store blobs on testnet?",
+    "expected_output": "Shows the $extend(walrus()) pattern with SuiClient, network: 'testnet', and a keypair for write operations.",
+    "expectations": [
+      "Shows importing from @mysten/walrus and @mysten/sui",
+      "Uses the $extend(walrus({...})) or WalrusClient pattern",
+      "Sets network to 'testnet'",
+      "Provides a keypair or wallet for write operations",
+      "Shows a storeBlob call with epochs parameter"
+    ],
+    "sources": ["https://sdk.mystenlabs.com/walrus"]
+  },
+  {
+    "id": "ts-sdk-browser-upload",
+    "prompt": "I'm trying to upload files from a React app in the browser but getting 'Too many failures while writing blob'. What's wrong?",
+    "expected_output": "Browser environments need an upload relay configured. Add uploadRelay with host URL and sendTip.max.",
+    "expectations": [
+      "Identifies the need for an upload relay in browser environments",
+      "Provides the upload relay configuration with host and sendTip.max",
+      "Mentions the mainnet relay URL (https://upload-relay.mainnet.walrus.space) or testnet equivalent",
+      "Explains that browsers cannot distribute slivers directly to storage nodes"
+    ],
+    "sources": ["https://sdk.mystenlabs.com/walrus"]
+  },
+  {
+    "id": "ts-sdk-vite-error",
+    "prompt": "My Vite build breaks when I add @mysten/walrus. I get errors about gRPC imports.",
+    "expected_output": "Add optimizeDeps.exclude for @mysten/walrus in vite.config.ts.",
+    "expectations": [
+      "Identifies this as a Vite pre-bundling issue with gRPC/WASM",
+      "Provides the vite.config.ts optimizeDeps.exclude configuration",
+      "Shows the exact config: exclude: ['@mysten/walrus']"
+    ],
+    "sources": ["https://sdk.mystenlabs.com/walrus"]
+  }
+]

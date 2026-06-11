@@ -1,0 +1,36 @@
+[
+  {
+    "id": "cli-store-file",
+    "prompt": "How do I store a file on Walrus for 30 epochs using the CLI?",
+    "expected_output": "walrus store myfile --epochs 30. Mentions installation via suiup and configuration.",
+    "expectations": [
+      "Shows the walrus store command with --epochs 30",
+      "Mentions the file path argument",
+      "Mentions that SUI and WAL tokens are required"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/storing-blobs"]
+  },
+  {
+    "id": "cli-json-mode",
+    "prompt": "How do I use Walrus CLI in a script where I need to parse the output?",
+    "expected_output": "Use --json flag or walrus json command for JSON output. Pipe to jq for parsing.",
+    "expectations": [
+      "Mentions the --json flag for JSON output",
+      "Shows the walrus json command for full JSON mode",
+      "Notes that JSON mode uses camelCase instead of kebab-case",
+      "Mentions piping to jq for parsing"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/json-mode"]
+  },
+  {
+    "id": "cli-install",
+    "prompt": "How do I install the Walrus CLI?",
+    "expected_output": "Install via suiup: curl the installer, then suiup install walrus.",
+    "expectations": [
+      "Shows the suiup installation command (curl)",
+      "Shows suiup install walrus",
+      "Mentions downloading client_config.yaml for configuration"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/walrus-cli"]
+  }
+]

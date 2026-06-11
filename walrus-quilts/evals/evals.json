@@ -1,0 +1,26 @@
+[
+  {
+    "id": "quilts-when-to-use",
+    "prompt": "I need to store 500 small JSON files (each ~2 KB). Should I use quilts or store them individually?",
+    "expected_output": "Use quilts. Individual storage incurs 64 MB overhead per blob, making it extremely expensive for small files.",
+    "expectations": [
+      "Recommends using quilts for this use case",
+      "Explains the per-blob metadata overhead (~64 MB) that makes individual small blob storage expensive",
+      "Shows the walrus store-quilt command or HTTP quilt API",
+      "Mentions that individual blobs within a quilt are retrieved by QuiltPatchId or identifier"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/quilts"]
+  },
+  {
+    "id": "quilts-read-by-identifier",
+    "prompt": "How do I retrieve a specific file from a quilt?",
+    "expected_output": "Use read-quilt with --identifiers, --quilt-patch-ids, or --tag. Or use the HTTP API with by-quilt-patch-id or by-quilt-id endpoints.",
+    "expectations": [
+      "Shows the walrus read-quilt command with at least one retrieval method",
+      "Mentions retrieval by identifier, QuiltPatchId, or tags",
+      "Mentions the list-patches-in-quilt command for discovering patch IDs",
+      "Does not suggest using a standard blob ID to read from a quilt"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/quilts"]
+  }
+]

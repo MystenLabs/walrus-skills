@@ -1,0 +1,37 @@
+[
+  {
+    "id": "costs-how-much",
+    "prompt": "How much does it cost to store 1 GB on Walrus for a year?",
+    "expected_output": "Explains the WAL + SUI dual-token cost model, mentions walrus info for current pricing, and the cost calculator.",
+    "expectations": [
+      "Mentions both WAL (storage) and SUI (gas) costs",
+      "Mentions walrus info or the cost calculator for current pricing",
+      "Explains that cost depends on encoded size (not raw size) due to erasure coding overhead",
+      "Mentions epoch duration (14 days on mainnet) for time-to-epoch conversion"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+  },
+  {
+    "id": "costs-small-blob-expensive",
+    "prompt": "Why does storing a 1 KB JSON file cost the same as storing a 60 MB file on Walrus?",
+    "expected_output": "The ~64 MB per-blob metadata overhead dominates for small blobs. Use quilts to batch small files.",
+    "expectations": [
+      "Explains the approximately 64 MB per-blob metadata overhead",
+      "States that for small blobs, metadata cost dominates",
+      "Recommends using quilts to batch many small files together",
+      "Mentions that quilts amortize the overhead across all files"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+  },
+  {
+    "id": "costs-estimate-before-upload",
+    "prompt": "How can I check how much a store will cost before uploading?",
+    "expected_output": "Use walrus store --dry-run, walrus info, or the cost calculator web app.",
+    "expectations": [
+      "Mentions walrus store --dry-run for CLI cost estimation",
+      "Mentions walrus info for current pricing parameters",
+      "Mentions the Walrus Cost Calculator web app (costcalculator.wal.app)"
+    ],
+    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+  }
+]

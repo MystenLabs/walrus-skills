@@ -1,0 +1,38 @@
+[
+  {
+    "id": "lifecycle-extend",
+    "prompt": "How do I extend the lifetime of a blob on Walrus?",
+    "expected_output": "Use walrus extend --blob-obj-id <ID>. The blob must not be expired. Use the Sui object ID, not the blob ID.",
+    "expectations": [
+      "Shows the walrus extend command with --blob-obj-id",
+      "States that the blob must not be expired",
+      "Clarifies that the command takes the Sui object ID, not the blob ID",
+      "Mentions that shared blobs can also be extended with --shared flag"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+  },
+  {
+    "id": "lifecycle-delete-privacy",
+    "prompt": "If I delete a blob on Walrus, is the data completely gone?",
+    "expected_output": "No. Delete only removes slivers from current/future nodes. Other copies may exist. Encryption is the only reliable privacy mechanism.",
+    "expectations": [
+      "States that delete does not guarantee complete data removal",
+      "Mentions that other copies of the same blob may exist if uploaded by others",
+      "Mentions caches and past storage nodes are not affected",
+      "Recommends encryption as the reliable privacy mechanism"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+  },
+  {
+    "id": "lifecycle-what-happens-expired",
+    "prompt": "What happens when a Walrus blob expires?",
+    "expected_output": "Data becomes unavailable at the start of the end epoch. No grace period. Storage nodes discard slivers. Must re-upload to restore.",
+    "expectations": [
+      "States that data becomes unavailable when the blob expires",
+      "Mentions there is no grace period",
+      "States that expired blobs cannot be extended",
+      "Mentions the need to re-upload if data must persist"
+    ],
+    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+  }
+]
