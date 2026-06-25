@@ -2,7 +2,7 @@
 
 Source: https://docs.wal.app/walrus-memory/mcp
 
-The Walrus Memory MCP server gives MCP-aware AI clients (Cursor, Claude Desktop, Claude Code, Codex, Antigravity) access to persistent agent memory through six built-in tools. No custom SDK code needed.
+The Walrus Memory MCP server gives MCP-aware AI clients (Cursor, Claude Desktop, Claude Code, Codex, Antigravity) access to persistent agent memory through eight built-in tools. No custom SDK code needed.
 
 ## Quick start
 
@@ -58,14 +58,16 @@ args = ["-y", "@mysten-incubation/memwal-mcp"]
 
 MCP servers load at startup. Fully quit and reopen (Cmd+Q on macOS). First launch fetches the package (5-10 second delay).
 
-## Six MCP tools
+## Eight MCP tools
 
 | Tool | Description |
 |------|-------------|
 | `memwal_remember` | Store a memory (text, optional namespace) |
+| `memwal_remember_bulk` | Store multiple memories in a single call |
 | `memwal_recall` | Search memories by natural language query |
 | `memwal_analyze` | Extract facts from text and store each separately |
 | `memwal_restore` | Rebuild vector index from Walrus for a namespace |
+| `memwal_health` | Check server and relayer connectivity status |
 | `memwal_login` | Open browser login flow (local-only tool) |
 | `memwal_logout` | Delete local credentials (local-only tool) |
 

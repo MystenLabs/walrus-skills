@@ -90,8 +90,8 @@ walrus store *.png --epochs 10
 # Store as permanent (cannot be deleted before expiry)
 walrus store myfile.png --epochs 30 --permanent
 
-# Store as deletable (default) and share immediately
-walrus store myfile.png --epochs 10 --deletable --share
+# Store as deletable (default)
+walrus store myfile.png --epochs 10 --deletable
 
 # Store using an upload relay
 walrus store myfile.png --epochs 5 --upload-relay https://relay.example.com
@@ -199,6 +199,18 @@ walrus --context mainnet blob-status --blob-id <BLOB_ID>
 ```
 
 Contexts are defined in `client_config.yaml` under the `contexts:` key. Each context specifies `system_object`, `staking_object`, `n_shards`, and `rpc_urls`.
+
+### Contract parameters
+
+These are the current Walrus contract parameters for each network:
+
+| Parameter | Mainnet | Testnet |
+|-----------|---------|---------|
+| `system_object` | `0x2734a3f967c2dcfb4545a04a72e55432c461e78c1afca993ad642380e35429d6` | `0x6c2547cbf202cdf4e19a069a17dbb2fcc407e4ea1049614550ca1e8bd842e0c4` |
+| `staking_object` | `0x10b9d30c28448939337279d46fa7e1a2b0e33d5a0e13f1096ee412e1ece41e55` | `0x954e63bc1b3b0523f25e7ba0d2b81fdf8fe08cc2eb53e7b73e87a37e5c4fc601` |
+| `n_shards` | 1000 | 1000 |
+
+These values are also available in the default `client_config.yaml` and via `walrus info --json`.
 
 ### Logging
 

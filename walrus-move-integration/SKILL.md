@@ -45,7 +45,7 @@ If unsure about the Walrus Move API, check the source contracts before answering
 
 - **Wrapping pattern.** Create a custom struct with `key` ability that contains a `Blob` field. This "wraps" the blob, giving your contract control over access and transfer. The wrapper struct needs its own `UID`.
 
-- **Shared blobs.** Walrus also provides `shared_blob::SharedBlob`, which wraps a `Blob` as a shared Sui object that anyone can fund and extend. See the [shared blob contract](https://github.com/MystenLabs/walrus/tree/main/contracts/walrus/sources/system/shared_blob.move).
+- **Wrapping blobs in shared objects.** A `Blob` can be wrapped into any Sui shared object you define, enabling multiple parties to fund and extend it. The Walrus contract provides `shared_blob::SharedBlob` as a reference implementation ([source](https://github.com/MystenLabs/walrus/tree/main/contracts/walrus/sources/system/shared_blob.move)), but you can create your own wrapper with custom access control, metadata, or business logic.
 
 ### Move.toml setup
 
@@ -144,9 +144,9 @@ To find the current package IDs:
 - Check `walrus info` output or the [available networks page](https://docs.wal.app/docs/system-overview/available-networks)
 - The client auto-infers package IDs from `system_object` and `staking_object`
 
-### SharedBlob API
+### SharedBlob API (reference implementation)
 
-The `walrus::shared_blob` module provides:
+The `walrus::shared_blob` module is one example of wrapping a `Blob` in a shared object. Developers can freely wrap a `Blob` into their own shared object with custom logic instead.
 
 ```move
 // Create a shared blob from an owned Blob (must be permanent)
@@ -156,7 +156,7 @@ walrus::shared_blob::new(blob: Blob, ctx: &mut TxContext): SharedBlob
 walrus::shared_blob::extend(shared_blob: &mut SharedBlob, ...)
 ```
 
-Shared blobs are shared Sui objects. Anyone can fund and extend them. They cannot contain deletable blobs.
+The built-in `SharedBlob` is a shared Sui object. Anyone can fund and extend it. It requires a permanent blob.
 
 ### Common mistakes
 

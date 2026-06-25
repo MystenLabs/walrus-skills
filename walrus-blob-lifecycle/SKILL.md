@@ -77,7 +77,9 @@ If unsure about any lifecycle operation, fetch the relevant page before answerin
 
 - **What happens when a blob expires.** When a blob's end epoch is reached, the data becomes unavailable. There is no grace period. Storage nodes discard slivers. You must re-upload the data to make it available again. Expired blobs cannot be extended.
 
-- **Shared blobs.** A shared Sui object wrapping a standard `Blob` that anyone can fund and extend. Shared blobs must contain permanent blobs and cannot be deleted before expiry.
+- **Wrapping blobs in shared objects.** A `Blob` object can be wrapped into any Sui shared object, allowing multiple parties to fund and extend it. The Walrus contract provides `shared_blob::SharedBlob` as one reference implementation of this pattern, but developers are free to create their own shared wrapper with custom logic (access control, metadata, etc.).
+
+- **Storage pools.** A storage pool is the recommended way to manage blob storage going forward. Instead of purchasing storage resources per-blob, you fund a pool and blobs draw from it. This simplifies lifecycle management—blobs in a pool can be extended or renewed without individual storage resource tracking. Use `walrus store --storage-pool <POOL_ID>` to store against a pool.
 
 - **Blob attributes.** Key-value metadata pairs stored on the blob's Sui object. Certain keys (`content-type`, `content-disposition`, and others) are recognized by the aggregator and returned as HTTP headers when reading by object ID.
 
@@ -145,14 +147,13 @@ After burning, you cannot extend permanent blobs or extend/delete deletable blob
 
 ### Shared blobs
 
-Create a shared blob from an existing owned `Blob` object:
+A blob can be wrapped into a Sui shared object so that anyone can fund and extend it. The Walrus contract provides `shared_blob::SharedBlob` as one reference implementation, but you can also wrap a `Blob` into your own custom shared object with whatever logic you need.
+
+Using the built-in `SharedBlob` via the CLI:
 
 ```sh
-# Share an existing blob
+# Share an existing blob using the built-in SharedBlob
 walrus share --blob-obj-id <SUI_OBJ_ID>
-
-# Share and fund immediately
-walrus share --blob-obj-id <SUI_OBJ_ID> --amount <WAL_AMOUNT>
 
 # Fund an existing shared blob
 walrus fund-shared-blob --blob-obj-id <SHARED_OBJ_ID> --amount <WAL_AMOUNT>
@@ -161,10 +162,26 @@ walrus fund-shared-blob --blob-obj-id <SHARED_OBJ_ID> --amount <WAL_AMOUNT>
 walrus store myfile.png --epochs 10 --share
 ```
 
-Shared blobs:
+Built-in shared blobs:
 - Can only contain permanent blobs
 - Cannot be deleted before expiry
 - Anyone can fund and extend them
+
+For more control, consider wrapping the `Blob` in your own shared object (see `walrus-move-integration`).
+
+### Storage pools
+
+Storage pools are the recommended way to manage blob storage. Instead of purchasing individual storage resources per blob, you fund a pool and blobs draw from it.
+
+```sh
+# Store a blob using a storage pool
+walrus store myfile.png --epochs 10 --storage-pool <POOL_ID>
+```
+
+Benefits:
+- Simplifies lifecycle management—no individual storage resource tracking
+- Blobs in a pool can be extended or renewed from the pool's funds
+- Multiple blobs can share a single funding source
 
 ### Blob attributes
 

@@ -108,7 +108,8 @@ Key properties:
 | **Deletable blob** | A blob whose owner can remove before expiry (default). |
 | **Permanent blob** | A blob that cannot be deleted before expiry, even by the uploader. |
 | **Quilt** | A single storage unit containing multiple blobs, reducing per-blob overhead. |
-| **Shared blob** | A Sui shared object wrapping a permanent blob that anyone can fund and extend. |
+| **Shared blob** | A `Blob` wrapped in a Sui shared object so anyone can fund and extend it. The Walrus contract provides `SharedBlob` as a reference implementation; developers can also create custom shared wrappers. |
+| **Storage pool** | A funding pool that blobs draw storage from, simplifying lifecycle management. The recommended way to manage blob storage. |
 
 ### Blob ID vs Sui object ID
 
