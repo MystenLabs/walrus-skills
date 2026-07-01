@@ -3,6 +3,7 @@ name: walrus-sites
 description: >
   Deploying, updating, and serving decentralized static websites on Walrus Sites.
   Use when the user needs to deploy a frontend to Walrus Sites, run a local portal
+  [why not mainnet too?]: #
   for testnet, use the site-builder CLI, configure ws-resources.json (routing,
   headers, metadata), set up custom domains (SuiNS, DNS), automate deploys with
   GitHub Actions CI/CD, debug site-builder errors, or manage site object lifecycle
@@ -22,6 +23,8 @@ Walrus Sites lets you deploy a static website (HTML/CSS/JS) to Walrus, with an o
 
 Common failures:
 
+[`--permanent` does not affect expiration. It is just that this blob is undeletable. Still expires
+based on `--epochs`]: #
 1. **Blobs expire.** Sites published with too few epochs silently break when blobs expire. Always use a generous `--epochs` value (30+ for testnet, higher or `--permanent` for mainnet).
 2. **Portal misconfiguration.** The portal's `original_package_id` must match the Walrus Sites framework package (`site::Site`), not your app's Move package.
 3. **Testnet sites cannot use `wal.app`.** The public `wal.app` portal serves mainnet only. Testnet requires a self-hosted local portal.
@@ -38,6 +41,7 @@ Common failures:
 
 ### portal — Running a local portal for testnet
 **Path:** `portal/SKILL.md`
+[Maybe here we can also add decentralization - set up own portal as fallback]: #
 **Load when:** the user needs to view a testnet site, set up the local portal, fix portal 404s, or understand how portal resolution works.
 **Covers:** cloning the portal, installing dependencies (Bun), `portal-config.yaml`, the `original_package_id` gotcha, starting the server, URL format, port conflicts, mainnet vs testnet differences.
 
@@ -70,10 +74,13 @@ Common failures:
 
 - **Resources.** Each file in the deployed directory becomes a resource stored on Walrus. Small files might be batched into a quilt. Each resource has a path (for example, `/index.html`, `/assets/main.js`) and optional HTTP headers.
 
+[`<name>.localhost:3000` would also work]: #
 - **Portal.** A server that maps `<base36-site-id>.localhost:3000` (testnet) or `<name>.wal.app` (mainnet with SuiNS) URLs to on-chain site objects. It reads the site's dynamic fields to find the requested resource path, fetches the blob from a Walrus aggregator, and returns it as an HTTP response.
 
 - **`ws-resources.json`.** A configuration file in the site's root directory controlling resource headers, routing rules, redirect configuration, metadata, and file ignoring. Auto-generated on first deploy with the site object ID. On subsequent deploys, the site-builder reads it to determine whether to create a new site or update the existing one.
 
+[the 404 for an expired blob is distinct: its body says "content no longer available / may have
+expired" and names the Blob ID, so the page contents will probably point to this]: #
 - **Blob expiration.** Walrus blobs have a finite storage duration. When blobs expire, the portal returns 404. Use `site-builder sitemap <object-id>` to check expiration dates. Re-deploy with a higher `--epochs` value to fix.
 
 - **`site-builder deploy`.** The recommended unified command that creates a new site or updates an existing one (replacing the legacy `publish` and `update` commands).
@@ -85,18 +92,28 @@ Common failures:
 | `site-builder deploy <DIR>` | Create or update a site (recommended) |
 | `site-builder sitemap <OBJECT_ID>` | List resources with expiry dates |
 | `site-builder list-directory <DIR>` | Preview what would be uploaded |
+[wrong name: the subcommand is `update-resources` (plural), takes `--resources local:site ...` and
+adds/updates one or more resources (args.rs:354)]: #
 | `site-builder update-resource` | Update a single resource |
 | `site-builder destroy <OBJECT_ID>` | Remove a site permanently |
 | `site-builder convert <HEX>` | Convert hex object ID to Base36 |
 
 ### Custom domains
 
+[wrong: there is no `name` field in ws-resources.json — the field is `site_name` and it only sets
+the Site object's on-chain display name (config.rs:31), not SuiNS. SuiNS association is a separate
+on-chain step done via SuiNS tooling; the portal resolves via the name record's `walrusSiteId` field
+(suins.ts:23), not ws-resources.json]: #
 **SuiNS names:** Associate a SuiNS name with your site object. The portal resolves `<name>.wal.app` to your site. Set with the `ws-resources.json` `name` field or SuiNS tooling.
 
 **Custom DNS:** Point your own domain to a Walrus Sites portal using DNS CNAME records. See the [DNS configuration guide](https://docs.wal.app/docs/sites/dns-configuration) for details.
 
 ### CI/CD with GitHub Actions
 
+[wrong reference: the official action moved to its own repo — `MystenLabs/walrus-sites-github-actions/deploy@v3`.
+The `deploy-walrus-site` path never existed. Input names are also off: `SUI_NETWORK` (not `NETWORK`),
+and auth is `SUI_ADDRESS`+`SUI_KEYSTORE` / `SUI_BECH32_PRIVATE_KEY` / `SUI_SECRET_PHRASE`. Only `DIST`
+and `EPOCHS` are correct.]: #
 Use the official **Deploy Walrus Site** GitHub Action to automate deployments:
 
 ```yaml
@@ -125,6 +142,11 @@ The action handles building, publishing, and updating `ws-resources.json`. Use `
 
 ### Rules
 
+[the `30` figure is unsourced — the docs use `--epochs 1` in tutorials and default `EPOCHS: 5` in CI,
+never "30+". Epoch length (docs/components.mdx:40): testnet = 1 day, mainnet = 14 days. Max duration
+is 53 epochs, so `--epochs max` = ~53 days on testnet, ~2 years on mainnet. `--permanent` misused
+again: it does NOT extend duration (only makes the blob non-deletable) and duration is still capped
+at 53 epochs — for longevity use `--epochs max`, not `--permanent`.]: #
 1. **Always use `--epochs 30` or higher for testnet deploys.** Low values cause blobs to expire within days. For mainnet, use higher values or `--permanent`.
 2. **Build before deploying.** Run `npm run build` (or equivalent) to produce a static output directory. The site-builder deploys whatever directory you point it at.
 3. **Do not change `original_package_id` in the portal config** unless you know the Walrus Sites framework package has been upgraded.
@@ -141,6 +163,10 @@ The action handles building, publishing, and updating `ws-resources.json`. Use `
 - **Deploying an SPA without fallback routing.** React/Vue/Svelte SPAs use client-side routing. Direct navigation to `/dashboard` hits the portal looking for a `/dashboard` resource that does not exist. Configure a fallback route in `ws-resources.json`.
 - **Not killing port 3000 before starting the portal.** Other dev tools often use port 3000. The portal fails silently if the port is taken.
 - **Not committing `ws-resources.json` after first deploy.** Without it, the next deploy creates a brand new site instead of updating the existing one.
+[misdiagnosed + fixed: this was not a blob-size issue. The generic upstream error appeared when the
+aggregator chain outran Bun's default 10s idleTimeout, closing the socket mid-fetch (large WASM just
+took longer, so hit it more often). Fixed in commit a31ec78 (#714) by sizing idleTimeout from the
+aggregator retry budget; tunable via AGGREGATOR_REQUEST_TIMEOUT_MS / PORTAL_IDLE_TIMEOUT_MAX_S.]: #
 - **WASM files returning 503 errors.** Large `.wasm` files can trigger `upstream connect error or disconnect/reset before headers` from the portal. Ensure the WASM file is within blob size limits and the aggregator is reachable.
 - **Windows users using `$(pwd)` in Docker commands.** PowerShell does not support `$(pwd)`. Use the full absolute path instead.
 - **SuiNS domain costs.** Custom `.sui` names cost approximately $10/year through SuiNS. This is separate from Walrus storage costs.
