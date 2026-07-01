@@ -22,6 +22,16 @@ The public portal at `wal.app` only serves **mainnet** sites. To view testnet si
 - **Bun** runtime — install with `npm install -g bun`
 - **Git** — to clone the portal repo
 
+[method mismatch: the official docs (deploy-locally.mdx) run the portal via DOCKER, not raw bun. Two
+documented paths, both Docker: (1) the `scripts/local-docker-portal.sh <testnet|mainnet>` helper,
+which auto-generates config matching your installed site-builder version and runs the image; (2)
+manual `docker run ... mysten/walrus-sites-server-portal:mainnet-<version>`. The image tag is ALWAYS
+`mainnet-<version>` — only a mainnet release is produced; the served network is NOT set by the tag
+but by env vars (SUINS_CLIENT_NETWORK / RPC_URL_LIST / AGGREGATOR_URL, local-docker-portal.sh:58-68).
+The `bun -F server start` shown below is the DEV server (`bun --hot run index.ts`, package.json) —
+fine for hacking on the portal, but not the documented way to run one. Also: docs clone the stable
+release branch (`git checkout mainnet`), not `main`, and the portal image version MUST match your
+site-builder version. This skill should lead with Docker/the script and keep bun as the dev option.]: #
 ## Setup
 
 ### 1. Clone the repository
