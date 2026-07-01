@@ -18,10 +18,18 @@ description: >
 
 ## Prerequisites
 
+[misleading: network + signing env come from `sites-config.yaml` (`default_context` + per-context
+`wallet_env`), NOT from `sui client active-env`. Every shipped config sets `wallet_env` (testnet/
+mainnet), so the Sui active-env is never consulted — it's only a fallback when `wallet_env` is unset
+everywhere (util.rs:229-234). What's actually needed: a `client.yaml` with an env aliased to match
+`wallet_env` (e.g. `testnet`) and a funded address, else it errors "Env 'testnet' not found".]: #
 1. **Sui CLI** installed and configured for the target network (`sui client active-env`).
 2. **`site-builder`** installed via `suiup install site-builder`.
 3. **`walrus`** CLI installed via `suiup install walrus`, with a config context for the target network.
 4. **SUI tokens** for gas on the target network (`sui client balance`).
+[wrong: there is no WAL faucet. Get Testnet SUI from the Sui faucet, then exchange it for WAL via
+`walrus get-wal` (1:1, default 0.5 SUI→0.5 WAL, `--amount` in MIST/FROST). Testnet-only; needs an
+exchange object (getting-started/index.mdx:132, available-networks.mdx:109).]: #
 5. **WAL tokens** for Walrus blob storage (testnet: faucet available).
 6. A **built static site** — run `npm run build` (or equivalent) to produce a `dist/` directory.
 
@@ -31,14 +39,26 @@ Check the site-builder config exists:
 cat ~/.config/walrus/sites-config.yaml
 ```
 
+[claim-check: site-builder DOES search `~/.config/walrus/sites-config.yaml` (also `./sites-config.yaml`
+and `$XDG_CONFIG_HOME/walrus/`) — lib.rs:257-263. But "created automatically by suiup" is FALSE:
+suiup installs only the binary; the docs have you download the config manually
+(`curl .../sites-config.yaml -o ~/.config/walrus/sites-config.yaml`, installing-the-site-builder.mdx:166).]: #
 This file specifies the Walrus Sites framework package, staking object, and Walrus context per network. It's created automatically by `suiup install site-builder`.
 
+[this whole file teaches the legacy `publish`/`update` commands, but the parent SKILL.md's own rule
+says "use `site-builder deploy` instead" (it's the unified create-or-update command). Prefer `deploy`
+throughout; at minimum, wherever `publish` or `update` is shown, mention `deploy` as the recommended
+equivalent. Note: `publish`/`update`/`deploy` all write ws-resources.json via the same code path
+(persist_site_identifier, publish.rs:325) — it is NOT deploy-only.]: #
 ## Publishing a new site
 
 ```bash
 site-builder publish --epochs 30 dist/
 ```
 
+[`--permanent` misuse again: it does NOT make a site "never expire" — it only makes the blob
+non-deletable; the site still expires after `--epochs` (capped at 53). For max longevity use
+`--epochs max`, not `--permanent`.]: #
 - `--epochs 30` — store blobs for 30 Walrus epochs. Use higher values for longer-lived sites. Use `--permanent` for sites that should never expire (cannot be reclaimed).
 - `dist/` — the directory containing your built static site.
 
@@ -57,6 +77,9 @@ For local development: http://3q7dwaf5a6eg....localhost:3000
 
 | Use case | Recommended |
 |----------|-------------|
+[above the limit: max is 53 epochs. `--epochs 100`, `200+`, and `--end-epoch 200` below are all
+rejected by site-builder ("blobs can only be stored for up to 53 epochs ahead", args.rs). Use
+`--epochs max` for the ceiling. `--permanent` here is the same misuse — it doesn't extend duration.]: #
 | Quick testnet demo | `--epochs 30` |
 | Testnet staging | `--epochs 100` |
 | Mainnet production | `--epochs 200+` or `--permanent` |
@@ -68,6 +91,9 @@ Other duration options:
 - `--earliest-expiry-time "2026-12-31T00:00:00Z"` — expire no earlier than a specific date.
 - `--end-epoch 200` — expire at a specific Walrus epoch number.
 
+[recommend `deploy` here too: `site-builder deploy dist/` updates the existing site in place when
+ws-resources.json has the object_id (same as `update`), so this section should present `deploy` as
+the primary command and `update` as the legacy equivalent.]: #
 ## Updating an existing site
 
 After the first publish, `ws-resources.json` records the site object ID. Subsequent publishes detect this and offer to update:
@@ -144,6 +170,11 @@ Shows all published resources with their blob IDs and **expiration dates**:
  /assets/index-Do4WTf-k.js   MlhytW8o...             2026-06-15
 ```
 
+[specificity: an expired blob returns a *distinct* 404, not a generic page-not-found. Its body reads
+"This content is no longer available / It may have expired" and names the Blob ID with restore
+instructions (http_error_responses.ts:66-81), and unlike a missing resource it's a terminal error
+that bypasses redirects/route-matching/404.html fallback (url_fetcher.ts:141). The page contents are
+the tell — the status code is the same 404 either way.]: #
 **If the expiration date is in the past, the site will 404.** Re-publish with a higher `--epochs` value.
 
 ## Destroying a site
