@@ -19,68 +19,52 @@ The public portal at `wal.app` only serves **mainnet** sites. To view testnet si
 
 ## Prerequisites
 
-- **Bun** runtime — install with `npm install -g bun`
-- **Git** — to clone the portal repo
+- **Docker** — to run the portal container
+- **Git** — to clone the portal repo (for the helper script)
 
-[method mismatch: the official docs (deploy-locally.mdx) run the portal via DOCKER, not raw bun. Two
-documented paths, both Docker: (1) the `scripts/local-docker-portal.sh <testnet|mainnet>` helper,
-which auto-generates config matching your installed site-builder version and runs the image; (2)
-manual `docker run ... mysten/walrus-sites-server-portal:mainnet-<version>`. The image tag is ALWAYS
-`mainnet-<version>` — only a mainnet release is produced; the served network is NOT set by the tag
-but by env vars (SUINS_CLIENT_NETWORK / RPC_URL_LIST / AGGREGATOR_URL, local-docker-portal.sh:58-68).
-The `bun -F server start` shown below is the DEV server (`bun --hot run index.ts`, package.json) —
-fine for hacking on the portal, but not the documented way to run one. Also: docs clone the stable
-release branch (`git checkout mainnet`), not `main`, and the portal image version MUST match your
-site-builder version. This skill should lead with Docker/the script and keep bun as the dev option.]: #
-## Setup
+## Setup (Docker — recommended)
 
-### 1. Clone the repository
+The official way to run a local portal is via Docker. The portal Docker image tag is always `mainnet-<version>` — the served network is controlled by environment variables, not the image tag. The portal image version **must match** your installed `site-builder` version.
+
+### Option 1: Helper script (easiest)
 
 ```bash
-git clone --depth 1 https://github.com/MystenLabs/walrus-sites.git
-cd walrus-sites/portal
+git clone https://github.com/MystenLabs/walrus-sites.git
+cd walrus-sites
+git checkout mainnet
+scripts/local-docker-portal.sh testnet
 ```
 
-### 2. Install dependencies
+The script auto-generates a config matching your installed `site-builder` version and runs the Docker image with the correct environment variables (`SUINS_CLIENT_NETWORK`, `RPC_URL_LIST`, `AGGREGATOR_URL`).
+
+### Option 2: Manual Docker run
 
 ```bash
-bun install
+docker run -p 3000:3000 mysten/walrus-sites-server-portal:mainnet-<version> \
+  -e SUINS_CLIENT_NETWORK=testnet \
+  -e RPC_URL_LIST="https://fullnode.testnet.sui.io" \
+  -e AGGREGATOR_URL="https://aggregator.walrus-testnet.walrus.space"
 ```
 
-### 3. Copy the testnet config
-
-```bash
-cp server/portal-config.testnet.example.yaml server/portal-config.yaml
-```
+Replace `<version>` with the version matching your `site-builder`.
 
 **Do not modify `original_package_id` in the config.** It must match the Walrus Sites framework package on testnet (`site::Site` type). The example config ships with the correct value. Changing it to your app's Move package ID will cause all site lookups to fail.
 
-The config contains:
+The portal runs on **port 3000** by default.
 
-```yaml
-network: testnet
-original_package_id: "0xf99aee9..."  # Walrus Sites framework — DO NOT CHANGE
-landing_page_oid_b36: "..."
+## Setup (Bun — development only)
 
-rpc_urls:
-  - url: https://fullnode.testnet.sui.io
-    retries: 2
-    metric: 100
-
-aggregator_urls:
-  - url: https://aggregator.walrus-testnet.walrus.space
-    retries: 3
-    metric: 100
-```
-
-### 4. Start the portal
+For hacking on the portal source code, you can run the dev server directly:
 
 ```bash
-cd walrus-sites/portal
+git clone https://github.com/MystenLabs/walrus-sites.git
+cd walrus-sites
+git checkout mainnet
+cd portal
+bun install
+cp server/portal-config.testnet.example.yaml server/portal-config.yaml
 bun -F server start
 ```
-
-The portal runs on **port 3000** by default.
 
 ## Accessing your site
 
@@ -124,7 +108,7 @@ The hex prefix in that type is the `original_package_id` the portal needs.
 
 ### Portal returns "Page not found" (404)
 
-1. **Blobs expired.** Run `site-builder sitemap <site-object-id>` and check the "Earliest Expiration Date" column. If dates are in the past, re-publish with `--epochs 30+`.
+1. **Blobs expired.** Run `site-builder sitemap <site-object-id>` and check the "Earliest Expiration Date" column. If dates are in the past, re-deploy with a higher `--epochs` value or `--epochs max`. Note: an expired blob returns a distinct 404 whose body reads "This content is no longer available / It may have expired" and names the Blob ID.
 
 2. **Wrong `original_package_id`.** If you edited the portal config, restore the original value from the example file. Check with `sui client object <site-id>` — the `objType` prefix is the correct package ID.
 
@@ -180,7 +164,8 @@ All of this happens per-request. The portal is stateless — it reads from Sui a
 1. **Don't change `original_package_id`** unless you know the Walrus Sites framework package has been upgraded. The testnet example value is correct.
 2. **`wal.app` is mainnet only.** For testnet, self-host the portal.
 3. **Kill port 3000 before starting the portal.** Other dev servers commonly use this port.
-4. **Run `bun -F server start` from the `portal/` directory**, not from the repo root.
+4. **Use Docker (or the helper script) to run the portal** — this is the officially documented method. Use `bun -F server start` only for portal development.
+5. **Clone the `mainnet` branch**, not `main`, for a stable portal release. The portal image version must match your `site-builder` version.
 
 ## Common mistakes
 
