@@ -1,0 +1,286 @@
+name: Skill Evals
+
+on:
+  pull_request:
+    paths:
+      - "**/SKILL.md"
+      - "**/*.md"
+      - "**/evals/**"
+      - "scripts/**"
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: "Run evals for a specific skill (leave empty for all)"
+        required: false
+        type: string
+      provider:
+        description: "Provider (anthropic, openai)"
+        required: false
+        type: string
+        default: "anthropic"
+      model:
+        description: "Model override"
+        required: false
+        type: string
+      runs:
+        description: "Runs per eval for flake detection"
+        required: false
+        type: number
+        default: 1
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  # ── 1. Knowledge evals: each skill tested in isolation ────────────
+  knowledge-evals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    continue-on-error: ${{ matrix.provider == 'openai' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - provider: anthropic
+            model: claude-sonnet-4-6
+            label: sonnet
+          - provider: anthropic
+            model: claude-opus-4-6
+            label: opus
+          - provider: openai
+            model: gpt-4o
+            label: gpt4o
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Run knowledge evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ARGS="--provider ${{ matrix.provider }} --model ${{ matrix.model }}"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            ARGS="$ARGS --changed-only"
+          fi
+          if [ -n "${{ inputs.skill }}" ]; then
+            ARGS="$ARGS --skill ${{ inputs.skill }}"
+          fi
+          if [ "${{ inputs.runs }}" -gt 1 ] 2>/dev/null; then
+            ARGS="$ARGS --runs ${{ inputs.runs }}"
+          fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="$ARGS --runs 2"
+          fi
+          node scripts/run-evals.js $ARGS
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results-${{ matrix.label }}
+          path: scripts/eval-results.json
+
+  # ── 2. AgentPrompt baseline: prompts with NO skills ───────────────
+  agent-prompt-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    continue-on-error: ${{ matrix.provider == 'openai' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - provider: anthropic
+            model: claude-sonnet-4-6
+            label: sonnet
+          - provider: anthropic
+            model: claude-opus-4-6
+            label: opus
+          - provider: openai
+            model: gpt-4o
+            label: gpt4o
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Run agent prompt evals (no skills)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ARGS="--provider ${{ matrix.provider }} --model ${{ matrix.model }} --timeout 180000"
+          if [ "${{ inputs.runs }}" -gt 1 ] 2>/dev/null; then ARGS="$ARGS --runs ${{ inputs.runs }}"; fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then ARGS="$ARGS --runs 2"; fi
+          node scripts/run-agent-prompt-evals.js $ARGS
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-prompt-results-${{ matrix.label }}
+          path: scripts/agent-prompt-eval-results.json
+
+  # ── 3. AgentPrompt with skills: prompts WITH matching skills ──────
+  agent-prompt-with-skills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    continue-on-error: ${{ matrix.provider == 'openai' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - provider: anthropic
+            model: claude-sonnet-4-6
+            label: sonnet
+          - provider: anthropic
+            model: claude-opus-4-6
+            label: opus
+          - provider: openai
+            model: gpt-4o
+            label: gpt4o
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Run agent prompt evals (with skills)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ARGS="--provider ${{ matrix.provider }} --model ${{ matrix.model }} --with-skills --timeout 180000"
+          if [ "${{ inputs.runs }}" -gt 1 ] 2>/dev/null; then ARGS="$ARGS --runs ${{ inputs.runs }}"; fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then ARGS="$ARGS --runs 2"; fi
+          node scripts/run-agent-prompt-evals.js $ARGS
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-prompt-with-skills-results-${{ matrix.label }}
+          path: scripts/agent-prompt-with-skills-eval-results.json
+
+  # ── 4. Unbranded: competitive prompts with NO Walrus context ──────
+  unbranded:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: ${{ matrix.provider == 'openai' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - provider: anthropic
+            model: claude-sonnet-4-6
+            label: sonnet
+          - provider: anthropic
+            model: claude-opus-4-6
+            label: opus
+          - provider: openai
+            model: gpt-4o
+            label: gpt4o
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Run unbranded evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node scripts/run-unbranded-evals.js \
+            --provider "${{ matrix.provider }}" \
+            --model "${{ matrix.model }}"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unbranded-results-${{ matrix.label }}
+          path: scripts/unbranded-eval-results.json
+
+  # ── 5. Report ─────────────────────────────────────────────────────
+  report:
+    runs-on: ubuntu-latest
+    needs: [knowledge-evals, agent-prompt-baseline, agent-prompt-with-skills, unbranded]
+    if: always()
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Generate report
+        id: report
+        run: |
+          node scripts/report-evals.js artifacts || true
+          node scripts/compare-skill-impact.js --artifacts-dir artifacts || true
+
+      - name: Save reports
+        run: |
+          mkdir -p reports
+          cp artifacts/report.md reports/report.md 2>/dev/null || true
+          cp scripts/skill-impact-report.json reports/skill-impact-report.json 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git diff --staged --quiet || git commit -m "docs: update eval report $(date -u +%Y-%m-%d)"
+          git push || true
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'artifacts/report.md';
+            if (!fs.existsSync(reportPath)) return;
+            const body = fs.readFileSync(reportPath, 'utf-8').slice(0, 65000);
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const existing = comments.find(c => c.user.type === 'Bot' && c.body.includes('Eval Report'));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ issue_number: context.issue.number, owner: context.repo.owner, repo: context.repo.repo, body });
+            }

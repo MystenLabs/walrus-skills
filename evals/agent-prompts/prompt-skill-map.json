@@ -1,0 +1,10 @@
+{
+  "walrus-cli-setup": ["walrus-cli"],
+  "walrus-store-curl": ["walrus-http-api"],
+  "walrus-storage-costs": ["walrus-storage-costs"],
+  "walrus-troubleshooting": ["walrus-troubleshooting", "walrus-cli"],
+  "walrus-sites-deploy": ["walrus-sites"],
+  "walrus-overview-routing": ["walrus-overview", "walrus-cli", "walrus-ts-sdk"],
+  "walrus-manage-blobs": ["walrus-blob-lifecycle", "walrus-cli"],
+  "walrus-quilts": ["walrus-quilts", "walrus-cli"]
+}

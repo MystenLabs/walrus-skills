@@ -34,36 +34,32 @@ import {
   loadSkillContext,
   parseEvals,
 } from "./lib/utils.js";
+import { createProvider } from "./lib/providers.js";
 
 // ── CLI args ──────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
+const providerName = getFlag(args, "provider") ?? "anthropic";
+const modelFlag = getFlag(args, "model");
 const skillFlag = getFlag(args, "skill");
 const judgeModelFlag = getFlag(args, "judge-model");
 const concurrencyFlag = getFlag(args, "concurrency");
 const timeoutFlag = getFlag(args, "timeout");
 const changedOnly = hasFlag(args, "changed-only");
 
-const EVAL_MODEL = process.env.EVAL_MODEL ?? "claude-opus-4-6";
+const EVAL_MODEL = modelFlag ?? process.env.EVAL_MODEL ?? "claude-sonnet-4-6";
 const JUDGE_MODEL = judgeModelFlag ?? process.env.JUDGE_MODEL ?? "claude-haiku-4-5-20251001";
 const MAX_TOKENS_RESPONSE = 4096;
 const MAX_TOKENS_JUDGE = 2048;
 const CONCURRENCY = parseInt(concurrencyFlag ?? "3", 10);
 const EVAL_TIMEOUT = parseInt(timeoutFlag ?? "120000", 10);
 
-const client = new Anthropic();
+const provider = createProvider(providerName);
+const judgeClient = new Anthropic();
 
 // ── Generate a response using the skill context ──────────────────────
 async function generateResponse(skillContext, prompt) {
-  const response = await client.messages.create({
-    model: EVAL_MODEL,
-    max_tokens: MAX_TOKENS_RESPONSE,
-    system: `You are an expert Walrus and Sui developer assistant. Use the following skill reference to answer the user's question.\n\n${skillContext}`,
-    messages: [{ role: "user", content: prompt }],
-  });
-  return response.content
-    .filter((b) => b.type === "text")
-    .map((b) => b.text)
-    .join("\n");
+  const systemPrompt = `You are an expert Walrus and Sui developer assistant. Use the following skill reference to answer the user's question.\n\n${skillContext}`;
+  return provider.generate(systemPrompt, prompt, { model: EVAL_MODEL, maxTokens: MAX_TOKENS_RESPONSE });
 }
 
 // ── Judge the response against expectations ──────────────────────────
@@ -95,7 +91,7 @@ Return ONLY valid JSON — an array where each entry has:
 
 Do not include any text outside the JSON array.`;
 
-  const result = await client.messages.create({
+  const result = await judgeClient.messages.create({
     model: JUDGE_MODEL,
     max_tokens: MAX_TOKENS_JUDGE,
     messages: [{ role: "user", content: judgePrompt }],
