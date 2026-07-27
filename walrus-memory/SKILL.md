@@ -92,7 +92,7 @@ Common integration mistakes:
 
 - **Encryption.** The relayer encrypts all memory content with Seal before it reaches Walrus; in the manual client flow the client encrypts instead, so the relayer never sees plaintext. Only the owner and authorized delegates can decrypt.
 
-- **Forget.** `POST /api/forget` deletes the vector index rows for a namespace. The encrypted Walrus blobs persist until their storage expires, so `restore` can re-index them later. There is no blob-deletion API; expiry is the deletion mechanism.
+- **Forget and delete.** `POST /api/forget` deletes the vector index rows for a namespace; the encrypted Walrus blobs persist, so `restore` can re-index them later. For permanent blob deletion, deployments with the Security Delete API enabled offer a wallet-authenticated flow that prepares sponsored Sui deletion transactions; see [Delete memories programmatically](https://docs.wal.app/walrus-memory/guides/delete-memories-programmatically) and the dashboard guide [Delete old memories](https://docs.wal.app/walrus-memory/guides/delete-old-memories).
 
 - **Relayer.** A backend service (Rust + TypeScript sidecar) that handles embedding, encryption, Walrus upload, and vector search behind a REST API. The managed relayer is provided by Walrus Foundation. You can also self-host.
 
