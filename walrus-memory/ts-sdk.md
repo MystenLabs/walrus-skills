@@ -117,10 +117,11 @@ for (const memory of result.results) {
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `query` | `string` | required | Natural language search query |
-| `limit` | `number` | `10` | Max results to return |
+| `limit` | `number` | `10` | Max results to return. The server caps it at `100` |
 | `topK` | `number` | | Alias for limit (wins when both set) |
 | `namespace` | `string` | client default | Memory space to search |
 | `maxDistance` | `number` | | Drop results with distance >= this value |
+| `scoringWeights` | `ScoringWeights` | | Optional composite ranking: blend semantic distance with recency and importance. Omit for plain cosine-distance order |
 
 #### `analyze(text, namespace?)`
 

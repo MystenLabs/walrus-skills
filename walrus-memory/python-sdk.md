@@ -72,7 +72,7 @@ from memwal import RecallParams
 
 result = await memwal.recall(RecallParams(
     query="What do we know about this user?",
-    limit=5,
+    limit=5,  # server caps limit at 100
     max_distance=0.5,
 ))
 for memory in result.results:
