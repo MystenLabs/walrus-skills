@@ -19,7 +19,7 @@ description: >
 > [MystenLabs/MemWal repository](https://github.com/MystenLabs/MemWal).
 > When extending this skill, only pull from these sources.
 
-Walrus Memory gives AI agents persistent, portable memory built on Walrus (decentralized storage) and Sui (onchain access control). Memories are Seal-encrypted, stored as blobs on Walrus, and searchable via vector embeddings. The owner controls who can read and write, with delegate keys enabling shared agent access.
+Walrus Memory gives AI agents persistent, portable memory built on Walrus (decentralized storage) and Sui (onchain access control). The relayer (or the client, in the manual flow) encrypts each memory with Seal, stores it as a blob on Walrus, and indexes it with vector embeddings for semantic search. The owner controls who can read and write, with delegate keys enabling shared agent access.
 
 Common integration mistakes:
 
@@ -45,7 +45,7 @@ Common integration mistakes:
 ### mcp — MCP Server Reference
 **Path:** `mcp.md`
 **Load when:** setting up Walrus Memory in Cursor, Claude Desktop, Claude Code, Codex, or another MCP client. Also when configuring the memwal-mcp package, debugging login/auth issues, or using Streamable HTTP transport.
-**Covers:** Installation via npx, login flow, client configs (Cursor, Claude Desktop, Claude Code, Codex), six MCP tools, auth-required mode, default namespace, environment switching, Streamable HTTP setup.
+**Covers:** Installation via npx, login flow, client configs (Cursor, Claude Desktop, Claude Code, Codex), eight MCP tools, auth-required mode, default namespace, environment switching, Streamable HTTP setup.
 
 ---
 
@@ -86,11 +86,13 @@ Common integration mistakes:
   - **Remember** — store a memory with semantic embedding. Async: returns a job ID immediately.
   - **Recall** — search for memories by natural language query. Returns matches ranked by cosine distance.
   - **Analyze** — extract structured facts from text using an LLM. Each fact is stored as a separate memory.
-  - **Ask** — recall + LLM reasoning. Query your memories and get an AI-generated answer.
+  - **Ask** — recall + LLM reasoning. Query your memories and get an AI-generated answer. Available through the Python SDK, the relayer HTTP API (`POST /api/ask`), and not yet wrapped by the TypeScript SDK.
 
 - **Owner and delegates.** The owner is the Sui wallet that created the account. Delegates are Ed25519 keypairs granted access by the owner. Delegates can store, recall, and decrypt, but cannot manage keys or transfer ownership. Access is enforced by a Move smart contract on Sui.
 
-- **Encryption.** All memory content is Seal-encrypted before reaching Walrus. Only the owner and authorized delegates can decrypt. The relayer handles encryption by default, or you can use the manual client flow for full client-side control.
+- **Encryption.** The relayer encrypts all memory content with Seal before it reaches Walrus; in the manual client flow the client encrypts instead, so the relayer never sees plaintext. Only the owner and authorized delegates can decrypt.
+
+- **Forget.** `POST /api/forget` deletes the vector index rows for a namespace. The encrypted Walrus blobs persist until their storage expires, so `restore` can re-index them later. There is no blob-deletion API; expiry is the deletion mechanism.
 
 - **Relayer.** A backend service (Rust + TypeScript sidecar) that handles embedding, encryption, Walrus upload, and vector search behind a REST API. The managed relayer is provided by Walrus Foundation. You can also self-host.
 
@@ -153,7 +155,7 @@ Six components:
 | Per delegate key | 30 points/minute |
 | Storage quota | 1 GB per account |
 
-Point costs: `analyze` = 10, `remember` = 5, `restore` / `remember/manual` = 3, `ask` = 2, `recall` = 1.
+Point costs: `remember/bulk` = 10, `analyze` = 5, `remember` = 5, `restore` / `remember/manual` = 3, `ask` = 2, everything else (`recall`, `recall/manual`, and so on) = 1.
 
 ### Rules
 
