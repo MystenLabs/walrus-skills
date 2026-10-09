@@ -9,7 +9,9 @@
       "Clarifies that the command takes the Sui object ID, not the blob ID",
       "Mentions that shared blobs can also be extended with --shared flag"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/managing-blobs"
+    ]
   },
   {
     "id": "lifecycle-delete-privacy",
@@ -21,18 +23,39 @@
       "Mentions caches and past storage nodes are not affected",
       "Recommends encryption as the reliable privacy mechanism"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/managing-blobs",
+      "https://docs.wal.app/docs/data-security"
+    ]
   },
   {
     "id": "lifecycle-what-happens-expired",
     "prompt": "What happens when a Walrus blob expires?",
     "expected_output": "Data becomes unavailable at the start of the end epoch. No grace period. Storage nodes discard slivers. Must re-upload to restore.",
     "expectations": [
-      "States that data becomes unavailable when the blob expires",
-      "Mentions there is no grace period",
-      "States that expired blobs cannot be extended",
-      "Mentions the need to re-upload if data must persist"
+      "States that a blob becomes unavailable once it reaches its end epoch (expiry is at the beginning of the end epoch)",
+      "States that an expired blob cannot be extended; extension must happen before expiry",
+      "Recommends checking walrus blob-status against the current epoch from walrus info on a schedule, rather than waiting for a read to fail",
+      "Does NOT claim there is a grace period or an onchain expiry event"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/managing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/managing-blobs",
+      "https://docs.wal.app/docs/system-overview/storage-pools"
+    ]
+  },
+  {
+    "id": "lifecycle-storage-pools",
+    "prompt": "My app continuously writes and deletes blobs. Can I use a Walrus storage pool from the CLI to avoid buying storage for each blob?",
+    "expected_output": "Explains that storage pools are a preview feature available through the Rust SDK and the Move contracts, not the CLI, and that pooled blobs share one expiry and pay only the write fee per store.",
+    "expectations": [
+      "States that the walrus CLI does not support storage pools (preview feature in the Rust SDK and Move contracts)",
+      "Explains that blobs in a pool share the pool's lifetime and capacity",
+      "Mentions that registering a blob in a pool pays only the write fee",
+      "Does NOT invent a --storage-pool CLI flag"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/storage-pools",
+      "https://docs.wal.app/docs/walrus-client/storing-blobs"
+    ]
   }
 ]

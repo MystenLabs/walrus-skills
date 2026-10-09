@@ -1,20 +1,26 @@
 {
   "walrus-cli": [
-    "docs/content/walrus-client/"
+    "docs/content/walrus-client/",
+    "docs/content/walrus-client/network-health.mdx"
   ],
   "walrus-http-api": [
-    "docs/content/http-api/"
+    "docs/content/http-api/",
+    "docs/content/sponsored-uploads.mdx",
+    "docs/content/system-overview/aggregators-publishers-relays.mdx"
   ],
   "walrus-ts-sdk": [
-    "docs/content/typescript-sdk/"
+    "docs/content/typescript-sdk/",
+    "docs/content/walrus-client/verifying-availability.mdx"
   ],
   "walrus-quilts": [
-    "docs/content/walrus-client/quilts.mdx",
-    "docs/content/http-api/quilt-http-apis.mdx"
+    "docs/content/http-api/quilt-http-apis.mdx",
+    "docs/content/system-overview/quilt.mdx",
+    "docs/content/walrus-client/quilts.mdx"
   ],
   "walrus-move-integration": [
-    "docs/examples/move/walrus_dep/",
-    "contracts/walrus/sources/"
+    "contracts/walrus/sources/",
+    "docs/content/examples/move.mdx",
+    "docs/examples/move/walrus_dep/"
   ],
   "walrus-sites": [
     "docs/content/sites/"
@@ -23,10 +29,22 @@
     "docs/content/data-security.mdx"
   ],
   "walrus-blob-lifecycle": [
+    "docs/content/large-uploads.mdx",
+    "docs/content/system-overview/storage-pools.mdx",
     "docs/content/walrus-client/managing-blobs.mdx",
-    "docs/content/large-uploads.mdx"
+    "docs/content/walrus-client/verifying-availability.mdx"
   ],
   "walrus-storage-costs": [
     "docs/content/system-overview/storage-costs.mdx"
+  ],
+  "walrus-overview": [
+    "docs/content/system-overview/core-concepts.mdx",
+    "docs/content/system-overview/aggregators-publishers-relays.mdx",
+    "docs/content/sponsored-uploads.mdx",
+    "docs/content/production-readiness.mdx"
+  ],
+  "walrus-troubleshooting": [
+    "docs/content/troubleshooting/",
+    "docs/content/walrus-client/network-health.mdx"
   ]
 }

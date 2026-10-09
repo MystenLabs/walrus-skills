@@ -6,9 +6,12 @@
     "expectations": [
       "Shows the walrus store command with --epochs 30",
       "Mentions the file path argument",
-      "Mentions that SUI and WAL tokens are required"
+      "Mentions that storing costs WAL and every transaction costs SUI for gas"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/storing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/storing-blobs",
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
+    ]
   },
   {
     "id": "cli-json-mode",
@@ -20,7 +23,10 @@
       "Notes that JSON mode uses camelCase instead of kebab-case",
       "Mentions piping to jq for parsing"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/json-mode"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/json-mode",
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
+    ]
   },
   {
     "id": "cli-install",
@@ -31,6 +37,22 @@
       "Shows suiup install walrus",
       "Mentions downloading client_config.yaml for configuration"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/walrus-cli"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
+    ]
+  },
+  {
+    "id": "cli-get-wal",
+    "prompt": "How do I get WAL on testnet to try storing a blob, and does the same command work on mainnet?",
+    "expected_output": "Shows walrus get-wal --context testnet (exchanges 0.5 SUI for WAL by default, --amount in MIST) and explains it is Testnet-only; on Mainnet acquire WAL on an exchange or by transfer.",
+    "expectations": [
+      "Shows walrus get-wal (with --context testnet)",
+      "Mentions the 1:1 exchange and the default 0.5 SUI / --amount option",
+      "States that get-wal only works on Testnet",
+      "For Mainnet, says to acquire WAL on an exchange or receive a transfer, not a faucet"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
+    ]
   }
 ]

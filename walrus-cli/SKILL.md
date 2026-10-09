@@ -128,6 +128,8 @@ walrus blob-status --blob-id <BLOB_ID>
 
 # Check blob status by file (re-encodes to derive blob ID)
 walrus blob-status --file myfile.png
+# Status requests time out after 1s per node by default; raise it on slow links
+walrus blob-status --blob-id <BLOB_ID> --timeout 5s
 
 # Read a blob to stdout
 walrus read <BLOB_ID>
@@ -166,7 +168,7 @@ walrus json '{
 }'
 ```
 
-JSON mode uses camelCase instead of kebab-case for option names. It also accepts input from stdin. Output is always JSON-formatted, suitable for piping to `jq`.
+JSON mode uses camelCase instead of kebab-case for option names (`blob-status` becomes `blobStatus`), with global options such as `config`, `context`, `wallet`, and `gasBudget` at the root beside `command`. Run `walrus json` with no argument to read the JSON from stdin (`echo '{...}' | walrus json`). Output is always JSON-formatted, suitable for piping to `jq`. On failure the CLI prints a human-readable error to stderr and exits non-zero.
 
 Use `--json` with any standard command to get JSON output without full JSON mode:
 
@@ -184,7 +186,47 @@ walrus info
 walrus info --json
 ```
 
-`walrus info` shows the current epoch number, epoch duration, price per storage unit, write fee, and maximum epochs ahead. Use this to verify pricing before large uploads.
+`walrus info` shows the current epoch number, epoch duration, price per storage unit, write fee, and maximum epochs ahead (53). Use this to verify pricing before large uploads. Subcommands narrow the output: `walrus info epoch`, `walrus info committee`, `walrus info bft`, and `walrus info coin` (the StructTag of the WAL coin for the configured context).
+
+### Get WAL on Testnet
+
+Storing costs WAL and every transaction costs SUI. On Testnet, exchange SUI for WAL at 1:1 with the CLI:
+
+```sh
+walrus get-wal --context testnet          # exchanges 0.5 SUI (500,000,000 MIST) by default
+walrus get-wal --context testnet --amount 1000000000
+walrus get-wal --exchange-id <OBJECT_ID>  # use a specific exchange object instead of the config's
+```
+
+`get-wal` works on Testnet only. On Mainnet the context declares no exchange objects and the command fails with `The object ID of an exchange object must be specified ... this command is only available on Testnet`. Acquire Mainnet WAL on an exchange that lists it or by transfer from an address that holds it; avoid third-party WAL faucets, which can hand out WAL from a package the client rejects.
+
+### Transfer WAL between addresses
+
+Walrus has no transfer command; Sui holds WAL as a coin type, so `sui client` moves it (when funding a publisher wallet, a shared team wallet, or an agent wallet):
+
+```sh
+# 1. Find the WAL coin objects (coinType ends in ::wal::WAL)
+sui client balance ADDRESS --coin-type WAL_COIN_TYPE --with-coins --json
+# 2. Transfer a whole coin object
+sui client transfer --object-id WAL_COIN_ID --to RECIPIENT_ADDRESS --gas-budget 10000000
+# Merge small coins first so one coin covers the amount
+sui client merge-coin --primary-coin LARGEST_WAL_COIN_ID --coin-to-merge OTHER_WAL_COIN_ID
+```
+
+Sui transfers whole coin objects; to send an exact amount, split a coin in a programmable transaction block. The recipient also needs SUI for gas.
+
+### Check network health
+
+Intermittent upload failures usually mean storage nodes are unreachable, not that the client is misconfigured:
+
+```sh
+walrus health --committee            # one row per committee node, then a summary
+walrus health --committee --sort-by status --json
+walrus info bft                      # tolerated faults f, quorum 2f+1, write threshold n-f
+walrus info committee                # shard count and committee
+```
+
+Faults are counted in shards, not nodes. With `n` shards and `f = (n - 1) / 3`, a write certifies when at least `n - f` shards respond and a read reconstructs with `n - 2f`. On a 1,000-shard network that is 667 shards for a write and 334 for a read. Healthy shards well above `n - f`: upload normally; just above: expect intermittent failures; below: writes cannot certify, wait rather than retry. `--active-set`, `--node-ids`, and `--node-urls` select other node sets; `--detail` adds per-node health.
 
 ### Switching between testnet and mainnet
 
@@ -232,7 +274,9 @@ Use `--gas-budget <MIST>` to set the maximum SUI the command can spend. If omitt
 2. **All blobs are public.** Encrypt sensitive data before storing. See the `walrus-data-security` skill.
 3. **Use JSON mode for automation.** The `walrus json` command and `--json` flag produce machine-parseable output for CI/CD pipelines and scripts.
 4. **Blob ID is not object ID.** Blob ID identifies content. Sui object ID identifies the on-chain object. Some commands take one, some take the other. Check `--help` for each command.
-5. **Generate shell completions.** Run `walrus completion bash|zsh|fish` and place the output in the appropriate completions directory.
+5. **Storage pools are not a CLI feature yet.** They are a preview available through the Rust SDK and the Move contracts; `walrus store` has no pool flag. See `walrus-blob-lifecycle`.
+6. **Check `walrus health --committee` before blaming the client.** Upload failures that come and go are usually unreachable storage nodes.
+7. **Generate shell completions.** Run `walrus completion bash|zsh|fish` and place the output in the appropriate completions directory.
 
 ### Common mistakes
 
@@ -240,7 +284,7 @@ Use `--gas-budget <MIST>` to set the maximum SUI the command can spend. If omitt
 - **Expecting delete to make data unavailable.** Delete only removes slivers from current and future storage nodes. If another copy of the same blob exists (uploaded by someone else), the data remains accessible. All blobs are public.
 - **Forgetting `--json` in scripts.** Human-readable output is the default. Use `--json` or `walrus json` for parseable output in automation.
 - **Running `walrus` without configuration.** The CLI needs `client_config.yaml`. Download it or specify with `--config`. Without it, you get an error about missing configuration.
-- **Not having SUI/WAL tokens.** Write operations require SUI for gas and WAL for storage. On testnet, request tokens from the Sui faucet (`sui client faucet`) and the WAL faucet. On mainnet, acquire SUI and WAL through exchanges.
+- **Not having SUI/WAL tokens.** Write operations require SUI for gas and WAL for storage. On Testnet, request SUI from the Sui faucet (`sui client faucet`) and exchange it for WAL with `walrus get-wal`. On Mainnet, acquire WAL on an exchange or by transfer; `get-wal` does not work there.
 - **`Cannot find gas coin for signer address` error.** The wallet has no SUI. Fund the address with SUI for gas fees.
 - **Using `suiup switch walrus 1.48.1` (wrong syntax).** The correct syntax is `suiup install walrus@mainnet` or `suiup install walrus@testnet`. Version numbers are not used directly.
 - **Confusing blob ID with Sui object ID.** Some commands take `--blob-id` (content hash, URL-safe base64), others take `--blob-obj-id` or `--object-id` (Sui object, `0x...` hex). Check `--help` for the specific command.

@@ -63,7 +63,7 @@ Check your balance with `sui client gas`.
 
 ---
 
-#### `Error: missing configuration` or `No configuration file found`
+#### `could not find a valid Walrus configuration file`
 
 **Cause:** The CLI cannot find `client_config.yaml`.
 
@@ -76,7 +76,52 @@ Or specify the path explicitly: `walrus --config /path/to/client_config.yaml sto
 
 ---
 
-#### Testnet blobs disappearing quickly
+#### `blobs can only be stored for up to MAX_EPOCHS epochs ahead`
+
+**Cause:** The requested storage duration exceeds the maximum. The current maximum is 53 epochs; `walrus info` reports it.
+
+**Fix:** Use `--epochs 53` or `--epochs max`, and plan to extend before expiry.
+
+---
+
+#### `exactly one of epochs, earliest-expiry-time, or end-epoch must be specified`
+
+**Cause:** `walrus store` was given none, or more than one, of the three lifetime options.
+
+**Fix:** Pass exactly one: `--epochs <N|max>`, `--earliest-expiry-time <TIME>`, or `--end-epoch <N>`.
+
+---
+
+#### `deletable blobs cannot be shared`
+
+**Cause:** `walrus share` was given a deletable blob. Shared blobs must be permanent.
+
+**Fix:** Store with `--permanent` (or `--permanent --share`) and share that blob.
+
+---
+
+#### `The object ID of an exchange object must be specified ... this command is only available on Testnet`
+
+**Cause:** `walrus get-wal` was run against the Mainnet context, which declares no exchange objects.
+
+**Fix:** `get-wal` is Testnet-only (`walrus get-wal --context testnet`). On Mainnet, acquire WAL on an exchange or by transfer from an address that holds it.
+
+---
+
+#### Uploads fail intermittently with no config change
+
+**Cause:** Storage nodes are unreachable, not a client problem. Writes need `n - f` shards (667 of 1,000); when the healthy count sits just above that, individual attempts fail whenever the nodes a write needs fall in the unreachable set.
+
+**Fix:**
+```sh
+walrus health --committee --sort-by status   # which nodes are in Error
+walrus info bft                              # the write threshold n - f
+```
+Healthy shards well above `n - f`: upload normally. Just above: expect intermittent failures and retry. Below: writes cannot certify; wait for the network to recover rather than retrying. Reads keep working down to `n - 2f`.
+
+---
+
+#### Testnet blobs disappearing quickly#### Testnet blobs disappearing quickly
 
 **Cause:** Testnet epochs are shorter than mainnet epochs. Storing with low epoch counts means blobs expire sooner than expected.
 
@@ -113,21 +158,27 @@ And that the wallet is connected to the same network.
 
 #### `file.bytes is not a function`
 
-**Cause:** Passing a raw string or JavaScript object to `storeBlob` instead of binary data.
+**Cause:** Passing a raw string or JavaScript object as the blob instead of binary data.
 
 **Fix:** Convert to `Uint8Array` first:
 ```typescript
 // WRONG
-await client.walrus.storeBlob({ blob: myJsonString, epochs: 5 });
+await client.walrus.writeBlob({ blob: myJsonString, epochs: 5, deletable: true, signer });
 
 // CORRECT
-await client.walrus.storeBlob({
+await client.walrus.writeBlob({
   blob: new TextEncoder().encode(myJsonString),
   epochs: 5,
+  deletable: true,
+  signer,
 });
+
+// Or use the WalrusFile API, which accepts a Uint8Array, Blob, or string
+const file = WalrusFile.from({ contents: myJsonString, identifier: 'data.json' });
+await client.walrus.writeFiles({ files: [file], epochs: 5, deletable: true, signer });
 ```
 
-The `blob` parameter expects `Uint8Array`, `File`, `Blob`, or `ReadableStream`.
+`writeBlob` takes a `Uint8Array`. There is no `storeBlob` method in `@mysten/walrus`.
 
 ---
 
@@ -159,6 +210,7 @@ Check the relay's required tip: `curl <relay-url>/v1/tip-config`
 2. Check network connectivity.
 3. Retry with exponential backoff.
 4. If persistent, try a different upload relay or wait for storage node recovery.
+5. Around an epoch change the client's cached committee goes stale: `if (error instanceof RetryableWalrusClientError) { client.walrus.reset(); /* retry */ }`. Pass `storageNodeClientOptions: { onError }` to see the individual node errors the SDK absorbs.
 
 ---
 
@@ -170,18 +222,23 @@ Check the relay's required tip: `curl <relay-url>/v1/tip-config`
 
 ---
 
-#### Vite build errors with `@mysten/walrus`
+#### Vite, Next.js, or another bundler cannot load the SDK's WASM module
 
-**Cause:** Vite's dependency pre-bundling breaks the SDK's gRPC and WASM imports.
+**Cause:** The SDK needs WASM bindings to encode and decode blobs, and the bundler cannot locate the binary at runtime (Turbopack shows this as a virtualized path such as `/ROOT/...`).
 
-**Fix:** Exclude the package from optimization:
+**Fix:** Tell the client where the WASM is:
 ```typescript
-// vite.config.ts
-export default defineConfig({
-  optimizeDeps: {
-    exclude: ['@mysten/walrus'],
-  },
-});
+// Vite: import the file with ?url and pass it as wasmUrl
+import walrusWasmUrl from '@mysten/walrus-wasm/web/walrus_wasm_bg.wasm?url';
+const client = new SuiGrpcClient({ network: 'testnet', baseUrl: 'https://fullnode.testnet.sui.io:443' })
+  .$extend(walrus({ wasmUrl: walrusWasmUrl }));
+
+// Or a CDN / self-hosted copy
+walrus({ wasmUrl: 'https://unpkg.com/@mysten/walrus-wasm@latest/web/walrus_wasm_bg.wasm' });
+```
+```typescript
+// Next.js API routes (webpack and Turbopack)
+const nextConfig: NextConfig = { serverExternalPackages: ['@mysten/walrus', '@mysten/walrus-wasm'] };
 ```
 
 ---
@@ -198,7 +255,15 @@ export default defineConfig({
 
 ---
 
-#### `404 Not Found` immediately after uploading
+#### `503 BLOB_UNAVAILABLE` from an aggregator
+
+**Cause:** The blob is only temporarily unretrievable (since v1.47 the aggregator returns a retryable `503` for this instead of `500`).
+
+**Fix:** Retry with exponential backoff. If it persists, check `walrus blob-status --blob-id <BLOB_ID>`: the blob may have expired or never been certified.
+
+---
+
+#### `404 Not Found` immediately after uploading#### `404 Not Found` immediately after uploading
 
 **Cause:** CDN caching on the aggregator. The aggregator's CDN cached a 404 from before the blob propagated.
 
@@ -227,7 +292,7 @@ export default defineConfig({
 
 3. **Stale `Move.lock`.** Delete `Move.lock` and rebuild: `rm Move.lock && sui move build`.
 
-4. **Wrong `edition`.** Use `edition = "2024"`, not `"2024.beta"`.
+4. **Wrong `edition`.** Use `edition = "2024"`, not `"2024.beta"`. With the 2024 edition the Sui framework resolves implicitly; an explicit `Sui = { git = ... }` pin that mismatches the Walrus package's framework version causes dependency resolution errors. Drop it.
 
 ---
 

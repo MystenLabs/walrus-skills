@@ -1,16 +1,19 @@
 [
   {
     "id": "ts-sdk-init",
-    "prompt": "How do I initialize a WalrusClient in TypeScript to store blobs on testnet?",
-    "expected_output": "Shows the $extend(walrus()) pattern with SuiClient, network: 'testnet', and a keypair for write operations.",
+    "prompt": "How do I set up the Walrus TypeScript SDK and store a blob on testnet?",
+    "expected_output": "Creates a SuiGrpcClient for testnet and extends it with walrus(), then writes with writeBlob or writeFiles passing epochs, deletable, and a signer.",
     "expectations": [
-      "Shows importing from @mysten/walrus and @mysten/sui",
-      "Uses the $extend(walrus({...})) or WalrusClient pattern",
-      "Sets network to 'testnet'",
-      "Provides a keypair or wallet for write operations",
-      "Shows a storeBlob call with epochs parameter"
+      "Imports from @mysten/walrus and @mysten/sui (SuiGrpcClient from @mysten/sui/grpc)",
+      "Extends the Sui client with $extend(walrus(...))",
+      "Uses writeBlob or writeFiles to store data",
+      "Passes epochs and a signer (keypair or wallet) to the write call",
+      "Does NOT use the deprecated JSON-RPC SuiClient as the primary client",
+      "Does NOT use a storeBlob method (it does not exist in @mysten/walrus)"
     ],
-    "sources": ["https://sdk.mystenlabs.com/walrus"]
+    "sources": [
+      "https://sdk.mystenlabs.com/walrus"
+    ]
   },
   {
     "id": "ts-sdk-browser-upload",
@@ -22,17 +25,39 @@
       "Mentions the mainnet relay URL (https://upload-relay.mainnet.walrus.space) or testnet equivalent",
       "Explains that browsers cannot distribute slivers directly to storage nodes"
     ],
-    "sources": ["https://sdk.mystenlabs.com/walrus"]
+    "sources": [
+      "https://sdk.mystenlabs.com/walrus",
+      "https://docs.wal.app/docs/network-reference",
+      "https://docs.wal.app/docs/system-overview/aggregators-publishers-relays"
+    ]
   },
   {
     "id": "ts-sdk-vite-error",
-    "prompt": "My Vite build breaks when I add @mysten/walrus. I get errors about gRPC imports.",
-    "expected_output": "Add optimizeDeps.exclude for @mysten/walrus in vite.config.ts.",
+    "prompt": "My Vite build breaks when I add @mysten/walrus. It cannot load the WASM module.",
+    "expected_output": "Explains that the SDK needs its WASM bindings and shows the wasmUrl option with a ?url import of @mysten/walrus-wasm/web/walrus_wasm_bg.wasm (or a CDN URL).",
     "expectations": [
-      "Identifies this as a Vite pre-bundling issue with gRPC/WASM",
-      "Provides the vite.config.ts optimizeDeps.exclude configuration",
-      "Shows the exact config: exclude: ['@mysten/walrus']"
+      "Identifies that the SDK needs to locate its WASM bindings",
+      "Shows passing the wasmUrl option to walrus({...})",
+      "Imports the WASM file with a ?url suffix from @mysten/walrus-wasm/web/walrus_wasm_bg.wasm, or points wasmUrl at a CDN/self-hosted URL",
+      "Does NOT present optimizeDeps.exclude as the fix"
     ],
-    "sources": ["https://sdk.mystenlabs.com/walrus"]
+    "sources": [
+      "https://sdk.mystenlabs.com/walrus"
+    ]
+  },
+  {
+    "id": "ts-sdk-verify-durable",
+    "prompt": "After writing a blob with the TypeScript SDK, how do I confirm it is actually stored before my app depends on it?",
+    "expected_output": "Reads the Blob object back with getBlobObject using blobObject.id and checks certified_epoch is set, the current epoch is before storage.end_epoch, and the blob is not deletable.",
+    "expectations": [
+      "Reads the Blob object back from Sui (getBlobObject with the object ID from the write result)",
+      "Checks that certified_epoch is not null",
+      "Compares the current epoch against storage.end_epoch",
+      "Mentions checking deletable (a deletable blob can disappear before its end epoch)"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/verifying-availability",
+      "https://sdk.mystenlabs.com/walrus"
+    ]
   }
 ]

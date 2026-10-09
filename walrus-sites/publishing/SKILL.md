@@ -31,7 +31,7 @@ Check the site-builder config exists:
 cat ~/.config/walrus/sites-config.yaml
 ```
 
-This file specifies the Walrus Sites framework package, staking object, and Walrus context per network. It is **not** created automatically by `suiup install site-builder` — you must download it manually (see the [site-builder installation docs](https://docs.wal.app/docs/sites/installing-the-site-builder)). The site-builder searches `~/.config/walrus/sites-config.yaml`, `./sites-config.yaml`, and `$XDG_CONFIG_HOME/walrus/`.
+This file has a `contexts:` map with, per network, the Walrus Sites framework `package`, the `staking_object`, and a `general:` block (`wallet_env`, `walrus_context`, optionally `walrus_package`, `rpc_url`, `wallet`, `walrus_binary`, `walrus_config`, `gas_budget`). Site-builder v2.9.1 stopped requiring the Walrus `package_id` in this file (it is resolved from the staking object), so an older config that pins it still works but a newer one need not. This file specifies the Walrus Sites framework package, staking object, and Walrus context per network. It is **not** created automatically by `suiup install site-builder` — you must download it manually (see the [site-builder installation docs](https://docs.wal.app/docs/sites/installing-the-site-builder)). The site-builder searches `~/.config/walrus/sites-config.yaml`, `./sites-config.yaml`, and `$XDG_CONFIG_HOME/walrus/`.
 
 ## Deploying a site
 
@@ -126,14 +126,30 @@ Without this, direct navigation to `/borrows` or any client-side route returns 4
   "site_name": "My App",
   "object_id": "0x...",
   "headers": {
-    "/assets/*": {
-      "Cache-Control": "public, max-age=31536000, immutable"
+    "/index.html": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "max-age=3500"
     }
   }
 }
 ```
 
-## Debugging with `site-builder sitemap`
+Header keys are exact resource paths from the root (no wildcards), and each path that needs custom headers must be listed. The headers live on the site object on Sui: editing `ws-resources.json` changes nothing until you run `site-builder deploy` again. Common uses are `Content-Type` overrides, `Cache-Control`, `Content-Disposition`, and `Content-Encoding` for pre-compressed assets.
+
+### HTTP redirects
+
+```json
+{
+  "redirects": {
+    "/old-page": { "location": "/new-page", "status_code": 301 },
+    "/legacy/**/*": { "location": "/index.html", "status_code": 302 }
+  }
+}
+```
+
+Server-side redirects evaluated by the portal before any resource lookup; `*` matches one segment, `**/*` any number; `location` may be a site path or a full URL. Distinct from `routes`, which only maps client-side paths to deployed resources.
+
+## Debugging with `site-builder sitemap`## Debugging with `site-builder sitemap`
 
 ```bash
 site-builder sitemap 0x<site-object-id>

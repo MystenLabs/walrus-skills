@@ -7,32 +7,54 @@
       "Shows a struct with key ability and id: UID field",
       "Includes a blob: Blob field using walrus::blob::Blob",
       "Shows using object::new(ctx) for the UID",
-      "Uses the use walrus::blob::Blob import"
+      "States or relies on Blob having the store ability (it can be embedded in another object)"
     ],
-    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+    "sources": [
+      "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
+    ]
   },
   {
     "id": "move-testnet-deps",
     "prompt": "What does my Move.toml look like to use Walrus on testnet?",
     "expected_output": "Shows Move.toml with Walrus dependency using testnet-contracts/walrus subdir and edition 2024.",
     "expectations": [
-      "Uses subdir = 'testnet-contracts/walrus' (not 'contracts/walrus') for testnet",
       "Uses edition = '2024' (not '2024.beta')",
-      "Includes the Walrus git dependency pointing to MystenLabs/walrus",
-      "Does not hardcode package IDs that may be stale"
+      "Declares the Walrus package as a git dependency on MystenLabs/walrus with a subdir, using the testnet-contracts/walrus sources for Testnet",
+      "Does NOT add an explicit Sui framework git dependency or an [addresses] section",
+      "Points at the Network Reference or the testnet-contracts Move.lock for current package IDs rather than hardcoding them"
     ],
-    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+    "sources": [
+      "https://docs.wal.app/docs/examples/move",
+      "https://docs.wal.app/docs/network-reference",
+      "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
+    ]
   },
   {
-    "id": "move-vmverification-error",
-    "prompt": "I get VMVerificationOrDeserializationError when publishing my Move contract that depends on Walrus to testnet. How do I fix it?",
-    "expected_output": "Check Move.toml: wrong subdir (use testnet-contracts/walrus), wrong rev, or stale Move.lock. Delete Move.lock and rebuild.",
+    "id": "move-read-blob-fields",
+    "prompt": "From my Move contract, how do I check whether a Walrus Blob I hold is still live?",
+    "expected_output": "Reads certified_epoch (none until certified) and compares end_epoch against the current epoch from the System object with system.epoch().",
     "expectations": [
-      "Identifies Move.toml dependency misconfiguration as the likely cause",
-      "Mentions the testnet-contracts/walrus subdir requirement for testnet",
-      "Recommends deleting Move.lock and rebuilding",
-      "Mentions checking the rev matches what is deployed on-chain"
+      "Uses the certified_epoch accessor on walrus::blob::Blob",
+      "Uses the end_epoch accessor",
+      "Compares end_epoch against the current epoch read from the System object (system.epoch())",
+      "Does NOT claim Move can read the blob's content"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/available-networks"]
+    "sources": [
+      "https://docs.wal.app/docs/examples/move"
+    ]
+  },
+  {
+    "id": "move-lifecycle-functions",
+    "prompt": "My contract holds a Walrus Blob. How do I extend its storage or delete it from Move?",
+    "expected_output": "Calls walrus::system::extend_blob(system, blob, extended_epochs, payment) with a Coin<WAL>, or extend_blob_with_resource with an owned Storage resource; delete_blob(system, blob) consumes a deletable blob and returns its Storage. Operations take the shared System object.",
+    "expectations": [
+      "Uses walrus::system::extend_blob with the shared System object, the blob, the number of epochs, and a Coin<WAL> payment",
+      "Mentions delete_blob(system, blob) consumes a deletable blob and returns its Storage resource for reuse",
+      "Mentions extend_blob_with_resource as the way to extend with a Storage resource you already own",
+      "Distinguishes burn (destroys the Blob object without deleting data or refunding storage) from delete"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/examples/move"
+    ]
   }
 ]

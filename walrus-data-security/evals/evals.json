@@ -4,22 +4,27 @@
     "prompt": "I want to store private user documents on Walrus. How do I keep them private?",
     "expected_output": "Encrypt before uploading. All Walrus blobs are public. Use Seal for onchain access control or any encryption library.",
     "expectations": [
-      "Clearly states all Walrus blobs are public by default",
-      "Recommends encrypting data before uploading",
-      "Mentions Seal as the recommended solution for onchain access control",
-      "States that blob IDs are not secrets"
+      "Clearly states all Walrus blobs are public by default and that Walrus provides availability and integrity, not confidentiality",
+      "Recommends encrypting data on the client before uploading, for example with Seal, and states that encryption is the user's responsibility",
+      "States that blob IDs are not secrets",
+      "Does NOT claim Walrus offers native encryption or access control"
     ],
-    "sources": ["https://docs.wal.app/docs/data-security"]
+    "sources": [
+      "https://docs.wal.app/docs/data-security"
+    ]
   },
   {
-    "id": "security-seal-sender",
-    "prompt": "I'm getting 'Transaction was not signed by the correct sender' when trying to decrypt with Seal. What's wrong?",
-    "expected_output": "Set tx.setSender(address) on the PTB before passing it to Seal. The sender must match the decrypting address.",
+    "id": "security-sovereignty",
+    "prompt": "Can I make sure my Walrus blobs are stored only in a specific region, so I can keep regulated personal data there?",
+    "expected_output": "No: Walrus erasure-codes a blob into slivers spread across all shards, and a Sui contract assigns shards to nodes; there is no way to pin data to a node, region, or jurisdiction. Every blob is public, so regulated or personal data must be encrypted first and the keys kept off Walrus.",
     "expectations": [
-      "Identifies the missing tx.setSender(address) call as the cause",
-      "Shows the tx.setSender(address) code",
-      "Explains the sender must match the address requesting decryption"
+      "States that Walrus does not let you choose which storage nodes or regions hold your data",
+      "Explains that blobs are erasure-coded into slivers distributed across all shards, with shard assignment managed onchain",
+      "Advises against storing personal or regulated data in the clear; recommends encrypting first and keeping plaintext and keys off Walrus",
+      "States that all blobs are public and treats the blob ID as public"
     ],
-    "sources": ["https://docs.wal.app/docs/data-security"]
+    "sources": [
+      "https://docs.wal.app/docs/data-security"
+    ]
   }
 ]
