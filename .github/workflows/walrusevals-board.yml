@@ -1,0 +1,70 @@
+name: "Walrus Evals board"
+
+# The page is rebuilt here, from data in this repository.
+#
+# It used to be built in a private repository from eval reports that only existed
+# there, which made the board something people could read but not reproduce. The
+# suite, the page, the build and the published cards are all here now: a card is
+# the publishable part of a run, and the board is a function of the cards plus
+# the skills they were scored against.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "walrusevals/**"
+      - "*/evals/evals.json"
+      - ".github/workflows/walrusevals-board.yml"
+  pull_request:
+    paths:
+      - "walrusevals/**"
+      - "*/evals/evals.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Rebuild the board
+        run: node walrusevals/build.js --skills . --out walrusevals
+
+      - name: Check it
+        run: |
+          node walrusevals/tests/build.test.js
+          node walrusevals/tests/kind.test.js
+          node walrusevals/tests/page.test.mjs
+
+      # Nothing is committed. This job used to rebuild the two index.json files
+      # and push them to main, and it could not: main is protected, so every run
+      # built correctly, passed the checks above, and then failed with
+      #
+      #   remote: error: GH006: Protected branch update failed for refs/heads/main.
+      #   remote: - Changes must be made through a pull request.
+      #
+      # So the files it was keeping fresh went stale and stayed stale, and the
+      # job was red on every run -- which is worse than not having it, because a
+      # permanently failing check is one nobody reads.
+      #
+      # They are generated files now, ignored by git, and built before anything
+      # reads them: here, and by the Vercel build before it serves the page.
+      # This job's remaining job is to prove the board still builds and that its
+      # page still renders, which is what a check should do.
+      - name: What the board would publish
+        run: |
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync("walrusevals/results/index.json", "utf8"));
+            const e = JSON.parse(require("fs").readFileSync("walrusevals/evals/index.json", "utf8"));
+            console.log(`suite ${e.manifest}: ${e.evals.length} evals`);
+            console.log(`${(r.runs ?? []).length} run(s) ranked, ${(r.incomplete ?? []).length} marked`);
+            for (const x of r.runs ?? []) {
+              const pct = (100 * x.total.pass / x.total.total).toFixed(1);
+              console.log(`  ${x.name.padEnd(48)} ${pct}%`);
+            }
+          ' >> "$GITHUB_STEP_SUMMARY"
