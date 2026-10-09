@@ -79,11 +79,31 @@ If unsure about any lifecycle operation, fetch the relevant page before answerin
 
 - **Wrapping blobs in shared objects.** A `Blob` object can be wrapped into any Sui shared object, allowing multiple parties to fund and extend it. The Walrus contract provides `shared_blob::SharedBlob` as one reference implementation of this pattern, but developers are free to create their own shared wrapper with custom logic (access control, metadata, etc.).
 
-- **Storage pools.** A storage pool is the recommended way to manage blob storage going forward. Instead of purchasing storage resources per-blob, you fund a pool and blobs draw from it. This simplifies lifecycle management—blobs in a pool can be extended or renewed without individual storage resource tracking. Use `walrus store --storage-pool <POOL_ID>` to store against a pool.
+- **Storage pools.** A preview feature: one storage reservation that many blobs share. Pooled blobs draw on the pool's pre-paid capacity, so each store pays only the write fee, and all blobs in a pool expire together. Available through the Rust SDK (`walrus-sdk`, `walrus-sui`) and the Move contracts; the `walrus` CLI, the HTTP publisher and aggregator APIs, and the TypeScript SDK do not expose pools yet.
 
 - **Blob attributes.** Key-value metadata pairs stored on the blob's Sui object. Certain keys (`content-type`, `content-disposition`, and others) are recognized by the aggregator and returned as HTTP headers when reading by object ID.
 
 - **Per-blob storage overhead.** Each blob incurs approximately 64 MB of metadata overhead regardless of size. For blobs smaller than ~10 MB, this metadata cost dominates. Use quilts for batching many small blobs to amortize this overhead.
+
+### Check status and verify availability before acting
+
+Before you extend or depend on a blob, confirm it is still stored and see when it expires:
+
+```sh
+walrus blob-status --blob-id <BLOB_ID>   # stored? availability period; event ID for certified permanent blobs
+walrus info                              # current epoch, to compare against the end epoch
+```
+
+Expiry is silent: at the end epoch, storage nodes stop serving the blob and no event is emitted. Check on a schedule rather than waiting for a read to fail, and extend well before the end epoch.
+
+To check programmatically after a write, re-read the `Blob` object from Sui using the object ID from the write result. A blob is durable when it is certified, the current epoch is before its end epoch, and it is not deletable:
+
+```ts
+const blob = await walrusClient.getBlobObject(blobObjectId);
+const durable = blob.certified_epoch != null && currentEpoch < blob.storage.end_epoch && !blob.deletable;
+```
+
+For integrity, read the bytes by object ID through an aggregator with `strict_consistency_check=true`, so the data is bound to the object whose certification you verified. The `blob_id` field on the Sui object is a `u256`, not the base64 ID used in URLs.
 
 ### Extend blob lifetime
 
@@ -169,19 +189,23 @@ Built-in shared blobs:
 
 For more control, consider wrapping the `Blob` in your own shared object (see `walrus-move-integration`).
 
-### Storage pools
+### Storage pools (preview)
 
-Storage pools are the recommended way to manage blob storage. Instead of purchasing individual storage resources per blob, you fund a pool and blobs draw from it.
+A storage pool is a single storage reservation that many blobs share. In the standard flow every blob buys its own storage resource for its exact size and lifetime; with a pool you reserve a block of encoded capacity for a lifetime once, and each blob registered into it pays only the write fee.
 
-```sh
-# Store a blob using a storage pool
-walrus store myfile.png --epochs 10 --storage-pool <POOL_ID>
-```
+| | Regular blob | Pooled blob |
+|---|---|---|
+| **Storage payment** | Own storage resource per blob | Draws on the pool's pre-paid capacity; registration pays only the write fee |
+| **Lifetime** | Individual expiry, extended per blob | Shares the pool's expiry; extending the pool extends every blob in it |
+| **Deletion** | Returns the storage resource to you | Frees its encoded size for the next blob in the pool (no WAL refund) |
+| **Ownership** | `Blob` can be owned, transferred, shared | `PooledBlob` lives inside the pool and cannot be transferred on its own |
+| **Reading** | By blob ID | Identical; pooled blobs have regular blob IDs |
 
-Benefits:
-- Simplifies lifecycle management—no individual storage resource tracking
-- Blobs in a pool can be extended or renewed from the pool's funds
-- Multiple blobs can share a single funding source
+Costs: creating a pool pays the storage fee for the full reserved capacity for its full lifetime, whether or not blobs fill it; registering a blob pays the write fee for its encoded size; extending or growing the pool pays the storage fee for the added epochs or capacity; deleting pays nothing and refunds nothing. The fixed per-blob metadata overhead still applies to pooled blobs, so pools do not make many small blobs cheaper; use quilts for that, optionally inside a pool.
+
+Use a pool when you continuously write and retire blobs against a predictable total footprint, want each write to cost only the write fee, and can accept one shared expiry. Prefer regular blobs when blobs need independent lifetimes, when you need to transfer or share individual blob objects, or when capacity needs are unpredictable.
+
+Pools are available through the Rust SDK (`create_storage_pool`, `reserve_and_store_blobs_in_storage_pool`, `storage_pool_status`, `delete_pooled_blob`, `extend_storage_pool`, `increase_storage_pool_capacity`) and the `walrus::system` Move module. **The `walrus` CLI has no pool support**; there is no `--storage-pool` flag. See the [storage pools page](https://docs.wal.app/docs/system-overview/storage-pools) for the Rust and Move examples.
 
 ### Blob attributes
 
@@ -208,10 +232,12 @@ Recognized HTTP header attribute keys: `content-disposition`, `content-encoding`
 3. **Delete does not guarantee data removal.** Other copies of the same blob might exist. Caches and past storage nodes are not affected.
 4. **Shared blobs must be permanent.** You cannot share a deletable blob. Convert to permanent first or store as permanent with `--share`.
 5. **Burn is irreversible.** Burning a blob object forfeits all control with no storage refund. Use `--all-expired` to clean up expired blobs safely.
-6. **Maximum blob size is approximately 13.6 GiB.** For large uploads, see the `large-uploads.md` reference file.
+6. **Maximum blob size is approximately 13.6 GiB.** Check the current limit with `walrus info` under "Maximum blob size." For large uploads, see the `large-uploads.md` reference file.
 
 ### Common mistakes
 
+- **Inventing a `--storage-pool` CLI flag.** Pools are not in the CLI; they are a Rust SDK and Move preview.
+- **Waiting for a read to fail to learn a blob expired.** Expiry emits no event. Check `blob-status` against `walrus info` on a schedule.
 - **Extending with the blob ID instead of the object ID.** The `extend` command requires `--blob-obj-id` (Sui object ID), not the blob ID.
 - **Trying to extend an expired blob.** Once expired, a blob cannot be extended. You must re-upload.
 - **Expecting delete to make data completely unavailable.** If another user uploaded the same content, it persists. Encryption is the only reliable privacy mechanism.

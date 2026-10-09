@@ -17,7 +17,7 @@ description: >
 > and the [Seal SDK documentation](https://seal-docs.wal.app/).
 > When extending this skill, only pull from these sources.
 
-All data stored on Walrus is public and discoverable by anyone. Blob IDs are not secrets. If your use case requires data confidentiality or access control, you must encrypt data before uploading. Seal is the recommended encryption solution for onchain access control with Walrus.
+Walrus natively provides data availability and integrity guarantees. It does not provide confidentiality: all data stored on Walrus is public and discoverable by anyone, blob IDs are not secrets, and there is no mechanism to pin a blob to a node, region, or jurisdiction. To keep data confidential, encrypt it on the client before you store it, for example with Seal, and treat the blob ID as public. Encryption is your responsibility; Walrus stores and serves whatever bytes you upload.
 
 All patterns in this skill are derived from:
 - https://docs.wal.app/docs/data-security
@@ -81,11 +81,17 @@ If unsure about Seal or Walrus security, fetch the relevant page before answerin
 - **Point of availability (PoA):** Observable through a Sui event. Before PoA, you are responsible for blob availability. After PoA, Walrus maintains it for the full storage period.
 - **Inconsistency proofs:** If a blob is incorrectly encoded, storage nodes produce an inconsistency proof and reads return `None`. Correctly stored blobs cannot have false inconsistency proofs.
 
-### Data integrity
+### Data sovereignty and residency
+
+Walrus does not let you choose which storage nodes or geographic regions hold your data. A blob is erasure-coded into slivers and distributed across all shards, and a Sui smart contract assigns shards to storage nodes. Because every blob is public and its placement is not controllable, do not store personal or regulated data on Walrus in the clear: encrypt it first, keep the plaintext and any keys off Walrus, and store only what you are willing to make permanently public.
+
+### Data integrity### Data integrity
 
 Walrus guarantees that data read matches what the uploader intended. Because encoding is client-side, it is possible for encoding to be incorrect (by mistake or on purpose). The consistency check mechanisms (default and strict) detect and handle this.
 
 ### Seal: Threshold encryption with onchain access control
+
+The Walrus docs name Seal as one way to encrypt on the client; its own documentation is the source for everything below.
 
 Seal provides:
 - **Threshold encryption:** No single party holds the full decryption key.
@@ -140,7 +146,7 @@ To get started: https://docs.sui.io/concepts/cryptography/nautilus/using-nautilu
 
 ### Rules
 
-1. **Always encrypt sensitive data before uploading to Walrus.** There is no server-side encryption. All blobs are public.
+1. **Always encrypt sensitive data before uploading to Walrus.** Walrus guarantees availability and integrity, not confidentiality. There is no server-side encryption and no control over where data is placed.
 2. **Blob IDs are not secrets.** Anyone with a blob ID can fetch the blob content. Security comes from encryption, not obscurity.
 3. **Use Seal for onchain access control.** If you want decryption tied to blockchain state (token ownership, time locks, role membership), Seal is the recommended solution.
 4. **Set `tx.setSender(address)` before Seal PTBs.** Missing or mismatched sender causes decryption to fail.

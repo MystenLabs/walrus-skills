@@ -60,9 +60,11 @@ const { encryptedData, encryptionKey } = await sealClient.encrypt({
 });
 
 // 3. Store the encrypted data on Walrus
-const result = await walrusClient.walrus.storeBlob({
-  blob: encryptedData,
+const { blobId } = await walrusClient.walrus.writeBlob({
+  blob: encryptedData,   // Uint8Array
   epochs: 30,
+  deletable: false,
+  signer: keypair,       // pays SUI for gas and WAL for storage
 });
 ```
 

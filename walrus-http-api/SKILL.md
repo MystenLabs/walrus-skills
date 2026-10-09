@@ -68,7 +68,8 @@ curl -X PUT "$PUBLISHER/v1/blobs?epochs=5" --upload-file "some/file"
 | `epochs` | Number of storage epochs | 1 |
 | `deletable=true` | Blob can be deleted by owner before expiry | Default for new blobs |
 | `permanent=true` | Blob cannot be deleted before expiry | Must be explicit |
-| `send_object_to` | Send the resulting Blob Sui object to another address | Sender's address |
+| `send_object_to` | Send the resulting Blob Sui object to another address (how a sponsored upload hands ownership to a walletless user) | Publisher's wallet |
+| `reuse_resources=true` | Reuse storage or blob objects the publisher wallet already owns instead of registering fresh ones | `false`; keep it off when concurrent stores share one wallet |
 
 ```sh
 # Store as permanent for 5 epochs
@@ -158,7 +159,36 @@ Reading by object ID recognizes these attribute keys and returns them as HTTP he
 
 The full list of public aggregators is available at [docs.wal.app/operators.json](https://docs.wal.app/operators.json) (JSON) and the [public services page](https://docs.wal.app/docs/system-overview/public-aggregators-and-publishers). Public aggregators set CORS headers, so browser-based reads work directly.
 
-### Querying system info
+### Sponsored and walletless uploads
+
+Most users hold neither SUI nor WAL. Walrus has no built-in gas-sponsorship primitive; sponsoring means one of your wallets performs and pays for the store. Three patterns:
+
+| Pattern | Who signs | Who pays | Walletless for the user | Best for |
+|---|---|---|---|---|
+| **Backend publisher** | Publisher wallet | App | Yes | Backends that accept raw bytes over HTTP and pay for storage |
+| **Upload relay** | Client or app signer | Client or app signer, plus a relay tip if configured | Only if the app manages signing | Browser and mobile clients that cannot open many node connections |
+| **Direct SDK** | The signer your code configures | App wallet | Yes, if the backend holds the signer | Backends that integrate Walrus directly and control signing in code |
+
+The reference architecture: the client authenticates to your backend with your own credentials; the backend applies policy (quotas, sizes, duration) and forwards the bytes to your publisher; the publisher stores with its funded wallet and, with `send_object_to=<address>`, sends the `Blob` object to the user; the backend returns the blob ID. Every store spends real WAL and SUI (reserve + register in one transaction, certify in a second); there is no free tier.
+
+Operational pitfalls from the docs:
+- **Never expose an unauthenticated publisher on Mainnet.** Anyone who reaches it spends your wallet's SUI and WAL. Put the authenticated publisher's JWT flow or your own gateway in front of it.
+- **Do not sign many concurrent stores from one wallet.** Concurrent transactions contend for the same owned gas and storage objects. The publisher uses internal sub-wallets for this; replicate it if you build your own uploader.
+- **Keep `reuse_resources` off when a wallet is shared.** Reuse lets two in-flight uploads contend for the same objects and can leave a blob registered but never certified.
+- **Keep the funding wallets topped up.** Monitor both SUI and WAL on the main wallet; the publisher refills its sub-wallets from it.
+
+### Byte ranges and streaming media
+
+Aggregators support the HTTP `Range` header and return `206 Partial Content`, which is what lets a browser seek inside a video. There is also a query-parameter form:
+
+```sh
+curl -H "Range: bytes=0-999" "$AGGREGATOR/v1/blobs/<BLOB_ID>"
+curl "$AGGREGATOR/v1/blobs/<BLOB_ID>/byte-range?start=0&length=1024"
+```
+
+A `<video>` or `<audio>` element can use an aggregator URL as its `src`. Reading by blob ID returns no content type, and the aggregator deliberately blocks type sniffing, so set the `content-type` attribute on the blob and read it **by object ID** (`/v1/blobs/by-object-id/<OBJECT_ID>`) so the header is returned and the browser plays instead of downloads. A byte-range read verifies only the bytes it fetches, not the whole blob.
+
+### Querying system info### Querying system info
 
 ```sh
 # Get current epoch, storage cost, and network parameters
@@ -182,6 +212,8 @@ Returns epoch number, epoch duration, and system parameters. Useful for calculat
 - **Reading immediately after storing and getting 404.** CDN caching can cause brief 404s. Retry with backoff.
 - **Omitting `epochs` and getting 1-epoch storage.** The default is 1 epoch. Always set `epochs` explicitly.
 - **Confusing publisher and aggregator roles.** Publishers store (PUT). Aggregators read (GET). They are separate services with different URLs.
+- **Treating `503 BLOB_UNAVAILABLE` as permanent.** Since v1.47 the aggregator returns a retryable `503` (instead of `500`) when a blob is only temporarily unretrievable. Retry with backoff.
+- **Expecting a content type when reading by blob ID.** Only the by-object-id read returns attribute headers such as `content-type`.
 - **Getting `413 Payload Too Large` on a publisher.** Some publishers limit upload size (for example, 10 MiB for public testnet publishers). For large files, use the CLI, the TypeScript SDK, or run your own publisher.
 - **Wondering why `storageSize` is ~66 MB for a tiny blob.** Walrus adds ~64 MB of fixed per-blob metadata overhead regardless of blob size. For blobs smaller than ~10 MB, metadata cost dominates. Use quilts for many small blobs.
 - **Using old aggregator URLs.** `aggregator.walrus.site` and `aggregator.devnet.walrus.space` are outdated. Use `aggregator.walrus-mainnet.walrus.space` for mainnet or `aggregator.walrus-testnet.walrus.space` for testnet.

@@ -35,7 +35,7 @@ This skill provides the entry point for understanding Walrus. It covers architec
 | Blob lifecycle | `walrus-blob-lifecycle` | Extending, deleting, sharing blobs |
 | Sites | `walrus-sites` | Deploying static websites |
 | Quilts | `walrus-quilts` | Batching many small blobs |
-| Data security | `walrus-data-security` | Encryption with Seal |
+| Confidentiality | `walrus-data-security` | Encrypting before storing; Walrus guarantees availability and integrity, not confidentiality |
 | Troubleshooting | `walrus-troubleshooting` | Common errors and fixes |
 
 ---
@@ -99,7 +99,7 @@ Key properties:
 | **Epoch** | A time period. 14 days on mainnet. Storage duration is measured in epochs. |
 | **Sliver** | A fragment of an erasure-coded blob, stored on a single shard. |
 | **Shard** | A partition of the storage space, assigned to a storage node for each epoch. |
-| **Publisher** | An HTTP service that accepts blob data (PUT) and handles encoding, distribution, and on-chain registration. No public mainnet publisher exists. |
+| **Publisher** | An HTTP service that accepts blob data (PUT) and handles encoding, distribution, and on-chain registration with its own funded wallet. Walrus runs no public unauthenticated publisher on Mainnet and has no plans to; run your own behind authentication. Public Testnet publishers exist. |
 | **Aggregator** | An HTTP service that reads blobs (GET) by fetching slivers from storage nodes. Many public aggregators exist on both networks, free to use. |
 | **Upload relay** | A third-party service that handles encoding and sliver distribution on behalf of bandwidth-limited clients (for example, browsers). May charge a tip. |
 | **WAL** | The Walrus token, used to pay for storage. |
@@ -109,7 +109,7 @@ Key properties:
 | **Permanent blob** | A blob that cannot be deleted before expiry, even by the uploader. |
 | **Quilt** | A single storage unit containing multiple blobs, reducing per-blob overhead. |
 | **Shared blob** | A `Blob` wrapped in a Sui shared object so anyone can fund and extend it. The Walrus contract provides `SharedBlob` as a reference implementation; developers can also create custom shared wrappers. |
-| **Storage pool** | A funding pool that blobs draw storage from, simplifying lifecycle management. The recommended way to manage blob storage. |
+| **Storage pool** | A preview feature: one pre-paid storage reservation that many blobs share, so each store pays only the write fee and all blobs in the pool expire together. Rust SDK and Move only; not in the CLI, HTTP APIs, or TypeScript SDK yet. |
 
 ### Blob ID vs Sui object ID
 
@@ -135,7 +135,9 @@ This is the most common point of confusion for new users:
 | Reference blobs in a Move contract | Walrus Move dependency | `walrus-move-integration` |
 | Deploy a static website | `site-builder` CLI | `walrus-sites` |
 | Store many small files cheaply | Quilts (CLI or HTTP) | `walrus-quilts` |
-| Store sensitive/private data | Encrypt with Seal, then store | `walrus-data-security` |
+| Store sensitive/private data | Encrypt on the client (for example with Seal), then store | `walrus-data-security` |
+| Let users upload without holding SUI or WAL | Backend publisher (sponsored, walletless), upload relay, or SDK with a backend signer | `walrus-http-api` |
+| Confirm a blob is durably stored before depending on it | `walrus blob-status` / `getBlobObject` | `walrus-blob-lifecycle` |
 
 ### Walrus vs traditional storage
 
@@ -151,6 +153,14 @@ This is the most common point of confusion for new users:
 | **Verifiability** | Cryptographic blob IDs, on-chain certificates | None |
 
 Walrus is strongest for use cases that need **censorship resistance, verifiability, decentralized availability, or programmable access control**. It is not a drop-in replacement for all cloud storage — only the object/blob storage part.
+
+### Pick a service
+
+Match the constraint you actually have:
+- Your caller reads blobs: use an aggregator.
+- Your caller cannot hold SUI or WAL: use a publisher, and on Mainnet run and authenticate your own.
+- Your caller holds a wallet but runs in a browser or on mobile: use an upload relay.
+- Your caller runs server-side with a funded wallet: write through the TypeScript SDK, which talks to storage nodes directly.
 
 ### Rules
 

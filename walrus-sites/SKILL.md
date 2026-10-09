@@ -89,7 +89,35 @@ Common failures:
 | `site-builder destroy <OBJECT_ID>` | Remove a site permanently |
 | `site-builder convert <HEX>` | Convert hex object ID to Base36 |
 
-### Custom domains
+`deploy` updates when it finds an object ID, from `--object-id <OBJECT_ID>` or the `object_id` field in `ws-resources.json`, and publishes a new site otherwise. `--epochs` is required (`max` for the longest duration); `--list-directory` generates an index page for raw files. Run `site-builder deploy --help` to confirm flag spellings for your installed version; the docs' tutorial shows `--object-ids` while the reference page shows `--object-id`.
+
+### HTTP redirects
+
+The `redirects` field in `ws-resources.json` defines server-side HTTP redirects. Rules are stored as dynamic fields on the `Site` object, and the portal evaluates them before fetching any resource:
+
+```json
+{
+  "redirects": {
+    "/old-page": { "location": "/new-page", "status_code": 301 },
+    "/walrus-docs": { "location": "https://docs.wal.app", "status_code": 301 },
+    "/legacy/**/*": { "location": "/index.html", "status_code": 302 }
+  }
+}
+```
+
+`location` is a path on the site or a full URL; `status_code` is typically `301`, `302`, or `308`. Patterns are glob-style: `*` matches one path segment, `**/*` any number. This is distinct from the `routes` section, which is client-side routing only. The public portal caps redirect chains at a depth of 3.
+
+### Production checklist
+
+From the docs' [production guide](https://docs.wal.app/docs/sites/production):
+- **Portal:** `wal.app` serves only Mainnet sites that have a SuiNS name; nested subnames such as `app.myname.wal.app` do not resolve, so use one SuiNS name per site. Testnet and previews need a local or self-hosted portal.
+- **SPA routing:** `"routes": { "/*": "/index.html" }`; more specific patterns win over the wildcard.
+- **Caching:** portals and CDNs cache aggressively. Use content-hashed filenames, keep the old site object when you need a rollback target, and verify a fresh deploy from a private window before concluding it failed.
+- **CI:** there is no watch mode; run `site-builder deploy` from CI on each push. Commit `ws-resources.json` (it carries the site object ID) or every CI run creates a new site instead of updating yours.
+- **Next.js:** build with `output: "export"` and `images: { unoptimized: true }`, deploy `out/`, and put `ws-resources.json` in `public/` so redeploys update the same site. API routes, server actions, and on-demand rendering do not run.
+- **Toolchain:** `suiup` installs and pins `sui`, `walrus`, and `site-builder` together.
+
+### Custom domains### Custom domains
 
 **SuiNS names:** Associate a SuiNS name with your site object using SuiNS tooling (a separate on-chain step). The portal resolves `<name>.wal.app` to your site via the SuiNS name record's `walrusSiteId` field. Note: the `site_name` field in `ws-resources.json` only sets the Site object's on-chain display name — it does not configure SuiNS.
 
@@ -118,9 +146,10 @@ The action handles building, publishing, and updating `ws-resources.json`. Use `
 
 ### Known restrictions
 
-- **Static sites only.** No server-side rendering, runtime logic, or server-side redirects.
+- **Static sites only.** No server-side rendering, request handlers, or databases. HTTP redirects *are* supported through the `redirects` field in `ws-resources.json`; the `routes` section is client-side only, and framework redirect plugins that run server-side at request time do not work.
 - **No secrets.** All content is stored on Walrus (public). Do not include API keys, credentials, or private data.
-- **Maximum 3 redirect hops** on the public portal.
+- **Maximum 3 redirect hops** on the public portal; self-hosted portals can configure the limit.
+- **Route wildcards only at the end of a pattern** (`/path/*`, not `/path/*/to`), route targets must exist among deployed files, and custom headers are per exact resource path, not global.
 - **Service-worker portal limitations** on iOS and certain browsers.
 - **PWAs not fully supported.**
 
@@ -129,7 +158,7 @@ The action handles building, publishing, and updating `ws-resources.json`. Use `
 1. **Choose an appropriate `--epochs` value.** Maximum is 53 epochs (~53 days on testnet where 1 epoch = 1 day, ~2 years on mainnet where 1 epoch = 14 days). Use `--epochs max` for the longest possible storage duration. Note: `--permanent` only prevents deletion — it does not extend storage duration.
 2. **Build before deploying.** Run `npm run build` (or equivalent) to produce a static output directory. The site-builder deploys whatever directory you point it at.
 3. **Do not change `original_package_id` in the portal config** unless you know the Walrus Sites framework package has been upgraded.
-4. **`wal.app` is mainnet only.** For testnet, self-host the portal from the `MystenLabs/walrus-sites` repo.
+4. **`wal.app` serves Mainnet sites with a SuiNS name only.** No Testnet sites, no nested subnames. For testnet, self-host the portal from the `MystenLabs/walrus-sites` repo.
 5. **Keep `ws-resources.json` in version control.** It records the site object ID. Without it, future deploys create a new site instead of updating the existing one.
 6. **Use `site-builder deploy` instead of `publish`/`update`.** The `deploy` command is the recommended unified command.
 

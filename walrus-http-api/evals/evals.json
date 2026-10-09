@@ -9,7 +9,9 @@
       "Uses --upload-file for file uploads or -d for string data",
       "Mentions that there is no public mainnet publisher"
     ],
-    "sources": ["https://docs.wal.app/docs/http-api/storing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/http-api/storing-blobs"
+    ]
   },
   {
     "id": "http-api-read-blob",
@@ -21,7 +23,9 @@
       "Mentions that public aggregators are available on both testnet and mainnet",
       "Does not confuse aggregator (read) with publisher (write)"
     ],
-    "sources": ["https://docs.wal.app/docs/http-api/reading-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/http-api/reading-blobs"
+    ]
   },
   {
     "id": "http-api-no-mainnet-publisher",
@@ -33,6 +37,22 @@
       "Mentions the upload relay URL if applicable",
       "Does not provide a fake or outdated publisher URL"
     ],
-    "sources": ["https://docs.wal.app/docs/http-api/storing-blobs"]
+    "sources": [
+      "https://docs.wal.app/docs/http-api/storing-blobs"
+    ]
+  },
+  {
+    "id": "http-api-sponsored-uploads",
+    "prompt": "I want users of my app to upload to Walrus without holding SUI or WAL. How do I set that up?",
+    "expected_output": "Explains the backend publisher pattern: an authenticated backend forwards bytes to a funded publisher, which can send the Blob object to the user with send_object_to; warns never to expose an unauthenticated publisher on Mainnet.",
+    "expectations": [
+      "Describes running your own funded publisher behind authentication (the backend pays)",
+      "Mentions send_object_to to give the user ownership of the Blob object",
+      "Warns against an open unauthenticated publisher on Mainnet",
+      "Mentions the upload relay or direct SDK as alternatives when the client holds a wallet"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/sponsored-uploads"
+    ]
   }
 ]

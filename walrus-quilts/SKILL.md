@@ -48,7 +48,25 @@ If unsure about any quilt operation, fetch the relevant page before answering.
 
 - **Lifecycle applies to the whole quilt.** You cannot delete, extend, or share individual blobs inside a quilt. Operations like `delete`, `extend`, and `share` apply to the entire quilt.
 
-### CLI: Storing quilts
+### Decision guide
+
+Quilt is the right choice only when every row points to it; if any row points to a regular blob, store that item as a regular blob.
+
+| Dimension | Use Quilt when | Use a regular blob when |
+|---|---|---|
+| **File count** | Many items you can batch (tens to hundreds, up to 666 per QuiltV1) | One item, or items that never arrive together |
+| **Individual size** | Each item is small, typically under 10 MiB | An item approaches the ~4 GiB per-patch limit, or is large enough that overhead is negligible |
+| **Lifecycle** | Items share a lifetime (store, extend, retire together) | An item needs its own delete, extend, or share schedule |
+| **Addressing** | Identifier or tag lookup is acceptable | You need content-derived `BlobId`s; a `QuiltPatchId` depends on the whole quilt |
+| **Retrieval** | Items are read individually and occasionally | Every item is a hot, independently cached object |
+
+Pitfalls the docs call out: a single-file quilt adds `QuiltPatchId` indirection with no cost benefit; grouping items with mismatched lifetimes forces you to carry the whole quilt for the longest-lived item; and applications that look items up by a hash of their contents need regular blobs or their own identifier-to-content mapping.
+
+### TypeScript SDK
+
+`client.walrus.writeFiles({ files, epochs, deletable, signer })` stores all the files of one call as a single quilt, and `getFiles({ ids })` / `getBlob({ blobId }).files({ identifiers | tags | ids })` read patches back by identifier, tag, or quilt ID. See `walrus-ts-sdk`.
+
+### CLI: Storing quilts### CLI: Storing quilts
 
 #### Store from directories with `--paths`
 

@@ -7,21 +7,25 @@
       "Shows a struct with key ability and id: UID field",
       "Includes a blob: Blob field using walrus::blob::Blob",
       "Shows using object::new(ctx) for the UID",
-      "Uses the use walrus::blob::Blob import"
+      "States or relies on Blob having the store ability (it can be embedded in another object)"
     ],
-    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+    "sources": [
+      "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
+    ]
   },
   {
     "id": "move-testnet-deps",
     "prompt": "What does my Move.toml look like to use Walrus on testnet?",
     "expected_output": "Shows Move.toml with Walrus dependency using testnet-contracts/walrus subdir and edition 2024.",
     "expectations": [
-      "Uses subdir = 'testnet-contracts/walrus' (not 'contracts/walrus') for testnet",
       "Uses edition = '2024' (not '2024.beta')",
-      "Includes the Walrus git dependency pointing to MystenLabs/walrus",
+      "Includes the Walrus git dependency pointing to MystenLabs/walrus with a subdir for the network (testnet-contracts/walrus for Testnet)",
+      "Does NOT add an explicit Sui framework git dependency or an [addresses] section",
       "Does not hardcode package IDs that may be stale"
     ],
-    "sources": ["https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"]
+    "sources": [
+      "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
+    ]
   },
   {
     "id": "move-vmverification-error",
@@ -33,6 +37,22 @@
       "Recommends deleting Move.lock and rebuilding",
       "Mentions checking the rev matches what is deployed on-chain"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/available-networks"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/available-networks"
+    ]
+  },
+  {
+    "id": "move-read-blob-fields",
+    "prompt": "From my Move contract, how do I check whether a Walrus Blob I hold is still live?",
+    "expected_output": "Reads certified_epoch (none until certified) and compares end_epoch against the current epoch from the System object with system.epoch().",
+    "expectations": [
+      "Uses the certified_epoch accessor on walrus::blob::Blob",
+      "Uses the end_epoch accessor",
+      "Compares end_epoch against the current epoch read from the System object (system.epoch())",
+      "Does NOT claim Move can read the blob's content"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/examples/move"
+    ]
   }
 ]

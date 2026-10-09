@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sites-deploy-spa",
+    "prompt": "I deployed my React SPA to Walrus Sites but direct links to /dashboard return 404. How do I fix it?",
+    "expected_output": "Adds a routes section to ws-resources.json mapping /* to /index.html and redeploys with site-builder deploy.",
+    "expectations": [
+      "Shows the routes section in ws-resources.json with /* mapped to /index.html",
+      "Mentions redeploying with site-builder deploy for the change to apply",
+      "Explains that routes are client-side routing rules stored on the site object"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/sites/production",
+      "https://docs.wal.app/docs/sites/configuration/site-configuration"
+    ]
+  },
+  {
+    "id": "sites-http-redirect",
+    "prompt": "Can a Walrus Site return an HTTP 301 from an old URL to a new page?",
+    "expected_output": "Yes: the redirects field in ws-resources.json defines server-side HTTP redirects with location and status_code, including glob patterns; the portal evaluates them before fetching a resource.",
+    "expectations": [
+      "Shows the redirects field in ws-resources.json with location and status_code",
+      "Mentions that the portal evaluates redirects before looking up the resource",
+      "Mentions glob pattern support (* and **/*)",
+      "Does NOT claim Walrus Sites cannot do HTTP redirects"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/sites/linking/redirects"
+    ]
+  },
+  {
+    "id": "sites-ci-duplicate",
+    "prompt": "Every GitHub Actions deploy of my Walrus Site creates a brand new site object instead of updating the existing one. Why?",
+    "expected_output": "ws-resources.json, which records the site object ID, is not committed, so CI's fresh checkout has no object ID; commit it (or pass --object-id).",
+    "expectations": [
+      "Identifies the missing ws-resources.json / object_id in the CI checkout as the cause",
+      "Recommends committing ws-resources.json to the repository",
+      "Mentions --object-id as the way to target an existing site explicitly"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/sites/production",
+      "https://docs.wal.app/docs/sites/getting-started/using-the-site-builder"
+    ]
+  }
+]

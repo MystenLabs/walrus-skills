@@ -58,7 +58,7 @@ You need both WAL and SUI in your wallet to store blobs. On testnet, get SUI fro
 The WAL cost for storing a blob has two parts:
 
 1. **Storage cost** = `encoded_size × price_per_unit × epochs`
-   - `encoded_size` = raw blob size after erasure coding (~5x expansion) plus per-blob metadata
+   - `encoded_size` = raw blob size after erasure coding (about 4.5x) plus a fixed ~64 MB of per-blob metadata
    - `price_per_unit` = price per encoded storage unit per epoch (check `walrus info`)
    - `epochs` = number of storage epochs
 
@@ -77,10 +77,10 @@ Every blob incurs approximately **64 MB of metadata overhead** regardless of its
 | Blob size | Encoded size (approx) | Metadata % of cost |
 |-----------|----------------------|-------------------|
 | 1 KB | ~64 MB | ~99.99% |
-| 1 MB | ~69 MB | ~93% |
-| 10 MB | ~114 MB | ~56% |
-| 100 MB | ~564 MB | ~11% |
-| 1 GB | ~5.1 GB | ~1% |
+| 1 MB | ~68.5 MB | ~93% |
+| 10 MB | ~109 MB | ~59% |
+| 100 MB | ~514 MB | ~12% |
+| 1 GB | ~4.6 GB | ~1.4% |
 
 **This is why small blobs are expensive individually.** A 1 KB JSON document costs roughly the same as a 64 MB file. For many small files, use **quilts** to batch them into a single storage unit, amortizing the metadata overhead across all files.
 
@@ -108,7 +108,18 @@ Maximum storage duration is **53 epochs** (~2 years on mainnet). Convert epochs 
 
 Use the [Walrus Cost Calculator](https://costcalculator.wal.app/) for interactive estimates. Input file size and duration to see WAL cost.
 
-#### CLI dry run
+#### By hand
+
+The docs give a two-step estimate in USD (storage is priced at a fixed USD rate and paid in WAL, so the WAL amount moves with the WAL price):
+
+```text
+encoded_size_GB  = 4.5 * original_size_GB + 0.064
+monthly_cost_USD = encoded_size_GB * 0.023
+```
+
+For 600 files of 10 KiB stored separately: each pays roughly 0.064 GB of overhead, 38.4 GB in all, about $0.88/month for 6 MB of data. As one quilt: 4.5 × 0.006 + 0.064 ≈ 0.09 GB, about $0.002/month. The docs' measured comparison recorded a 409x saving for that case and 13x at 1 MiB per file; above about 1 MiB per file the storage saving shrinks quickly.
+
+#### CLI dry run#### CLI dry run
 
 ```sh
 # Estimate cost without actually uploading
@@ -128,10 +139,7 @@ Returns the price per encoded storage unit, write fee, current epoch, and maximu
 
 #### TypeScript SDK
 
-```typescript
-// Estimate storage cost programmatically
-const cost = await client.walrus.storageCost(fileSizeInBytes, epochs);
-```
+`WalrusClient` exposes a `storageCost` method; check its signature in the [TypeDocs](https://sdk.mystenlabs.com/typedoc/classes/_mysten_walrus.WalrusClient.html) before using it.
 
 ### Cost optimization strategies
 
@@ -141,6 +149,7 @@ const cost = await client.walrus.storageCost(fileSizeInBytes, epochs);
 | **Reuse storage resources** | Avoids buying new storage | The CLI does this automatically when your wallet has suitable resources |
 | **Delete expired blob objects** | Reclaims SUI storage fund deposit | After blobs expire, burn them with `walrus burn-blobs --all-expired` |
 | **Extend instead of re-upload** | Avoids write fee + encoding cost | When a blob needs to live longer |
+| **Storage pool for churn (preview)** | Each store pays only the write fee | Rust SDK / Move only; continuous write-and-delete against a stable footprint, one shared expiry |
 | **Use permanent blobs only when needed** | Deletable blobs can reclaim storage | Default is deletable, which lets you recover storage resources |
 
 ### Rules
@@ -157,7 +166,7 @@ const cost = await client.walrus.storageCost(fileSizeInBytes, epochs);
 - **Wondering why a tiny JSON blob costs as much as a 64 MB file.** The ~64 MB per-blob metadata overhead dominates for small blobs. Use quilts instead.
 - **Forgetting the write fee.** The write fee is charged on every upload regardless of size or epochs. It is separate from the per-unit storage cost.
 - **Confusing WAL and SUI costs.** WAL = storage on Walrus nodes. SUI = gas for Sui transactions. They are different tokens with different purposes.
-- **Not accounting for erasure coding overhead.** The encoded size is approximately 5x the raw blob size (before adding metadata). Cost is based on the encoded size, not the raw size.
+- **Not accounting for erasure coding overhead.** The encoded size is about 4.5x the raw blob size plus the fixed metadata. Cost is based on the encoded size, not the raw size.
 - **Assuming storage is indefinite.** Maximum is 53 epochs (~2 years). Plan for renewals via `walrus extend` if data must persist longer.
 - **Not using `--dry-run` for cost estimation.** This flag shows the cost without spending any tokens. Always use it before large uploads.
 - **Paying to store the same content twice.** If a permanent blob with identical content and sufficient lifetime already exists, the CLI skips re-upload automatically (returning `alreadyCertified`). This is expected and saves money.
