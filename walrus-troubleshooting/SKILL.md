@@ -6,16 +6,16 @@ description: >
   Covers VMVerificationOrDeserializationError, ChainNotSupportedError, tip exceeded,
   RetryableWalrusClientError, file.bytes is not a function, 413 Payload Too Large,
   BlobNotCertifiedError, spawn walrus ENOENT, Cannot find gas coin, EWrongVersion,
-  and other recurring errors from support threads.
+  and other errors the documentation and the SDK source describe.
 ---
 
 # Walrus Troubleshooting
 
-> **Source constraint:** Errors and fixes in this skill are sourced from the
+> **Source constraint:** Every error in this skill appears in the
 > [Walrus documentation](https://docs.wal.app), the
-> [Walrus GitHub repository](https://github.com/MystenLabs/walrus), and
-> confirmed community support patterns. When extending, verify errors are
-> reproducible before adding.
+> [Walrus repository](https://github.com/MystenLabs/walrus), or the
+> [TypeScript SDK source](https://github.com/MystenLabs/ts-sdks/tree/main/packages/walrus).
+> When extending, add an error only with the page or source file it comes from.
 
 This skill collects the most common errors users encounter when working with Walrus, organized by tool. Each entry includes the error message, cause, and fix.
 
@@ -121,24 +121,11 @@ Healthy shards well above `n - f`: upload normally. Just above: expect intermitt
 
 ---
 
-#### Testnet blobs disappearing quickly#### Testnet blobs disappearing quickly
+#### Testnet blobs disappearing quickly
 
 **Cause:** Testnet epochs are shorter than mainnet epochs. Storing with low epoch counts means blobs expire sooner than expected.
 
 **Fix:** Use `walrus info` to check the current epoch duration. Use generous epoch values on testnet (30+). On mainnet, 1 epoch = 14 days.
-
----
-
-#### `suiup switch walrus 1.48.1` fails
-
-**Cause:** Wrong syntax. `suiup` uses network-based versioning, not version numbers.
-
-**Fix:**
-```sh
-suiup install walrus@mainnet
-# or
-suiup install walrus@testnet
-```
 
 ---
 
@@ -263,7 +250,7 @@ const nextConfig: NextConfig = { serverExternalPackages: ['@mysten/walrus', '@my
 
 ---
 
-#### `404 Not Found` immediately after uploading#### `404 Not Found` immediately after uploading
+#### `404 Not Found` immediately after uploading
 
 **Cause:** CDN caching on the aggregator. The aggregator's CDN cached a 404 from before the blob propagated.
 
@@ -320,23 +307,7 @@ tx.setSender(address);  // Must match the decrypting wallet address
 
 ---
 
-#### `Connected wallet does not support Seal session signing`
-
-**Cause:** The connected wallet does not implement the session signing protocol required by Seal for multi-signature decryption flows.
-
-**Fix:** Use a wallet that supports Seal sessions, or implement manual per-signature approval in your decryption flow.
-
----
-
 ### Network / general errors
-
-#### `ERR_CERT_COMMON_NAME_INVALID` on storage node connections
-
-**Cause:** TLS certificate mismatch on a storage node. The node's certificate does not match the expected hostname.
-
-**Fix:** This is typically a storage node operator issue. Try a different aggregator or wait for the operator to fix their TLS configuration. If using the CLI, it should automatically fall back to other nodes.
-
----
 
 #### `client/server api version mismatch`
 
