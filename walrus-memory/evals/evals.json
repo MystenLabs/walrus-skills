@@ -10,7 +10,11 @@
       "Mentions the relayer as the backend service handling encryption and storage",
       "Mentions that memory is scoped by owner + namespace"
     ],
-    "sources": ["https://docs.wal.app/walrus-memory/getting-started/what-is-walrus-memory"]
+    "sources": [
+      "https://docs.wal.app/walrus-memory/fundamentals/concepts/how-agent-memory-works",
+      "https://docs.wal.app/walrus-memory/fundamentals/concepts/memory-space",
+      "https://docs.wal.app/walrus-memory/fundamentals/architecture/core-components"
+    ]
   },
   {
     "id": "memory-ts-quickstart",
@@ -23,7 +27,10 @@
       "Shows waitForRememberJob or rememberAndWait for confirmation",
       "Shows recall with a query parameter"
     ],
-    "sources": ["https://docs.wal.app/walrus-memory/sdk/quick-start"]
+    "sources": [
+      "https://docs.wal.app/walrus-memory/sdk/quick-start",
+      "https://docs.wal.app/walrus-memory/sdk/api-reference"
+    ]
   },
   {
     "id": "memory-mcp-setup",
@@ -33,9 +40,13 @@
       "Shows the login command: npx -y @mysten-incubation/memwal-mcp login --prod",
       "Shows the Claude Code command: claude mcp add --scope user memwal -- npx -y @mysten-incubation/memwal-mcp",
       "Mentions restarting the client after adding",
-      "Mentions the six available MCP tools (memwal_remember, memwal_recall, etc.)"
+      "Mentions the MCP tools the docs list, such as memwal_remember, memwal_recall, memwal_analyze, memwal_restore, and memwal_login"
     ],
-    "sources": ["https://docs.wal.app/walrus-memory/mcp/quick-start"]
+    "sources": [
+      "https://docs.wal.app/walrus-memory/mcp/claude-code",
+      "https://docs.wal.app/walrus-memory/mcp/reference",
+      "https://docs.wal.app/walrus-memory/mcp/quickstart"
+    ]
   },
   {
     "id": "memory-namespace-isolation",
@@ -47,7 +58,9 @@
       "Mentions that one user can have multiple namespaces",
       "Explains that recall only searches within the specified memory space"
     ],
-    "sources": ["https://docs.wal.app/walrus-memory/fundamentals/concepts/memory-space"]
+    "sources": [
+      "https://docs.wal.app/walrus-memory/fundamentals/concepts/memory-space"
+    ]
   },
   {
     "id": "memory-python-quickstart",
@@ -60,6 +73,8 @@
       "Shows remember_and_wait or remember for storing",
       "Shows recall with RecallParams"
     ],
-    "sources": ["https://docs.wal.app/walrus-memory/python-sdk/quick-start"]
+    "sources": [
+      "https://docs.wal.app/walrus-memory/python-sdk/quick-start"
+    ]
   }
 ]

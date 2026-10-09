@@ -5,12 +5,14 @@
     "expected_output": "Explains Walrus as a decentralized blob storage protocol on Sui with erasure coding, three-layer architecture, and public-by-default data.",
     "expectations": [
       "Describes Walrus as a decentralized storage protocol built on Sui",
-      "Mentions erasure coding (RedStuff) for distributing data across storage nodes",
-      "Explains the three layers: client, storage nodes, Sui blockchain",
+      "Mentions erasure encoding (Red Stuff) splitting blobs into slivers distributed across shards",
+      "Explains the three actors: users/clients, storage nodes, and the Sui blockchain for coordination",
       "States that all blobs are public by default",
       "Mentions the Point of Availability (PoA) concept"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/core-concepts"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/core-concepts"
+    ]
   },
   {
     "id": "overview-blob-id-vs-object-id",
@@ -23,7 +25,9 @@
       "States that each upload creates a different object ID even for identical content",
       "Clarifies blob ID is for reading, object ID is for lifecycle operations (extend, delete, share)"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/core-concepts"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/core-concepts"
+    ]
   },
   {
     "id": "overview-which-tool",
@@ -36,6 +40,10 @@
       "Mentions the CLI for terminal/scripting use cases",
       "Does not recommend the CLI as the primary choice for a web app"
     ],
-    "sources": ["https://docs.wal.app/docs/typescript-sdk/sdks"]
+    "sources": [
+      "https://docs.wal.app/docs/typescript-sdk/sdks",
+      "https://docs.wal.app/docs/system-overview/aggregators-publishers-relays",
+      "https://docs.wal.app/docs/sponsored-uploads"
+    ]
   }
 ]

@@ -19,26 +19,14 @@
     "expected_output": "Shows Move.toml with Walrus dependency using testnet-contracts/walrus subdir and edition 2024.",
     "expectations": [
       "Uses edition = '2024' (not '2024.beta')",
-      "Includes the Walrus git dependency pointing to MystenLabs/walrus with a subdir for the network (testnet-contracts/walrus for Testnet)",
+      "Declares the Walrus package as a git dependency on MystenLabs/walrus with a subdir, using the testnet-contracts/walrus sources for Testnet",
       "Does NOT add an explicit Sui framework git dependency or an [addresses] section",
-      "Does not hardcode package IDs that may be stale"
+      "Points at the Network Reference or the testnet-contracts Move.lock for current package IDs rather than hardcoding them"
     ],
     "sources": [
+      "https://docs.wal.app/docs/examples/move",
+      "https://docs.wal.app/docs/network-reference",
       "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
-    ]
-  },
-  {
-    "id": "move-vmverification-error",
-    "prompt": "I get VMVerificationOrDeserializationError when publishing my Move contract that depends on Walrus to testnet. How do I fix it?",
-    "expected_output": "Check Move.toml: wrong subdir (use testnet-contracts/walrus), wrong rev, or stale Move.lock. Delete Move.lock and rebuild.",
-    "expectations": [
-      "Identifies Move.toml dependency misconfiguration as the likely cause",
-      "Mentions the testnet-contracts/walrus subdir requirement for testnet",
-      "Recommends deleting Move.lock and rebuilding",
-      "Mentions checking the rev matches what is deployed on-chain"
-    ],
-    "sources": [
-      "https://docs.wal.app/docs/system-overview/available-networks"
     ]
   },
   {
@@ -50,6 +38,20 @@
       "Uses the end_epoch accessor",
       "Compares end_epoch against the current epoch read from the System object (system.epoch())",
       "Does NOT claim Move can read the blob's content"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/examples/move"
+    ]
+  },
+  {
+    "id": "move-lifecycle-functions",
+    "prompt": "My contract holds a Walrus Blob. How do I extend its storage or delete it from Move?",
+    "expected_output": "Calls walrus::system::extend_blob(system, blob, extended_epochs, payment) with a Coin<WAL>, or extend_blob_with_resource with an owned Storage resource; delete_blob(system, blob) consumes a deletable blob and returns its Storage. Operations take the shared System object.",
+    "expectations": [
+      "Uses walrus::system::extend_blob with the shared System object, the blob, the number of epochs, and a Coin<WAL> payment",
+      "Mentions delete_blob(system, blob) consumes a deletable blob and returns its Storage resource for reuse",
+      "Mentions extend_blob_with_resource as the way to extend with a Storage resource you already own",
+      "Distinguishes burn (destroys the Blob object without deleting data or refunding storage) from delete"
     ],
     "sources": [
       "https://docs.wal.app/docs/examples/move"

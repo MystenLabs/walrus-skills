@@ -24,7 +24,8 @@
       "Recommends encryption as the reliable privacy mechanism"
     ],
     "sources": [
-      "https://docs.wal.app/docs/walrus-client/managing-blobs"
+      "https://docs.wal.app/docs/walrus-client/managing-blobs",
+      "https://docs.wal.app/docs/data-security"
     ]
   },
   {
@@ -32,13 +33,14 @@
     "prompt": "What happens when a Walrus blob expires?",
     "expected_output": "Data becomes unavailable at the start of the end epoch. No grace period. Storage nodes discard slivers. Must re-upload to restore.",
     "expectations": [
-      "States that data becomes unavailable when the blob expires",
-      "Mentions there is no grace period",
-      "States that expired blobs cannot be extended",
-      "Mentions the need to re-upload if data must persist"
+      "States that a blob becomes unavailable once it reaches its end epoch (expiry is at the beginning of the end epoch)",
+      "States that an expired blob cannot be extended; extension must happen before expiry",
+      "Recommends checking walrus blob-status against the current epoch from walrus info on a schedule, rather than waiting for a read to fail",
+      "Does NOT claim there is a grace period or an onchain expiry event"
     ],
     "sources": [
-      "https://docs.wal.app/docs/walrus-client/managing-blobs"
+      "https://docs.wal.app/docs/walrus-client/managing-blobs",
+      "https://docs.wal.app/docs/system-overview/storage-pools"
     ]
   },
   {

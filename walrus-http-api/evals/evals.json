@@ -10,7 +10,8 @@
       "Mentions that there is no public mainnet publisher"
     ],
     "sources": [
-      "https://docs.wal.app/docs/http-api/storing-blobs"
+      "https://docs.wal.app/docs/http-api/storing-blobs",
+      "https://docs.wal.app/docs/network-reference"
     ]
   },
   {
@@ -24,7 +25,8 @@
       "Does not confuse aggregator (read) with publisher (write)"
     ],
     "sources": [
-      "https://docs.wal.app/docs/http-api/reading-blobs"
+      "https://docs.wal.app/docs/http-api/reading-blobs",
+      "https://docs.wal.app/docs/network-reference"
     ]
   },
   {
@@ -38,7 +40,9 @@
       "Does not provide a fake or outdated publisher URL"
     ],
     "sources": [
-      "https://docs.wal.app/docs/http-api/storing-blobs"
+      "https://docs.wal.app/docs/http-api/storing-blobs",
+      "https://docs.wal.app/docs/network-reference",
+      "https://docs.wal.app/docs/system-overview/aggregators-publishers-relays"
     ]
   },
   {

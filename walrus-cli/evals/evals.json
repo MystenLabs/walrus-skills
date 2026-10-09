@@ -6,10 +6,11 @@
     "expectations": [
       "Shows the walrus store command with --epochs 30",
       "Mentions the file path argument",
-      "Mentions that SUI and WAL tokens are required"
+      "Mentions that storing costs WAL and every transaction costs SUI for gas"
     ],
     "sources": [
-      "https://docs.wal.app/docs/walrus-client/storing-blobs"
+      "https://docs.wal.app/docs/walrus-client/storing-blobs",
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
     ]
   },
   {
@@ -23,7 +24,8 @@
       "Mentions piping to jq for parsing"
     ],
     "sources": [
-      "https://docs.wal.app/docs/walrus-client/json-mode"
+      "https://docs.wal.app/docs/walrus-client/json-mode",
+      "https://docs.wal.app/docs/walrus-client/walrus-cli"
     ]
   },
   {

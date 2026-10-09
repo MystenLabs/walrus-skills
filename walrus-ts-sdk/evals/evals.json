@@ -6,9 +6,10 @@
     "expectations": [
       "Imports from @mysten/walrus and @mysten/sui (SuiGrpcClient from @mysten/sui/grpc)",
       "Extends the Sui client with $extend(walrus(...))",
-      "Uses writeBlob or writeFiles (not storeBlob) to store data",
+      "Uses writeBlob or writeFiles to store data",
       "Passes epochs and a signer (keypair or wallet) to the write call",
-      "Does NOT use the deprecated JSON-RPC SuiClient as the primary client"
+      "Does NOT use the deprecated JSON-RPC SuiClient as the primary client",
+      "Does NOT use a storeBlob method (it does not exist in @mysten/walrus)"
     ],
     "sources": [
       "https://sdk.mystenlabs.com/walrus"
@@ -25,7 +26,9 @@
       "Explains that browsers cannot distribute slivers directly to storage nodes"
     ],
     "sources": [
-      "https://sdk.mystenlabs.com/walrus"
+      "https://sdk.mystenlabs.com/walrus",
+      "https://docs.wal.app/docs/network-reference",
+      "https://docs.wal.app/docs/system-overview/aggregators-publishers-relays"
     ]
   },
   {

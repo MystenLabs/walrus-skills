@@ -9,7 +9,11 @@
       "Shows the walrus store-quilt command or HTTP quilt API",
       "Mentions that individual blobs within a quilt are retrieved by QuiltPatchId or identifier"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/quilts"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/quilts",
+      "https://docs.wal.app/docs/system-overview/quilt",
+      "https://docs.wal.app/docs/system-overview/storage-costs"
+    ]
   },
   {
     "id": "quilts-read-by-identifier",
@@ -21,6 +25,8 @@
       "Mentions the list-patches-in-quilt command for discovering patch IDs",
       "Does not suggest using a standard blob ID to read from a quilt"
     ],
-    "sources": ["https://docs.wal.app/docs/walrus-client/quilts"]
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/quilts"
+    ]
   }
 ]

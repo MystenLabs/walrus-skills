@@ -7,9 +7,11 @@
       "Mentions both WAL (storage) and SUI (gas) costs",
       "Mentions walrus info or the cost calculator for current pricing",
       "Explains that cost depends on encoded size (not raw size) due to erasure coding overhead",
-      "Mentions epoch duration (14 days on mainnet) for time-to-epoch conversion"
+      "Mentions the Mainnet epoch length (2 weeks / 14 days) for converting a duration to epochs"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/storage-costs"
+    ]
   },
   {
     "id": "costs-small-blob-expensive",
@@ -21,7 +23,9 @@
       "Recommends using quilts to batch many small files together",
       "Mentions that quilts amortize the overhead across all files"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/storage-costs"
+    ]
   },
   {
     "id": "costs-estimate-before-upload",
@@ -32,6 +36,8 @@
       "Mentions walrus info for current pricing parameters",
       "Mentions the Walrus Cost Calculator web app (costcalculator.wal.app)"
     ],
-    "sources": ["https://docs.wal.app/docs/system-overview/storage-costs"]
+    "sources": [
+      "https://docs.wal.app/docs/system-overview/storage-costs"
+    ]
   }
 ]
