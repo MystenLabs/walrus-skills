@@ -1,0 +1,50 @@
+{
+  "walrusevals_card": 1,
+  "source": "ci",
+  "model": "gemini-3.8-flash",
+  "skills": "none",
+  "layer": "baseline",
+  "graded_by": "judge:claude-haiku-4-5-20251001",
+  "grader": "judge",
+  "tools": [
+    "read",
+    "grep",
+    "ls"
+  ],
+  "samples": 1,
+  "empty_answers": 40,
+  "recorded_at": "2026-10-09T16:36:29.617Z",
+  "manifest": "29d7d491fb90",
+  "eval_set": "29d7d491fb90",
+  "pillars": {
+    "fundamentals": {
+      "pass": 0,
+      "total": 0
+    },
+    "storing": {
+      "pass": 5,
+      "total": 8
+    },
+    "building": {
+      "pass": 0,
+      "total": 0
+    },
+    "operating": {
+      "pass": 0,
+      "total": 0
+    }
+  },
+  "partial": true,
+  "evals": [
+    {
+      "id": "walrus-blob-lifecycle/lifecycle-extend",
+      "pass": 1,
+      "of": 4
+    },
+    {
+      "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
+      "pass": 4,
+      "of": 4
+    }
+  ]
+}
