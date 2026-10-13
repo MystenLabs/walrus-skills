@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:31:45.801Z",
+  "recorded_at": "2026-10-09T21:14:55.232Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -26,11 +26,11 @@
       "total": 38
     },
     "building": {
-      "pass": 12,
+      "pass": 4,
       "total": 83
     },
     "operating": {
-      "pass": 2,
+      "pass": 4,
       "total": 22
     }
   },
@@ -77,12 +77,12 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -92,12 +92,12 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 2,
+      "pass": 0,
       "of": 6
     },
     {
@@ -237,7 +237,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

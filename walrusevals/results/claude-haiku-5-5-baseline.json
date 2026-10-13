@@ -11,14 +11,14 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:10:08.804Z",
+  "recorded_at": "2026-10-09T21:19:53.724Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 15,
+      "pass": 14,
       "total": 26
     },
     "storing": {
@@ -26,11 +26,11 @@
       "total": 38
     },
     "building": {
-      "pass": 51,
+      "pass": 43,
       "total": 83
     },
     "operating": {
-      "pass": 14,
+      "pass": 16,
       "total": 22
     }
   },
@@ -42,12 +42,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -127,7 +127,7 @@
     },
     {
       "id": "walrus-memory/memory-python-quickstart",
-      "pass": 5,
+      "pass": 0,
       "of": 5
     },
     {
@@ -162,12 +162,12 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 4,
+      "pass": 3,
       "of": 5
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -207,7 +207,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 1,
+      "pass": 3,
       "of": 3
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 6,
+      "pass": 4,
       "of": 6
     },
     {
@@ -237,7 +237,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

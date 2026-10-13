@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:33:16.554Z",
+  "recorded_at": "2026-10-13T06:26:37.511Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -22,15 +22,15 @@
       "total": 26
     },
     "storing": {
-      "pass": 36,
+      "pass": 38,
       "total": 38
     },
     "building": {
-      "pass": 78,
+      "pass": 79,
       "total": 83
     },
     "operating": {
-      "pass": 22,
+      "pass": 17,
       "total": 22
     }
   },
@@ -47,7 +47,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -112,7 +112,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 5,
+      "pass": 3,
       "of": 5
     },
     {
@@ -177,7 +177,7 @@
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -232,7 +232,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-browser-upload",
-      "pass": 2,
+      "pass": 4,
       "of": 4
     },
     {

@@ -11,18 +11,18 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:34:06.420Z",
+  "recorded_at": "2026-10-11T07:21:59.516Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
+      "pass": 25,
       "total": 26
     },
     "storing": {
-      "pass": 37,
+      "pass": 38,
       "total": 38
     },
     "building": {
@@ -30,7 +30,7 @@
       "total": 83
     },
     "operating": {
-      "pass": 22,
+      "pass": 21,
       "total": 22
     }
   },
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {

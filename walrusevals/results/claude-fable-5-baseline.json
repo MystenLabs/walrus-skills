@@ -11,22 +11,22 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:32:45.621Z",
+  "recorded_at": "2026-10-09T21:14:20.153Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 18,
+      "pass": 16,
       "total": 26
     },
     "storing": {
-      "pass": 20,
+      "pass": 22,
       "total": 38
     },
     "building": {
-      "pass": 32,
+      "pass": 33,
       "total": 83
     },
     "operating": {
@@ -37,7 +37,7 @@
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -67,12 +67,12 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -152,17 +152,17 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 2,
+      "pass": 1,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -192,7 +192,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -237,7 +237,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {

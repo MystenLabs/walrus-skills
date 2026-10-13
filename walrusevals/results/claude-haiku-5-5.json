@@ -11,22 +11,22 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:10:05.239Z",
+  "recorded_at": "2026-10-11T07:21:29.493Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 24,
+      "pass": 25,
       "total": 26
     },
     "storing": {
-      "pass": 35,
+      "pass": 36,
       "total": 38
     },
     "building": {
-      "pass": 79,
+      "pass": 81,
       "total": 83
     },
     "operating": {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -97,7 +97,7 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -192,7 +192,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {

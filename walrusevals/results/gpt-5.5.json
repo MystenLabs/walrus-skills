@@ -11,26 +11,26 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:31:44.583Z",
+  "recorded_at": "2026-10-13T06:25:04.624Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 21,
+      "pass": 26,
       "total": 26
     },
     "storing": {
-      "pass": 35,
+      "pass": 33,
       "total": 38
     },
     "building": {
-      "pass": 78,
+      "pass": 77,
       "total": 83
     },
     "operating": {
-      "pass": 21,
+      "pass": 20,
       "total": 22
     }
   },
@@ -47,7 +47,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 2,
+      "pass": 5,
       "of": 5
     },
     {
@@ -172,7 +172,7 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -192,7 +192,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-estimate-before-upload",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {

@@ -11,18 +11,18 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:33:28.991Z",
+  "recorded_at": "2026-10-11T07:20:50.901Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
+      "pass": 25,
       "total": 26
     },
     "storing": {
-      "pass": 37,
+      "pass": 36,
       "total": 38
     },
     "building": {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -172,7 +172,7 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {

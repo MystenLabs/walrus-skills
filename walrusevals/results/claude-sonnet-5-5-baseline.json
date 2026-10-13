@@ -11,33 +11,33 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:10:51.866Z",
+  "recorded_at": "2026-10-09T21:19:44.915Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 19,
+      "pass": 22,
       "total": 26
     },
     "storing": {
-      "pass": 24,
+      "pass": 22,
       "total": 38
     },
     "building": {
-      "pass": 36,
+      "pass": 37,
       "total": 83
     },
     "operating": {
-      "pass": 14,
+      "pass": 16,
       "total": 22
     }
   },
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -62,12 +62,12 @@
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 3,
+      "pass": 1,
       "of": 3
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -102,7 +102,7 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -177,7 +177,7 @@
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-estimate-before-upload",
-      "pass": 0,
+      "pass": 2,
       "of": 3
     },
     {
@@ -222,7 +222,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {

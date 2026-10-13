@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:33:46.464Z",
+  "recorded_at": "2026-10-11T07:21:42.705Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -26,7 +26,7 @@
       "total": 38
     },
     "building": {
-      "pass": 81,
+      "pass": 83,
       "total": 83
     },
     "operating": {
@@ -112,7 +112,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {

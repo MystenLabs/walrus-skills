@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:11:59.780Z",
+  "recorded_at": "2026-10-11T07:21:46.836Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -22,11 +22,11 @@
       "total": 26
     },
     "storing": {
-      "pass": 37,
+      "pass": 38,
       "total": 38
     },
     "building": {
-      "pass": 79,
+      "pass": 82,
       "total": 83
     },
     "operating": {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -117,12 +117,12 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {

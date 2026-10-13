@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:11:14.021Z",
+  "recorded_at": "2026-10-11T07:22:57.399Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -26,11 +26,11 @@
       "total": 38
     },
     "building": {
-      "pass": 81,
+      "pass": 83,
       "total": 83
     },
     "operating": {
-      "pass": 22,
+      "pass": 21,
       "total": 22
     }
   },
@@ -122,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {

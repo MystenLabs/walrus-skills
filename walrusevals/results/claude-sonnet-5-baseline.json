@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:32:55.399Z",
+  "recorded_at": "2026-10-09T21:14:30.229Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -22,15 +22,15 @@
       "total": 26
     },
     "storing": {
-      "pass": 15,
+      "pass": 14,
       "total": 38
     },
     "building": {
-      "pass": 30,
+      "pass": 27,
       "total": 83
     },
     "operating": {
-      "pass": 12,
+      "pass": 14,
       "total": 22
     }
   },
@@ -47,12 +47,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 2,
+      "pass": 4,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -157,12 +157,12 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 4,
+      "pass": 3,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -237,7 +237,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {

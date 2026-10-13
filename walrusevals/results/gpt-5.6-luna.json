@@ -11,9 +11,9 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:36:05.685Z",
+  "recorded_at": "2026-10-11T07:20:02.029Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -22,15 +22,15 @@
       "total": 26
     },
     "storing": {
-      "pass": 34,
+      "pass": 33,
       "total": 38
     },
     "building": {
-      "pass": 82,
+      "pass": 80,
       "total": 83
     },
     "operating": {
-      "pass": 21,
+      "pass": 20,
       "total": 22
     }
   },
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -172,12 +172,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -192,7 +192,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
