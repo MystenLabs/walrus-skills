@@ -11,38 +11,48 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
-  "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:12:18.154Z",
+  "samples": 3,
+  "empty_answers": 2,
+  "recorded_at": "2026-10-13T18:15:19.199Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
       "pass": 12,
-      "total": 19
+      "total": 22
     },
     "storing": {
-      "pass": 12,
-      "total": 30
+      "pass": 15,
+      "total": 38
     },
     "building": {
-      "pass": 19,
-      "total": 68
+      "pass": 17,
+      "total": 71
     },
     "operating": {
-      "pass": 13,
+      "pass": 10,
       "total": 19
     }
   },
   "partial": true,
   "evals": [
     {
+      "id": "walrus-blob-lifecycle/lifecycle-extend",
+      "pass": 1,
+      "of": 4
+    },
+    {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
+      "pass": 2,
+      "of": 4
+    },
+    {
+      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
       "pass": 3,
       "of": 4
     },
@@ -63,7 +73,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -113,7 +123,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -123,12 +133,12 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 1,
+      "pass": 2,
       "of": 5
     },
     {
@@ -152,23 +162,33 @@
       "of": 4
     },
     {
-      "id": "walrus-sites/sites-http-redirect",
-      "pass": 1,
-      "of": 4
-    },
-    {
-      "id": "walrus-sites/sites-ci-duplicate",
+      "id": "walrus-sites/sites-deploy-spa",
       "pass": 0,
       "of": 3
     },
     {
-      "id": "walrus-storage-costs/costs-how-much",
-      "pass": 2,
+      "id": "walrus-sites/sites-http-redirect",
+      "pass": 0,
       "of": 4
     },
     {
+      "id": "walrus-sites/sites-ci-duplicate",
+      "pass": 1,
+      "of": 3
+    },
+    {
+      "id": "walrus-storage-costs/costs-small-blob-expensive",
+      "pass": 1,
+      "of": 4
+    },
+    {
+      "id": "walrus-storage-costs/costs-estimate-before-upload",
+      "pass": 0,
+      "of": 3
+    },
+    {
       "id": "walrus-troubleshooting/troubleshoot-tip-exceeded",
-      "pass": 3,
+      "pass": 0,
       "of": 3
     },
     {
@@ -193,7 +213,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
