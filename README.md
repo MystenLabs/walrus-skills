@@ -49,6 +49,20 @@ npx skills add mystenlabs/walrus-skills --all
 | [walrus-blob-lifecycle](walrus-blob-lifecycle/) | Epochs/lifetimes, extend, delete, burn, share, attributes, large uploads |
 | [walrus-troubleshooting](walrus-troubleshooting/) | Common error messages with causes and fixes |
 
+## Walrus Evals
+
+Every skill carries evals, and `walrusevals/` turns them into a public board: 42
+questions a Walrus developer would ask, each cited to the documentation page it
+grades against, scored on every model with and without the skills in context. The
+eval pipeline publishes a card per run into `walrusevals/results/`; anyone can run
+the suite on their own model and submit one. Start with
+[`walrusevals/RUN.md`](walrusevals/RUN.md).
+
+```sh
+node walrusevals/list.js                              # the suite, by pillar
+node walrusevals/build.js --skills . --out walrusevals  # the board, locally
+```
+
 ## Repo Structure
 
 Each skill is a directory containing a `SKILL.md` and any supporting reference files:
