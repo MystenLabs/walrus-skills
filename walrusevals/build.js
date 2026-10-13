@@ -607,24 +607,29 @@ function recordPage(r, missed, manifest, generated) {
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(r.name)} &middot; Walrus Evals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&family=Google+Sans+Code:wght@300..700&display=swap">
 <style>
-  :root { --bg:#05080f; --card:#0b1220; --line:#18243a; --ink:#e8eef8; --ink-2:#9fb0c9; --ink-3:#6b7f9c; --brand:#5fd3c8; }
-  @media (prefers-color-scheme: light) { :root { --bg:#fff; --card:#f7f9fc; --line:#e3e9f2; --ink:#0b1220; --ink-2:#44536a; --ink-3:#6b7f9c; } }
-  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
-  .wrap { max-width:900px; margin:0 auto; padding:40px 20px 72px; }
-  a { color:var(--brand); }
-  h1 { font-size:26px; margin:0 0 6px; letter-spacing:-0.02em; }
-  .note { color:var(--ink-3); font-size:13px; margin:0 0 26px; }
-  ul.p { list-style:none; display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:0 0 30px; }
-  ul.p li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--ink-2); }
-  ul.p b { color:var(--ink); font-size:17px; margin-right:6px; }
-  ul.p span { color:var(--ink-3); }
-  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-3); margin:0 0 10px; }
+  :root { --font-sans:"Google Sans Flex",ui-sans-serif,system-ui,sans-serif; --font-code:"Google Sans Code",ui-monospace,monospace;
+          --bg:#000; --card:#14181b; --line:#252b31; --ink:#faf8f5; --ink-2:#b1b4b6; --ink-3:#8e9294; --brand:#cab1ff; }
+  @media (prefers-color-scheme: light) { :root { --bg:#faf8f5; --card:#fff; --line:#dadad6; --ink:#000; --ink-2:#484946; --ink-3:#7c7c78; --brand:#613dff; } }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 16px/1.5 var(--font-sans); -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:900px; margin:0 auto; padding:40px 24px 72px; }
+  a { color:var(--brand); text-underline-offset:3px; }
+  a:hover { color:var(--ink); }
+  h1 { font-size:2.25rem; font-weight:450; margin:0 0 8px; letter-spacing:-0.5px; line-height:1.1; }
+  .note { color:var(--ink-3); font-size:14px; margin:0 0 28px; }
+  ul.p { list-style:none; display:flex; flex-wrap:wrap; gap:12px; padding:0; margin:0 0 36px; }
+  ul.p li { background:linear-gradient(to bottom,transparent,var(--card)); border:1px solid var(--line); border-radius:24px; padding:14px 18px; font-size:13px; color:var(--ink-2); }
+  ul.p b { color:var(--ink); font-size:1.25rem; font-weight:450; margin-right:6px; }
+  ul.p span { color:var(--ink-3); font-family:var(--font-code); font-size:12px; }
+  h2 { font:400 13px/1.2 var(--font-code); text-transform:uppercase; letter-spacing:.26px; color:var(--ink-3); margin:0 0 12px; }
+  h2::before { content:"// "; }
   table { width:100%; border-collapse:collapse; }
-  td { border-top:1px solid var(--line); padding:12px 0; vertical-align:top; }
+  td { border-top:1px solid var(--line); padding:14px 0; vertical-align:top; }
   td.q { padding-right:20px; }
-  td.s { text-align:right; white-space:nowrap; color:var(--ink-2); font-variant-numeric:tabular-nums; }
-  .meta { display:block; color:var(--ink-3); font-size:12px; margin-top:3px; }
+  td.s { text-align:right; white-space:nowrap; color:var(--ink-2); font-variant-numeric:tabular-nums; font-family:var(--font-code); font-size:13px; }
+  .meta { display:block; color:var(--ink-3); font-size:12px; margin-top:4px; font-family:var(--font-code); }
   td.q a { font-size:12px; margin-right:10px; }
 </style></head><body><div class="wrap">
   <h1>${esc(r.name)}</h1>

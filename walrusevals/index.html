@@ -5,248 +5,256 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Walrus Evals: how much does your AI know about Walrus?</title>
 <meta name="description" content="An open scoreboard for how well AI models understand Walrus, and how much the Walrus skills add. 42 evals across fundamentals, storing, building and operating. Evals live in MystenLabs/walrus-skills.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='14' r='11' fill='%235fd3c8'/><path d='M11 22v6M21 22v6' stroke='%235fd3c8' stroke-width='3.5' stroke-linecap='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23000'/><circle cx='16' cy='16' r='7' fill='%23613dff'/><circle cx='16' cy='16' r='3' fill='%23faf8f5'/></svg>">
+<!-- walrus.xyz sets its body in Google Sans Flex and its labels, buttons and
+     code in Google Sans Code; both are on Google Fonts. The headline face there
+     (Ratch) is not published, so headings fall to the body face at the weight
+     and tracking the site gives its titles (450, -0.5px). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&family=Google+Sans+Code:wght@300..700&display=swap">
 <style>
-  /* Walrus identity for the page; the validated categorical steps for the data.
-     Brand blue is chrome (wordmark, links, focus) and never a series colour. */
+  /* The look is walrus.xyz's: black page, "tusk" off-white type, the site's
+     dark greys for chrome, purple for the one accent. Its four brand colours --
+     violet, mint, purple, yellow -- are the four pillar series, which is as many
+     distinct colours as the brand has, used for the four things the page has
+     to tell apart. Values are the site's own tokens (--color-walrus-*). */
   :root {
     color-scheme: dark;
-    --ocean-900: #04111e;
-    --ocean-850: #071a2b;
-    --ocean-800: #0b2338;
-    --ocean-700: #1a3a56;
-    --line: #17324a;
-    --line-soft: #102639;
-    --ink: #eaf2fb;
-    --ink-2: #9fb4c9;
-    --ink-3: #6b8299;
-    --brand: #5fd3c8;
-    --brand-deep: #1aa093;
-    /* categorical slots, dark steps, validated: see the commit message */
-    --s1: #3987e5;  /* fundamentals */
-    --s2: #d95926;  /* storing */
-    --s3: #199e70;  /* building */
-    --s4: #9085e9;  /* operating */
-    --good: #199e70;
+    --font-sans: "Google Sans Flex", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-code: "Google Sans Code", ui-monospace, "JetBrains Mono", Menlo, monospace;
+    --title-weight: 450;
+    --title-tracking: -0.5px;
+    --radius-card: 24px;
+    --radius-pill: 26px;
+    --radius-small: 6px;
+    --pad: clamp(24px, 4vw, 64px);
+
+    --bg: #000;
+    --bg-2: #14181b;          /* dark-gray-100 */
+    --card: #14181b;
+    --card-2: #1c2228;        /* dark-gray-150 */
+    --line: #252b31;          /* dark-gray-200 */
+    --line-soft: #1c2228;     /* dark-gray-150 */
+    --ink: #faf8f5;           /* tusk */
+    --ink-2: #b1b4b6;         /* dark-gray-450 */
+    --ink-3: #8e9294;         /* dark-gray-400 */
+    --brand: #cab1ff;         /* violet: links and emphasis, readable on black */
+    --brand-fill: #613dff;    /* purple: fills and the lead card's edge */
+    --brand-deep: #613dff;
+    --s1: #cab1ff;  /* fundamentals: violet */
+    --s2: #98efe4;  /* storing: mint */
+    --s3: #613dff;  /* building: purple */
+    --s4: #e8ff75;  /* operating: yellow */
+    --good: #98efe4;
   }
+  /* The site's light surface: tusk background, midnight type, its light greys. */
   :root[data-theme="light"] {
     color-scheme: light;
-    --ocean-900: #f7fbff; --ocean-850: #ffffff; --ocean-800: #eef5fc;
-    --line: #cddeef; --line-soft: #e3eefa;
-    --ink: #08131f; --ink-2: #47607a; --ink-3: #6b8299;
-    --brand: #0f9c86; --brand-deep: #0b7a69;
-    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #4a3aa7;
-    --good: #1baf7a;
+    --bg: #faf8f5; --bg-2: #fff; --card: #fff; --card-2: #f1efeb;
+    --line: #dadad6; --line-soft: #e5e5e2;
+    --ink: #000; --ink-2: #484946; --ink-3: #7c7c78;
+    --brand: #613dff; --brand-fill: #613dff; --brand-deep: #4a2bd6;
+    --s1: #8b6cff; --s2: #1aa093; --s3: #613dff; --s4: #9ba600;
+    --good: #1aa093;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; background: var(--ocean-900); color: var(--ink);
-    font: 15px/1.65 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
-    /* A single soft light source, top-left, echoing the droplet mark. */
-    background-image: radial-gradient(90rem 40rem at -10% -10%, #0a2f4d55, transparent 60%);
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 16px/1.5 var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
-  /* Full bleed. The page ran at 1080px with prose capped at 66ch inside it, so on
-     any normal display the content hugged the left third and the right half was
-     empty. Width now comes from the viewport, and the long-form sections below use
-     columns to keep a readable measure without leaving a gutter. */
-  .wrap { max-width: 1680px; margin: 0 auto; padding: 0 clamp(20px, 3.5vw, 56px) 110px; }
+  /* walrus.xyz's container: 96rem wide, 1.5 / 4 / 6rem of side padding by breakpoint. */
+  .wrap { max-width: 96rem; margin: 0 auto; padding: 0 var(--pad) 0; }
 
-  /* ── masthead ── */
-  header { display: flex; align-items: center; gap: 12px; padding: 34px 0 0; }
-  .drop { width: 30px; height: 30px; flex: none; }
-  .word { font-size: 19px; font-weight: 680; letter-spacing: -0.015em; }
-  .word b { color: var(--brand); font-weight: 680; }
+  /* ── masthead: the wordmark, then what this page is ── */
+  header { display: flex; align-items: center; gap: 14px; padding: 28px 0 0; }
+  header .mark { height: 26px; width: auto; color: var(--ink); display: block; }
+  header .sep { width: 1px; height: 22px; background: var(--line); }
+  .word { font-family: var(--font-code); font-size: 13px; letter-spacing: .26px; text-transform: uppercase; color: var(--ink-3); }
+  .word b { font-weight: 400; color: var(--ink); }
   .spacer { flex: 1; }
-  .theme-btn {
-    background: transparent; border: 1px solid var(--line); color: var(--ink-2);
-    border-radius: 8px; padding: 5px 11px; font-size: 12px; cursor: pointer; font-family: inherit;
+
+  /* Buttons as the site draws them: a pill, code face, uppercase, tracked. */
+  .theme-btn, .copy {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: transparent; border: 1px solid var(--line); color: var(--ink);
+    border-radius: var(--radius-pill); padding: 8px 18px;
+    font: 400 12px/1 var(--font-code); letter-spacing: .04em; text-transform: uppercase;
+    cursor: pointer; transition: background-color .2s, color .2s, border-color .2s;
   }
-  .theme-btn:hover { color: var(--ink); border-color: var(--brand); }
+  .theme-btn:hover, .copy:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-  h1 { font-size: clamp(30px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 16px; max-width: 18ch; }
+  h1 {
+    font-family: var(--font-sans); font-weight: var(--title-weight);
+    font-size: clamp(2.5rem, 5.2vw, 4.5rem); line-height: 0.98; letter-spacing: -0.02em;
+    margin: 0 0 20px; max-width: 16ch; text-wrap: balance;
+  }
   h1 em { font-style: normal; color: var(--brand); }
-  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .13em; color: var(--ink-3); margin: 58px 0 14px; font-weight: 650; }
-  /* The first section follows the hero, which already has its own bottom
-     padding; 58px on top of that left a band of empty page between the two. */
-  .hero + h2 { margin-top: clamp(26px, 3vw, 38px); }
-  .note { color: var(--ink-3); font-size: 13px; }
-  .prose { color: var(--ink-2); max-width: 74ch; }
+  /* Section labels the way the site writes its eyebrows: code face, 13px,
+     uppercase, grey, led by a comment slash. */
+  h2 {
+    font-family: var(--font-code); font-size: 13px; font-weight: 400; text-transform: uppercase;
+    letter-spacing: .26px; color: var(--ink-3); margin: 72px 0 16px;
+  }
+  h2::before { content: "// "; }
+  .hero + h2 { margin-top: clamp(28px, 3vw, 44px); }
+  .note { color: var(--ink-3); font-size: 14px; }
+  .prose { color: var(--ink-2); max-width: 74ch; font-size: 1.0625rem; }
 
-  /* The first screen. A reader who has to scroll before seeing a number has been
-     asked to take the premise on trust; the headline figures sit beside the title
-     instead of three sections below it. */
-  /* Two columns again, but with content in both.
-     The figures that used to fill the right side were removed for saying
-     nothing, and one column left the headline down the left of a 1680px page
-     with the other half empty. Prose cannot fill that width without becoming
-     unreadable, so the right side carries the thing a reader can act on: the
-     prompt that runs the suite on their own agent. */
-  .sub { color: var(--ink-2); max-width: 46ch; font-size: 15.5px; line-height: 1.55; margin: 16px 0 0; }
+  .sub { color: var(--ink-2); max-width: 46ch; font-size: 1.125rem; line-height: 1.5; margin: 16px 0 0; }
   .hero { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
           gap: clamp(28px, 4vw, 64px); align-items: start;
-          padding: clamp(32px, 4vw, 52px) 0 clamp(18px, 2.5vw, 30px); }
-  .hero-run { background: var(--ocean-850); border: 1px solid var(--line-soft);
-              border-radius: 12px; padding: 18px 20px 16px; }
-  .hr-head { margin: 0 0 10px; font-size: 12px; text-transform: uppercase;
-             letter-spacing: .1em; color: var(--ink-3); font-weight: 650; }
+          padding: clamp(40px, 6vw, 96px) 0 clamp(18px, 2.5vw, 30px); }
+  /* The site's card: 24px radius, a dark-grey hairline, a fade into its
+     dark-gray-100 from transparent. */
+  .hero-run, .rule, .mcard, details.cat, .tk .n {
+    background: linear-gradient(to bottom, transparent, var(--bg-2));
+    border: 1px solid var(--line); border-radius: var(--radius-card);
+  }
+  .hero-run { padding: 24px 26px 22px; }
+  .hr-head { margin: 0 0 12px; font: 400 13px/1 var(--font-code); text-transform: uppercase;
+             letter-spacing: .26px; color: var(--ink-3); }
+  .hr-head::before { content: "// "; }
   .hero .cmd { margin-top: 0; font-size: 13px; line-height: 1.6; padding: 14px 16px; }
   @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 26px; } }
-  .run-row { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
-  .run-row .copy { margin-top: 0; flex: none; padding: 7px 16px; }
-  .run-row .note { line-height: 1.55; }
+  .run-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+  .run-row .copy { margin-top: 0; flex: none; }
+  .run-row .note { line-height: 1.5; }
   .cols .prose { max-width: none; }
   @media (max-width: 1000px) { .cols { columns: 1; } }
   .side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 56px); align-items: start; }
   @media (max-width: 1000px) { .side { grid-template-columns: 1fr; } }
   /* ── four configurations per model, grouped ── */
   .layers { width: 100%; height: auto; display: block; margin-top: 12px; }
-  .layers .mdl { fill: var(--ink); font-size: 12.5px; font-weight: 650; }
+  .layers .mdl { fill: var(--ink); font-size: 12.5px; font-weight: 500; }
   .layers .lyr { fill: var(--ink-2); font-size: 11.5px; }
-  .layers .val { fill: var(--ink); font-size: 11.5px; font-weight: 620; font-variant-numeric: tabular-nums; }
-  /* A configuration nobody has run says so, rather than drawing a bar of zero. */
+  .layers .val { fill: var(--ink); font-size: 11.5px; font-weight: 500; font-variant-numeric: tabular-nums; }
   .layers .gap { fill: var(--ink-3); font-size: 11px; font-style: italic; }
   .layers g:hover rect:last-of-type { opacity: .85; }
 
-
   .prose + .prose { margin-top: 12px; }
-  .prose strong { color: var(--ink); font-weight: 620; }
-  a { color: var(--brand); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-  code { background: var(--ocean-800); border-radius: 4px; padding: 1.5px 5px; font-size: 13px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+  a { color: var(--brand); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--ink); }
+  code { font-family: var(--font-code); background: var(--card-2); border-radius: 4px; padding: 1.5px 6px; font-size: 13px; }
 
-  /* ── leaderboard table ── */
-  /* One card per model, its configurations stacked inside it.
-     A single ranked list put a model's four runs wherever their scores fell, so
-     the comparison the board exists for had to be reassembled by the reader. */
-  /* Three columns, so six cards fill two rows exactly. auto-fit gave five at a
-     wide viewport and left the sixth alone on a row of its own, and the narrow
-     columns it produced broke a heading across two lines while the shortest
-     card ran a third as deep as the tallest. */
-  .rules { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* ── scoring rules ── */
+  .rules { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   @media (max-width: 1000px) { .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) { .rules { grid-template-columns: 1fr; } }
-  .rule { background: var(--ocean-850); border: 1px solid var(--line-soft); border-radius: 12px;
-          padding: 15px 17px 14px; }
-  .rule h3 { margin: 0 0 7px; font-size: 13.5px; font-weight: 650; color: var(--ink);
-             letter-spacing: -0.01em; text-wrap: balance; }
-  .rule p { margin: 0; font-size: 13px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
-  .cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
-  .mcard { background: var(--ocean-850); border: 1px solid var(--line-soft); border-radius: 12px;
-    padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 12px; }
-  .mcard.lead { border-color: var(--brand); }
+  .rule { padding: 24px 26px 22px; }
+  .rule h3 { margin: 0 0 10px; font-size: 1.25rem; font-weight: var(--title-weight); color: var(--ink);
+             letter-spacing: var(--title-tracking); line-height: 1.2; text-wrap: balance; }
+  .rule p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+
+  /* ── model cards ── */
+  .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+  .mcard { padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .mcard.lead { border-color: var(--brand-fill); box-shadow: 0 0 0 1px var(--brand-fill) inset; }
   .mc-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-  .mc-name { font-size: 15px; font-weight: 650; color: var(--ink); letter-spacing: -0.01em; }
-  /* Provenance, as a word rather than a colour: who measured this is not a
-     status and must not read as one. Solid background, no tiny type. */
-  .mc-src { display: inline-block; margin-left: 8px; padding: 2px 7px; border-radius: 6px;
-            font-size: 11.5px; font-weight: 600; letter-spacing: 0; vertical-align: 2px; }
-  .mc-src.community { background: var(--card); color: var(--ink-2); border: 1px solid var(--line); }
-  .mc-best { font-size: 26px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums;
+  .mc-name { font-size: 1.125rem; font-weight: var(--title-weight); color: var(--ink); letter-spacing: var(--title-tracking); }
+  .mc-src { display: inline-block; margin-left: 8px; padding: 3px 8px; border-radius: var(--radius-small);
+            font: 400 11px/1.2 var(--font-code); letter-spacing: .04em; text-transform: uppercase; vertical-align: 2px; }
+  .mc-src.community { background: var(--card-2); color: var(--ink-2); border: 1px solid var(--line); }
+  .mc-best { font-size: 2rem; font-weight: var(--title-weight); color: var(--ink); font-variant-numeric: tabular-nums;
     line-height: 1; letter-spacing: -0.03em; }
-  .mc-best i { font-style: normal; font-size: 13px; color: var(--ink-3); margin-left: 3px; }
-  .mc-rows { display: flex; flex-direction: column; gap: 7px; }
-  .mc-row { display: grid; grid-template-columns: 112px 1fr 44px; align-items: center; gap: 10px; }
-  .mc-lab { font-size: 11.5px; color: var(--ink-2); line-height: 1.25; }
-  .mc-track { height: 8px; border-radius: 4px; background: var(--ocean-800); overflow: hidden; }
+  .mc-best i { font-style: normal; font-size: 13px; color: var(--ink-3); margin-left: 3px; font-family: var(--font-code); }
+  .mc-rows { display: flex; flex-direction: column; gap: 8px; }
+  .mc-row { display: grid; grid-template-columns: 112px 1fr 56px; align-items: center; gap: 10px; }
+  .mc-row.absent .mc-val { white-space: nowrap; font-size: 11px; }
+  .mc-lab { font-size: 12px; color: var(--ink-2); line-height: 1.25; }
+  .mc-track { height: 8px; border-radius: 4px; background: var(--card-2); overflow: hidden; }
   .mc-track u { display: block; height: 100%; border-radius: 4px; background: var(--pc, var(--ink-3)); }
-  .mc-val { font-size: 12.5px; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); }
+  .mc-val { font-size: 12.5px; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); font-family: var(--font-code); }
   .mc-row.absent .mc-val, .mc-row.absent .mc-lab { color: var(--ink-3); }
-  .mc-gain { font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--line-soft); padding-top: 10px; }
-  .mc-gain b { color: var(--brand); font-variant-numeric: tabular-nums; }
+  .mc-gain { font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 12px; }
+  .mc-gain b { color: var(--brand); font-variant-numeric: tabular-nums; font-weight: 500; }
   .mc-detail[hidden] { display: none; }
   @media (max-width: 420px) { .mc-row { grid-template-columns: 96px 1fr 40px; } }
+
+  /* ── leaderboard table ── */
   .board { width: 100%; border-collapse: collapse; font-size: 14px; }
   .board thead th {
-    text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
-    color: var(--ink-3); font-weight: 600; padding: 0 10px 9px; border-bottom: 1px solid var(--line);
+    text-align: left; font: 400 11px/1.2 var(--font-code); text-transform: uppercase; letter-spacing: .26px;
+    color: var(--ink-3); padding: 0 10px 10px; border-bottom: 1px solid var(--line);
   }
   .board thead th.num, .board td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .board tbody tr { border-bottom: 1px solid var(--line-soft); }
-  .board tbody tr.open { background: var(--ocean-850); }
-  .board td { padding: 11px 10px; vertical-align: middle; }
+  .board tbody tr.open { background: var(--card); }
+  .board td { padding: 12px 10px; vertical-align: middle; }
   .who { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-  .pill { font-size: 10.5px; border-radius: 100px; padding: 2px 8px; border: 1px solid var(--line); color: var(--ink-3); }
-  .pill.on { background: color-mix(in srgb, var(--brand) 16%, transparent); border-color: color-mix(in srgb, var(--brand) 45%, transparent); color: var(--brand); }
+  .pill { font: 400 10.5px/1.4 var(--font-code); letter-spacing: .04em; text-transform: uppercase;
+          border-radius: var(--radius-pill); padding: 3px 9px; border: 1px solid var(--line); color: var(--ink-3); }
+  .pill.on { background: color-mix(in srgb, var(--brand-fill) 22%, transparent); border-color: color-mix(in srgb, var(--brand-fill) 60%, transparent); color: var(--brand); }
   .board td.plot { width: 42%; padding-right: 26px; }
   tr.baseline .track u { background: var(--ink-3); }
   @media (max-width: 900px) { .board td.plot, .board th.plot { display: none; } }
-  .score { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .score { font-size: 17px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .of { color: var(--ink-3); font-size: 12px; font-weight: 400; }
   tr.detail td { padding: 0 10px 16px; }
-  /* The old .bars capped the drawer at 460px and its .bar-row/.bar partners are
-     gone with the markup they styled. The cap is why four area figures rendered
-     two-across in a third of a full-width row. */
-  /* The drawer is the full width of the board, and this used a quarter of it as a
-     flat list. Each area is a figure now and each weak skill is a small card with
-     its own bar, so the numbers a reader opened the row to see are the largest
-     thing in it rather than the smallest. */
-  .d-head { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3);
-            font-weight: 650; margin: 0 0 10px; }
+  .d-head { font: 400 11px/1.2 var(--font-code); text-transform: uppercase; letter-spacing: .26px; color: var(--ink-3); margin: 0 0 10px; }
+  .d-head::before { content: "// "; }
   .detail-in .d-head + .bars + .d-head { margin-top: 26px; }
 
   .bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px;
-          background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: 10px;
-          overflow: hidden; }
-  .missed-list .m-bar { display: block; height: 3px; border-radius: 2px; background: var(--ocean-800);
-                        overflow: hidden; margin-bottom: 9px; }
+          background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .missed-list .m-bar { display: block; height: 3px; border-radius: 2px; background: var(--card-2); overflow: hidden; margin-bottom: 9px; }
   .missed-list .m-bar u { display: block; height: 100%; background: var(--pc); border-radius: 2px; }
   .missed-list .m-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-  .missed-list .m-skill { font-weight: 600; color: var(--ink); white-space: nowrap;
-                          overflow: hidden; text-overflow: ellipsis; }
-  .missed-list .m-pct { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; flex: none; }
-  .missed-list .m-stat { display: flex; align-items: center; flex-wrap: nowrap; gap: 5px;
-                         margin-top: 7px; color: var(--ink-3); white-space: nowrap;
-                         overflow: hidden; }
+  .missed-list .m-skill { font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .missed-list .m-pct { font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; flex: none; font-family: var(--font-code); }
+  .missed-list .m-stat { display: flex; align-items: center; flex-wrap: nowrap; gap: 5px; margin-top: 7px; color: var(--ink-3); white-space: nowrap; overflow: hidden; }
   pre.cmd {
-    background: var(--ocean-900); border: 1px solid var(--line-soft); border-radius: 8px;
-    padding: 11px 13px; font-size: 12.5px; margin: 10px 0 0; color: var(--ink);
-    /* Wrapped, not scrolled. This is a prompt someone is meant to read before
-       copying it, and a horizontal scrollbar hid the half that says what it does. */
+    font-family: var(--font-code); background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-small);
+    padding: 12px 14px; font-size: 12.5px; margin: 10px 0 0; color: var(--ink);
     white-space: pre-wrap; overflow-wrap: anywhere;
   }
-  .copy {
-    margin-top: 9px; background: transparent; border: 1px solid var(--line); color: var(--ink-2);
-    border-radius: 7px; padding: 5px 12px; font-size: 12px; cursor: pointer; font-family: inherit;
-  }
-  .copy:hover { color: var(--brand); border-color: var(--brand); }
+  .copy { margin-top: 10px; }
 
-  #catalog { columns: 2; column-gap: 20px; }
+  /* ── the catalogue ── */
+  #catalog { columns: 2; column-gap: 16px; }
   #catalog > details { break-inside: avoid; }
   details.cat[open] { column-span: all; }
   @media (max-width: 900px) { #catalog { columns: 1; } }
-  details.cat { background: var(--ocean-850); border: 1px solid var(--line-soft); border-radius: 10px; padding: 13px 16px; margin-bottom: 9px; }
-  details.cat summary { cursor: pointer; font-weight: 620; font-size: 14px; }
-  details.cat summary i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; background: var(--pc); margin-right: 9px; }
-  .ev { padding: 8px 0 8px 18px; border-top: 1px solid var(--line-soft); font-size: 13px; }
-  .ev-s { color: var(--ink-3); font-size: 11px; margin-left: 7px; }
+  details.cat { padding: 16px 22px; margin-bottom: 12px; }
+  details.cat summary { cursor: pointer; font-weight: var(--title-weight); font-size: 1.0625rem; letter-spacing: var(--title-tracking); }
+  details.cat summary i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--pc); margin-right: 10px; }
+  .ev { padding: 10px 0 10px 20px; border-top: 1px solid var(--line-soft); font-size: 14px; }
+  .ev-s { color: var(--ink-3); font-size: 11.5px; margin-left: 7px; font-family: var(--font-code); }
   .ev-d { display: block; color: var(--ink-2); margin-top: 2px; }
-  /* The ask, not the topic: a skill failed on recall is a different problem from
-     one failed on code. Not ETHEVALS' quiz/goal -- a goal there is a build task
-     with a verified end state, and nothing here is run. */
   .kind {
-    display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ink-2); background: var(--ocean-800);
-    border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; margin-right: 7px;
+    display: inline-block; font: 400 10px/1.3 var(--font-code); letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-2); background: var(--card-2);
+    border: 1px solid var(--line); border-radius: var(--radius-small); padding: 2px 7px; margin-right: 8px;
     vertical-align: 1px;
   }
   .missed-list .kind { margin: 0; }
 
   table.plain { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
   table.plain th, table.plain td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line-soft); }
-  table.plain th { color: var(--ink-3); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  table.plain th { color: var(--ink-3); font: 400 11px/1.3 var(--font-code); text-transform: uppercase; letter-spacing: .26px; }
   table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
-  footer { color: var(--ink-3); font-size: 13px; margin-top: 76px; border-top: 1px solid var(--line-soft); padding-top: 22px; }
-  .err { color: var(--s2); font-size: 13px; }
+  /* The site's footer: a dark-grey slab with rounded top corners, bleeding to
+     the viewport edge, labels in the code face. */
+  footer {
+    color: var(--ink-2); font-size: 14px; margin: 96px calc(-1 * var(--pad)) 0;
+    padding: 40px var(--pad) 48px; background: var(--bg-2);
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+  }
+  footer p { max-width: 74ch; margin: 0 0 12px; }
+  .err { color: var(--s4); font-size: 13px; }
   @media (max-width: 720px) {
     .missed-list { columns: 1; }
     .board td, .board thead th { padding-left: 6px; padding-right: 6px; }
   }
-.tk .n { border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--card); }
-.tk .n b { display:block; font-size:30px; line-height:1.1; letter-spacing:-.02em; color:var(--ink); }
-.tk .n span { display:block; margin-top:6px; font-size:12.5px; color:var(--ink-2); line-height:1.45; }
-.ch .lbl { font:500 11px ui-sans-serif,system-ui,sans-serif; fill:var(--ink-2); }
-.ch .val { font:600 11.5px ui-sans-serif,system-ui,sans-serif; fill:var(--ink); }
+.tk .n { padding: 18px 20px; }
+.tk .n b { display:block; font-size:2rem; line-height:1.1; letter-spacing:-.02em; color:var(--ink); font-weight: var(--title-weight); }
+.tk .n span { display:block; margin-top:6px; font-size:13px; color:var(--ink-2); line-height:1.45; }
+.ch .lbl { font:400 11px var(--font-code); fill:var(--ink-2); }
+.ch .val { font:500 11.5px var(--font-sans); fill:var(--ink); }
 .ch rect.sv { rx:3; }
 .ch rect.sv:hover { opacity:.82; }
 </style>
@@ -255,15 +263,9 @@
 <div class="wrap">
 
 <header>
-  <svg class="drop" viewBox="0 0 32 32" aria-hidden="true">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#8fe9dd"/><stop offset="1" stop-color="#1aa093"/>
-    </linearGradient></defs>
-    <circle cx="16" cy="14" r="11" fill="url(#g)"/>
-    <path d="M11 22v6M21 22v6" stroke="url(#g)" stroke-width="3.5" stroke-linecap="round"/>
-    <circle cx="12" cy="12" r="1.6" fill="#04111e" opacity=".55"/><circle cx="20" cy="12" r="1.6" fill="#04111e" opacity=".55"/>
-  </svg>
-  <span class="word">Walrus <b>Evals</b></span>
+  <svg viewBox="0 0 124 29" class="mark" xmlns="http://www.w3.org/2000/svg" aria-label="Walrus" fill="currentColor"><path d="M34.1435 14.1431C34.5465 12.879 35.1193 11.8005 35.8541 10.8998C36.5928 10.0031 37.4658 9.28805 38.4732 8.7666C39.4806 8.24119 40.5511 7.98047 41.677 7.98047C43.3164 7.98047 44.711 8.47032 45.8684 9.45001C47.022 10.4297 47.9069 11.7017 48.531 13.2582H48.934V8.17799H54.6977V28.325H48.934V23.2448H48.531C47.9148 24.8052 47.0259 26.0733 45.8684 27.053C44.7149 28.0327 43.3164 28.5225 41.677 28.5225C40.5472 28.5225 39.4885 28.2618 38.493 27.7364C37.4974 27.211 36.6284 26.4999 35.8738 25.6032C35.1232 24.7064 34.5425 23.6201 34.1396 22.3599C33.7366 21.0958 33.5352 19.725 33.5352 18.2515C33.5352 16.778 33.7366 15.4033 34.1396 14.1431H34.1435ZM39.8045 20.3294C40.0336 20.9615 40.3576 21.5106 40.7724 21.9807C41.1911 22.4508 41.6849 22.8221 42.2656 23.0907C42.8424 23.3593 43.4666 23.4937 44.1381 23.4937C44.8097 23.4937 45.4694 23.3593 46.0304 23.0907C46.5953 22.8221 47.0773 22.4587 47.4802 22.0044C47.8832 21.5461 48.211 21.001 48.4678 20.3729C48.7246 19.7408 48.851 19.0376 48.851 18.2554C48.851 17.4733 48.7246 16.774 48.4678 16.138C48.211 15.506 47.8832 14.9648 47.4802 14.5065C47.0773 14.0483 46.5953 13.6888 46.0304 13.4202C45.4655 13.1515 44.8334 13.0172 44.1381 13.0172C43.4429 13.0172 42.8424 13.1515 42.2656 13.4202C41.6889 13.6888 41.1911 14.0601 40.7724 14.5302C40.3536 15.0003 40.0336 15.5494 39.8045 16.1815C39.5754 16.8135 39.4608 17.5049 39.4608 18.2594C39.4608 19.0139 39.5754 19.7013 39.8045 20.3373V20.3294Z" fill="currentColor"></path><path d="M57.6055 0H63.5311V28.3283H57.6055V0Z" fill="currentColor"></path><path d="M66.4414 8.18194H72.1617V13.2621H72.6871C73.1453 11.7294 73.967 10.4811 75.164 9.51322C76.361 8.54537 78.032 8.03577 80.1811 7.98047V14.309H78.3678C77.3486 14.309 76.4598 14.4315 75.7092 14.6724C74.9586 14.9134 74.3344 15.2847 73.8367 15.7825C73.3389 16.2802 72.9676 16.9163 72.7266 17.6984C72.4856 18.4767 72.3632 19.4445 72.3632 20.598V28.3329H66.4375V8.18194H66.4414Z" fill="currentColor"></path><path d="M82.2188 8.18144H88.101V18.6974C88.101 20.2578 88.4012 21.4271 89.0096 22.2014C89.614 22.9796 90.491 23.3707 91.6484 23.3707C92.1857 23.3707 92.7032 23.264 93.201 23.0468C93.6987 22.8334 94.153 22.4779 94.5718 21.9762C94.9905 21.4785 95.3303 20.8148 95.5989 19.9813C95.8675 19.1517 96.0018 18.1009 96.0018 16.8407V8.17749H101.967V28.3245H96.2033V23.2877H95.6779C95.4369 24.066 95.113 24.781 94.71 25.421C94.3071 26.0649 93.8172 26.6219 93.2405 27.092C92.6637 27.5621 92.004 27.9334 91.2653 28.202C90.5265 28.4707 89.7404 28.605 88.9068 28.605C87.9113 28.605 87.0067 28.443 86.1889 28.1191C85.3712 27.7951 84.672 27.2776 84.0952 26.5666C83.5184 25.8555 83.0602 24.9469 82.7244 23.8487C82.3886 22.7465 82.2227 21.4311 82.2227 19.8983V8.17749L82.2188 8.18144Z" fill="currentColor"></path><path d="M109.961 21.6364C110.068 22.6043 110.451 23.3312 111.111 23.8131C111.767 24.299 112.77 24.536 114.113 24.536C114.544 24.536 114.943 24.4965 115.322 24.4136C115.697 24.3346 116.025 24.22 116.31 24.0699C116.594 23.9237 116.823 23.7262 116.997 23.4852C117.171 23.2442 117.258 22.9598 117.258 22.6398C117.258 22.2883 117.183 22.0275 117.036 21.8537C116.886 21.6799 116.693 21.5179 116.452 21.3678C116.211 21.2216 115.95 21.1071 115.666 21.0241C115.381 20.9412 115.053 20.8622 114.678 20.7832L111.052 20.1787C110.273 20.0444 109.491 19.843 108.713 19.5743C107.935 19.3057 107.235 18.9502 106.619 18.5038C106.003 18.0574 105.497 17.4846 105.11 16.7696C104.719 16.0585 104.525 15.2052 104.525 14.2137C104.525 12.9495 104.786 11.8908 105.312 11.0336C105.837 10.1764 106.52 9.48898 107.366 8.97938C108.211 8.46978 109.159 8.10635 110.206 7.89302C111.253 7.67575 112.312 7.56909 113.386 7.56909C115.081 7.56909 116.503 7.76266 117.657 8.15375C118.81 8.54484 119.758 9.06234 120.497 9.70625C121.236 10.3502 121.793 11.1047 122.168 11.9619C122.543 12.8192 122.8 13.7199 122.934 14.664H116.93C116.851 13.8344 116.527 13.1826 115.962 12.7086C115.401 12.2385 114.536 12.0054 113.382 12.0054C112.979 12.0054 112.608 12.033 112.272 12.0844C111.936 12.1397 111.632 12.2464 111.364 12.4083C111.095 12.5703 110.878 12.7718 110.72 13.0127C110.558 13.2537 110.479 13.5381 110.479 13.8581C110.479 14.0991 110.538 14.3282 110.66 14.5415C110.783 14.7588 110.945 14.9247 111.146 15.0432C111.348 15.1657 111.581 15.2645 111.853 15.3435C112.122 15.4225 112.418 15.5054 112.738 15.5844L116.527 16.2679C117.333 16.4022 118.131 16.5957 118.925 16.8525C119.715 17.1093 120.434 17.4688 121.082 17.9389C121.73 18.409 122.231 18.9857 122.591 19.6731C122.95 20.3605 123.136 21.1979 123.136 22.1895C123.136 23.3707 122.903 24.3938 122.433 25.251C121.963 26.1083 121.319 26.8154 120.501 27.3685C119.683 27.9176 118.727 28.3284 117.641 28.597C116.554 28.8657 115.377 29 114.113 29C112.446 29 111.004 28.8064 109.779 28.4153C108.555 28.0242 107.536 27.4949 106.718 26.8233C105.9 26.1517 105.268 25.3696 104.826 24.4649C104.379 23.5682 104.107 22.6201 104 21.6246H109.965L109.961 21.6364Z" fill="currentColor"></path><path d="M11.9975 23.1732L13.4117 8.17749H20.2618L21.6761 23.1732L22.4701 23.3272C23.2286 21.5535 25.7174 15.8729 26.2428 8.18144H33.6577L28.0955 28.3284H18.4407L17.054 18.2549H16.6353L15.2487 28.3284H5.58197L0 8.18144H7.43078C7.95619 15.8768 10.441 21.5535 11.2034 23.3272L11.9975 23.1732Z" fill="currentColor"></path></svg>
+  <span class="sep" aria-hidden="true"></span>
+  <span class="word"><b>Evals</b></span>
   <span class="spacer"></span>
   <button class="theme-btn" id="theme" type="button">Light</button>
 </header>
