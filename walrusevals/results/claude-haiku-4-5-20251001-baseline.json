@@ -13,24 +13,24 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:14:55.232Z",
+  "recorded_at": "2026-10-13T15:25:04.675Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 5,
+      "pass": 6,
       "total": 26
     },
     "storing": {
-      "pass": 6,
+      "pass": 8,
       "total": 38
     },
     "building": {
-      "pass": 4,
+      "pass": 11,
       "total": 83
     },
     "operating": {
-      "pass": 4,
+      "pass": 3,
       "total": 22
     }
   },
@@ -42,7 +42,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 1,
+      "pass": 3,
       "of": 4
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -187,7 +187,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 0,
+      "pass": 1,
       "of": 6
     },
     {

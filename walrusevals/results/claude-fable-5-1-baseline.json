@@ -13,20 +13,20 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:21:56.489Z",
+  "recorded_at": "2026-10-13T15:28:19.954Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 17,
+      "pass": 19,
       "total": 26
     },
     "storing": {
-      "pass": 24,
+      "pass": 23,
       "total": 38
     },
     "building": {
-      "pass": 36,
+      "pass": 37,
       "total": 83
     },
     "operating": {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -67,12 +67,12 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 3,
+      "pass": 1,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -97,17 +97,17 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 1,
+      "pass": 0,
       "of": 5
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -137,7 +137,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
@@ -167,7 +167,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -187,12 +187,12 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 2,
+      "pass": 4,
       "of": 4
     },
     {
@@ -217,12 +217,12 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -242,7 +242,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-verify-durable",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     }
   ]

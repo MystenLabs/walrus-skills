@@ -13,20 +13,20 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:16:08.803Z",
+  "recorded_at": "2026-10-13T15:27:26.216Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 19,
+      "pass": 20,
       "total": 26
     },
     "storing": {
-      "pass": 22,
+      "pass": 24,
       "total": 38
     },
     "building": {
-      "pass": 34,
+      "pass": 35,
       "total": 83
     },
     "operating": {
@@ -57,7 +57,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
@@ -97,7 +97,7 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -137,7 +137,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -152,12 +152,12 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -177,7 +177,7 @@
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
@@ -197,7 +197,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 1,
+      "pass": 4,
       "of": 4
     },
     {

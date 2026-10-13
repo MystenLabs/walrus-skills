@@ -13,31 +13,31 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:20:49.674Z",
+  "recorded_at": "2026-10-13T15:27:05.695Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 23,
+      "pass": 24,
       "total": 26
     },
     "storing": {
-      "pass": 31,
+      "pass": 28,
       "total": 38
     },
     "building": {
-      "pass": 45,
+      "pass": 49,
       "total": 83
     },
     "operating": {
-      "pass": 20,
+      "pass": 17,
       "total": 22
     }
   },
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -62,12 +62,12 @@
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -172,12 +172,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -222,7 +222,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -232,7 +232,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-browser-upload",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
@@ -242,7 +242,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-verify-durable",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     }
   ]

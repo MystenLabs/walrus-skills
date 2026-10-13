@@ -13,20 +13,20 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:19:53.724Z",
+  "recorded_at": "2026-10-13T15:26:17.701Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 14,
+      "pass": 19,
       "total": 26
     },
     "storing": {
-      "pass": 22,
+      "pass": 26,
       "total": 38
     },
     "building": {
-      "pass": 43,
+      "pass": 46,
       "total": 83
     },
     "operating": {
@@ -42,17 +42,17 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -102,12 +102,12 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -122,12 +122,12 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-python-quickstart",
-      "pass": 0,
+      "pass": 5,
       "of": 5
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -172,12 +172,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 1,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
@@ -187,7 +187,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -197,12 +197,12 @@
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 1,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-storage-costs/costs-estimate-before-upload",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -237,12 +237,12 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-verify-durable",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     }
   ]

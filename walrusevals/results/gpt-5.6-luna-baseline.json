@@ -13,20 +13,20 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:17:44.987Z",
+  "recorded_at": "2026-10-13T15:24:49.902Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 9,
+      "pass": 7,
       "total": 26
     },
     "storing": {
-      "pass": 14,
+      "pass": 13,
       "total": 38
     },
     "building": {
-      "pass": 21,
+      "pass": 19,
       "total": 83
     },
     "operating": {
@@ -37,12 +37,12 @@
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -72,22 +72,22 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -157,12 +157,12 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 2,
+      "pass": 1,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 4,
+      "pass": 3,
       "of": 5
     },
     {
@@ -187,7 +187,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {

@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:14:30.229Z",
+  "recorded_at": "2026-10-13T15:29:55.495Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
@@ -26,11 +26,11 @@
       "total": 38
     },
     "building": {
-      "pass": 27,
+      "pass": 26,
       "total": 83
     },
     "operating": {
-      "pass": 14,
+      "pass": 13,
       "total": 22
     }
   },
@@ -47,7 +47,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {
@@ -82,7 +82,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -147,7 +147,7 @@
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -157,7 +157,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 3,
+      "pass": 4,
       "of": 5
     },
     {
@@ -192,7 +192,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

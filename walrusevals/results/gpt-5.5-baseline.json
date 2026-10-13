@@ -13,24 +13,24 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T21:14:46.955Z",
+  "recorded_at": "2026-10-13T15:25:39.200Z",
   "manifest": "29d7d491fb90",
   "eval_set": "29d7d491fb90",
   "pillars": {
     "fundamentals": {
-      "pass": 13,
+      "pass": 12,
       "total": 26
     },
     "storing": {
-      "pass": 14,
+      "pass": 18,
       "total": 38
     },
     "building": {
-      "pass": 21,
+      "pass": 19,
       "total": 83
     },
     "operating": {
-      "pass": 10,
+      "pass": 9,
       "total": 22
     }
   },
@@ -42,7 +42,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -72,12 +72,12 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 1,
+      "pass": 4,
       "of": 4
     },
     {
@@ -102,12 +102,12 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 1,
+      "pass": 0,
       "of": 5
     },
     {
@@ -117,12 +117,12 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 1,
+      "pass": 2,
       "of": 5
     },
     {
@@ -167,7 +167,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -197,7 +197,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
