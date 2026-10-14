@@ -7,7 +7,7 @@
       "Shows a struct with key ability and id: UID field",
       "Includes a blob: Blob field using walrus::blob::Blob",
       "Shows using object::new(ctx) for the UID",
-      "States or relies on Blob having the store ability (it can be embedded in another object)"
+      "States that Blob has the store ability, which is what lets it be a field of another object and be transferred from your package"
     ],
     "sources": [
       "https://github.com/MystenLabs/walrus/tree/main/docs/examples/move/walrus_dep"
