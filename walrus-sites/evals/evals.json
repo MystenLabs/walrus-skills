@@ -6,7 +6,7 @@
     "expectations": [
       "Shows the routes section in ws-resources.json with /* mapped to /index.html",
       "Mentions redeploying with site-builder deploy for the change to apply",
-      "Explains that routes are client-side routing rules stored on the site object"
+      "States that routes are client-side routing only, distinct from the redirects section, and that a more specific pattern wins over /*"
     ],
     "sources": [
       "https://docs.wal.app/docs/sites/production",
@@ -20,7 +20,7 @@
     "expectations": [
       "Shows the redirects field in ws-resources.json with location and status_code",
       "Mentions that the portal evaluates redirects before looking up the resource",
-      "Mentions glob pattern support (* and **/*)",
+      "States that in redirect patterns * matches one path segment and **/* matches any number",
       "Does NOT claim Walrus Sites cannot do HTTP redirects"
     ],
     "sources": [
