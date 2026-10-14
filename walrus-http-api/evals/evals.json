@@ -36,7 +36,7 @@
     "expectations": [
       "Clearly states there is no public unauthenticated publisher on mainnet",
       "Suggests alternatives: upload relay, TypeScript SDK, CLI, or self-hosted publisher",
-      "Mentions the upload relay URL if applicable",
+      "Names the Mainnet upload relay https://upload-relay.mainnet.walrus.space",
       "Does not provide a fake or outdated publisher URL"
     ],
     "sources": [
