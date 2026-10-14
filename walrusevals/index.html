@@ -545,7 +545,13 @@ function renderBoard(cat, res) {
     const w = layers['with-skills'] ?? layers['with-skills-mcp'];
     return w ? pctOf(w) : Math.max(...Object.values(layers).map(pctOf));
   };
-  const models = [...byModel.entries()].sort((a, b) => best(b[1]) - best(a[1]));
+  // A card is a comparison: with the skills and without. A model with no
+  // ranked baseline cannot show what the skills are worth to it, so it has
+  // no card, rather than a card with one bar. It comes back the moment a
+  // full baseline run lands.
+  const models = [...byModel.entries()]
+    .filter(([, layers]) => layers['baseline'] && (layers['with-skills'] ?? layers['with-skills-mcp']))
+    .sort((a, b) => best(b[1]) - best(a[1]));
 
   const stale = res.manifest !== cat.manifest;
   // No summary line. It counted models, runs and pairs, which are facts about
