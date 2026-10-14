@@ -40,7 +40,7 @@
       "Shows the login command: npx -y @mysten-incubation/memwal-mcp login --prod",
       "Shows the Claude Code command: claude mcp add --scope user memwal -- npx -y @mysten-incubation/memwal-mcp",
       "Mentions restarting the client after adding",
-      "Mentions the MCP tools the docs list, such as memwal_remember, memwal_recall, memwal_analyze, memwal_restore, and memwal_login"
+      "Names memwal_remember and memwal_recall as MCP tools the server exposes"
     ],
     "sources": [
       "https://docs.wal.app/walrus-memory/mcp/claude-code",
