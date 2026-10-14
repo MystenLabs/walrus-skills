@@ -23,7 +23,21 @@
       "Shows the walrus read-quilt command with at least one retrieval method",
       "Mentions retrieval by identifier, QuiltPatchId, or tags",
       "Mentions the list-patches-in-quilt command for discovering patch IDs",
-      "Does not suggest using a standard blob ID to read from a quilt"
+      "Shows walrus read-quilt with --quilt-id <QUILT_BLOB_ID> and --identifiers (or --tag), with --out for the destination directory"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/walrus-client/quilts"
+    ]
+  },
+  {
+    "id": "quilts-store-with-tags",
+    "prompt": "I want to batch 200 product images into one Walrus upload and later fetch each one by its SKU. How do I store them?",
+    "expected_output": "walrus store-quilt with --blobs giving each file an identifier (the SKU) and tags; --paths for whole directories; later read by identifier. A QuiltPatchId is derived from the whole quilt.",
+    "expectations": [
+      "Shows walrus store-quilt with --blobs JSON entries that set an identifier (the SKU) and optional tags per file",
+      "Mentions --paths as the way to store whole directories when custom identifiers are not needed",
+      "States that a QuiltPatchId is derived from the quilt's contents, so it changes if the quilt is recreated with different contents",
+      "Does NOT claim each image gets its own standard blob ID that can be read with walrus read"
     ],
     "sources": [
       "https://docs.wal.app/docs/walrus-client/quilts"
