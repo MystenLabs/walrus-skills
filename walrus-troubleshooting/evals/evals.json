@@ -34,7 +34,7 @@
     "expectations": [
       "Explains that every transaction costs SUI for gas and storing data costs WAL",
       "Shows walrus get-wal (Testnet only) to exchange SUI for WAL",
-      "States that on Mainnet WAL comes from an exchange or a transfer, and warns against third-party WAL faucets",
+      "States that get-wal is Testnet-only and that on Mainnet WAL is acquired on an exchange or by transfer from an address that holds it",
       "Mentions that WAL alone does not pay for transactions; the address still needs SUI"
     ],
     "sources": [
@@ -50,7 +50,7 @@
       "Suggests walrus health --committee to check storage node reachability",
       "Explains that writes need a quorum of shards (n - f; walrus info bft)",
       "Attributes intermittent failures to unreachable nodes rather than client misconfiguration",
-      "Does NOT suggest reinstalling or reconfiguring the CLI as the first step"
+      "States that reads keep working down to n - 2f healthy shards while writes need n - f, so a network can be readable and not writable"
     ],
     "sources": [
       "https://docs.wal.app/docs/walrus-client/network-health"

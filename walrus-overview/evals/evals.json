@@ -36,9 +36,9 @@
     "expectations": [
       "Recommends the TypeScript SDK for web app integration",
       "Mentions the upload relay for browser-based uploads",
-      "Mentions the HTTP API as an alternative for server-side code",
-      "Mentions the CLI for terminal/scripting use cases",
-      "Does not recommend the CLI as the primary choice for a web app"
+      "States that there is no public Mainnet publisher, so server-side HTTP uploads mean running your own authenticated publisher",
+      "States that a browser client should upload through the upload relay, because a browser cannot open connections to every storage node to distribute slivers itself",
+      "Does NOT point the web app at a public Mainnet publisher endpoint"
     ],
     "sources": [
       "https://docs.wal.app/docs/typescript-sdk/sdks",

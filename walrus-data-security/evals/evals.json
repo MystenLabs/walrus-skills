@@ -20,8 +20,23 @@
     "expectations": [
       "States that Walrus does not let you choose which storage nodes or regions hold your data",
       "Explains that blobs are erasure-coded into slivers distributed across all shards, with shard assignment managed onchain",
-      "Advises against storing personal or regulated data in the clear; recommends encrypting first and keeping plaintext and keys off Walrus",
+      "Recommends encrypting on the client before upload, for example with Seal, and keeping plaintext and keys off Walrus",
       "States that all blobs are public and treats the blob ID as public"
+    ],
+    "sources": [
+      "https://docs.wal.app/docs/data-security"
+    ]
+  },
+  {
+    "id": "security-access-control",
+    "prompt": "I store a report on Walrus and only paying subscribers should be able to read it. How do I enforce that?",
+    "expected_output": "Walrus cannot restrict reads by blob ID; encrypt with Seal and put the policy in a Move seal_approve function (allowlist or token gate); the ciphertext stays public.",
+    "expectations": [
+      "States that Walrus itself cannot restrict who reads a blob: anyone with the blob ID can fetch it",
+      "Recommends Seal threshold encryption with the access policy written as a Move seal_approve function",
+      "Mentions an allowlist or token-gate pattern as the policy shape for subscribers",
+      "States that the encrypted blob stays public on Walrus; only decryption is gated",
+      "Does NOT claim a private or permissioned blob setting exists in Walrus"
     ],
     "sources": [
       "https://docs.wal.app/docs/data-security"
