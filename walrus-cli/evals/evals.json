@@ -5,7 +5,7 @@
     "expected_output": "walrus store myfile --epochs 30. Mentions installation via suiup and configuration.",
     "expectations": [
       "Shows the walrus store command with --epochs 30",
-      "Mentions the file path argument",
+      "States that storing a blob that is already certified with enough lifetime skips re-uploading the data and only collects the certificate, unless --force is given",
       "Mentions that storing costs WAL and every transaction costs SUI for gas"
     ],
     "sources": [
@@ -21,7 +21,7 @@
       "Mentions the --json flag for JSON output",
       "Shows the walrus json command for full JSON mode",
       "Notes that JSON mode uses camelCase instead of kebab-case",
-      "Mentions piping to jq for parsing"
+      "States that walrus json with no argument reads the command JSON from stdin"
     ],
     "sources": [
       "https://docs.wal.app/docs/walrus-client/json-mode",
