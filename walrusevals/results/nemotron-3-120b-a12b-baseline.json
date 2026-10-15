@@ -11,30 +11,30 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:08:46.131Z",
-  "manifest": "29d7d491fb90",
-  "eval_set": "29d7d491fb90",
+  "recorded_at": "2026-10-14T18:29:44.911Z",
+  "manifest": "60947078a44c",
+  "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 9,
+      "pass": 5,
       "total": 26
     },
     "storing": {
-      "pass": 14,
-      "total": 38
+      "pass": 6,
+      "total": 42
     },
     "building": {
-      "pass": 19,
-      "total": 78
+      "pass": 11,
+      "total": 83
     },
     "operating": {
-      "pass": 12,
-      "total": 19
+      "pass": 2,
+      "total": 27
     }
   },
-  "partial": true,
+  "context_tokens_estimate": 0,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
@@ -43,7 +43,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -53,17 +53,17 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -78,13 +78,18 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 1,
       "of": 4
+    },
+    {
+      "id": "walrus-data-security/security-access-control",
+      "pass": 0,
+      "of": 5
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
@@ -93,7 +98,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -112,13 +117,18 @@
       "of": 5
     },
     {
+      "id": "walrus-memory/memory-ts-quickstart",
+      "pass": 0,
+      "of": 5
+    },
+    {
       "id": "walrus-memory/memory-mcp-setup",
       "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -128,12 +138,12 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -148,17 +158,17 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 0,
+      "pass": 2,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 3,
+      "pass": 1,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 4,
+      "pass": 2,
       "of": 5
     },
     {
@@ -168,7 +178,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 4,
+      "pass": 0,
+      "of": 4
+    },
+    {
+      "id": "walrus-quilts/quilts-store-with-tags",
+      "pass": 1,
       "of": 4
     },
     {
@@ -178,7 +193,7 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -188,7 +203,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
@@ -202,8 +217,13 @@
       "of": 3
     },
     {
+      "id": "walrus-troubleshooting/troubleshoot-max-epochs",
+      "pass": 0,
+      "of": 3
+    },
+    {
       "id": "walrus-troubleshooting/troubleshoot-tip-exceeded",
-      "pass": 3,
+      "pass": 0,
       "of": 3
     },
     {
@@ -213,12 +233,12 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 6,
+      "pass": 1,
       "of": 6
     },
     {

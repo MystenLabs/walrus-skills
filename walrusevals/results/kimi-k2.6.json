@@ -11,29 +11,30 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:03:25.488Z",
-  "manifest": "29d7d491fb90",
-  "eval_set": "29d7d491fb90",
+  "recorded_at": "2026-10-14T18:22:01.041Z",
+  "manifest": "60947078a44c",
+  "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
       "pass": 26,
       "total": 26
     },
     "storing": {
-      "pass": 37,
-      "total": 38
+      "pass": 40,
+      "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 79,
       "total": 83
     },
     "operating": {
-      "pass": 21,
-      "total": 22
+      "pass": 27,
+      "total": 27
     }
   },
+  "context_tokens_estimate": 3039,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
@@ -57,7 +58,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -86,18 +87,23 @@
       "of": 4
     },
     {
+      "id": "walrus-data-security/security-access-control",
+      "pass": 5,
+      "of": 5
+    },
+    {
       "id": "walrus-http-api/http-api-store-blob",
       "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -112,7 +118,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -137,7 +143,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -176,13 +182,18 @@
       "of": 4
     },
     {
+      "id": "walrus-quilts/quilts-store-with-tags",
+      "pass": 4,
+      "of": 4
+    },
+    {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -217,7 +228,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {

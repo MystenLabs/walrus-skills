@@ -14,8 +14,8 @@
   "samples": 1,
   "empty_answers": 0,
   "recorded_at": "2026-10-09T16:48:18.088Z",
-  "manifest": "29d7d491fb90",
-  "eval_set": "29d7d491fb90",
+  "manifest": "60947078a44c",
+  "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
       "pass": 26,
@@ -34,6 +34,8 @@
       "total": 22
     }
   },
+  "partial": true,
+  "context_tokens_estimate": 3063,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",

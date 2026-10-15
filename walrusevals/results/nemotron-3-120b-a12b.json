@@ -11,29 +11,30 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:05:14.851Z",
-  "manifest": "29d7d491fb90",
-  "eval_set": "29d7d491fb90",
+  "recorded_at": "2026-10-14T18:32:36.707Z",
+  "manifest": "60947078a44c",
+  "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
+      "pass": 24,
       "total": 26
     },
     "storing": {
-      "pass": 35,
-      "total": 38
+      "pass": 38,
+      "total": 42
     },
     "building": {
-      "pass": 80,
+      "pass": 79,
       "total": 83
     },
     "operating": {
-      "pass": 18,
-      "total": 22
+      "pass": 24,
+      "total": 27
     }
   },
+  "context_tokens_estimate": 3039,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
@@ -47,17 +48,17 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
-      "of": 4
-    },
-    {
-      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
       "pass": 4,
       "of": 4
     },
     {
-      "id": "walrus-cli/cli-store-file",
+      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
       "pass": 2,
+      "of": 4
+    },
+    {
+      "id": "walrus-cli/cli-store-file",
+      "pass": 1,
       "of": 3
     },
     {
@@ -67,7 +68,7 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
@@ -84,6 +85,11 @@
       "id": "walrus-data-security/security-sovereignty",
       "pass": 4,
       "of": 4
+    },
+    {
+      "id": "walrus-data-security/security-access-control",
+      "pass": 4,
+      "of": 5
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
@@ -137,7 +143,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -162,7 +168,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
+      "pass": 3,
       "of": 5
     },
     {
@@ -172,6 +178,11 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
+      "pass": 4,
+      "of": 4
+    },
+    {
+      "id": "walrus-quilts/quilts-store-with-tags",
       "pass": 4,
       "of": 4
     },
@@ -217,7 +228,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {

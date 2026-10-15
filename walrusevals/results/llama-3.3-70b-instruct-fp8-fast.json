@@ -241,5 +241,6 @@
       "pass": 0,
       "of": 4
     }
-  ]
+  ],
+  "context_tokens_estimate": 3053
 }

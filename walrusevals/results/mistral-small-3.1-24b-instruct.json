@@ -11,33 +11,34 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
+  "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-09T17:07:02.927Z",
-  "manifest": "29d7d491fb90",
-  "eval_set": "29d7d491fb90",
+  "recorded_at": "2026-10-14T18:28:16.749Z",
+  "manifest": "60947078a44c",
+  "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 17,
+      "pass": 15,
       "total": 26
     },
     "storing": {
-      "pass": 18,
-      "total": 38
+      "pass": 8,
+      "total": 42
     },
     "building": {
-      "pass": 35,
+      "pass": 36,
       "total": 83
     },
     "operating": {
-      "pass": 4,
-      "total": 22
+      "pass": 3,
+      "total": 27
     }
   },
+  "context_tokens_estimate": 3039,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -47,7 +48,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 0,
       "of": 4
     },
     {
@@ -57,22 +58,22 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 0,
+      "pass": 2,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 3,
+      "pass": 0,
       "of": 4
     },
     {
@@ -86,33 +87,38 @@
       "of": 4
     },
     {
+      "id": "walrus-data-security/security-access-control",
+      "pass": 0,
+      "of": 5
+    },
+    {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 1,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-http-api/http-api-no-mainnet-publisher",
       "pass": 1,
       "of": 4
     },
     {
+      "id": "walrus-http-api/http-api-no-mainnet-publisher",
+      "pass": 2,
+      "of": 4
+    },
+    {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 2,
+      "pass": 5,
       "of": 5
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 0,
+      "pass": 5,
       "of": 5
     },
     {
@@ -127,12 +133,12 @@
     },
     {
       "id": "walrus-memory/memory-python-quickstart",
-      "pass": 1,
+      "pass": 5,
       "of": 5
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 0,
+      "pass": 3,
       "of": 4
     },
     {
@@ -142,12 +148,12 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 3,
+      "pass": 0,
       "of": 4
     },
     {
@@ -162,7 +168,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 3,
+      "pass": 2,
       "of": 5
     },
     {
@@ -172,12 +178,17 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 1,
+      "pass": 0,
+      "of": 4
+    },
+    {
+      "id": "walrus-quilts/quilts-store-with-tags",
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {
@@ -192,12 +203,12 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 0,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -222,7 +233,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -242,7 +253,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-verify-durable",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     }
   ]
