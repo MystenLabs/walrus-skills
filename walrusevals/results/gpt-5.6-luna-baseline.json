@@ -13,12 +13,12 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:00:50.011Z",
+  "recorded_at": "2026-10-15T19:52:15.780Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 3,
+      "pass": 5,
       "total": 26
     },
     "storing": {
@@ -26,7 +26,7 @@
       "total": 42
     },
     "building": {
-      "pass": 16,
+      "pass": 19,
       "total": 83
     },
     "operating": {
@@ -34,21 +34,28 @@
       "total": 27
     }
   },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 196163,
+    "output_tokens": 90143,
+    "input_per_answer": 1486,
+    "output_per_answer": 683
+  },
   "context_tokens_estimate": 0,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
@@ -68,12 +75,12 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -88,12 +95,12 @@
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 4,
+      "pass": 3,
       "of": 5
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -108,7 +115,7 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -148,7 +155,7 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -158,7 +165,7 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 1,
+      "pass": 2,
       "of": 5
     },
     {
@@ -168,7 +175,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 1,
+      "pass": 2,
       "of": 5
     },
     {
@@ -218,7 +225,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -238,7 +245,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 2,
+      "pass": 3,
       "of": 6
     },
     {
@@ -248,7 +255,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {

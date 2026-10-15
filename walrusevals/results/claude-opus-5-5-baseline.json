@@ -13,26 +13,35 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:32:35.295Z",
+  "recorded_at": "2026-10-15T20:12:00.398Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 24,
+      "pass": 23,
       "total": 26
     },
     "storing": {
-      "pass": 29,
+      "pass": 30,
       "total": 42
     },
     "building": {
-      "pass": 46,
+      "pass": 45,
       "total": 83
     },
     "operating": {
       "pass": 22,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 399312,
+    "cached_tokens": 398672,
+    "output_tokens": 124378,
+    "input_per_answer": 3025,
+    "cached_per_answer": 3020,
+    "output_per_answer": 942
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -73,7 +82,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -113,7 +122,7 @@
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 2,
+      "pass": 1,
       "of": 5
     },
     {
@@ -128,7 +137,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -203,7 +212,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -253,7 +262,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-verify-durable",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     }
   ]

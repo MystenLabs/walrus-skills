@@ -13,26 +13,35 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T06:22:54.046Z",
+  "recorded_at": "2026-10-15T20:06:45.256Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
+      "pass": 24,
       "total": 26
     },
     "storing": {
-      "pass": 37,
+      "pass": 36,
       "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 80,
       "total": 83
     },
     "operating": {
       "pass": 27,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4991288,
+    "cached_tokens": 4990492,
+    "output_tokens": 101560,
+    "input_per_answer": 37813,
+    "cached_per_answer": 37807,
+    "output_per_answer": 769
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -43,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -53,12 +62,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
@@ -118,17 +127,17 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -168,17 +177,17 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
+      "pass": 3,
       "of": 5
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 4,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 2,
+      "pass": 4,
       "of": 4
     },
     {
@@ -193,12 +202,12 @@
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {

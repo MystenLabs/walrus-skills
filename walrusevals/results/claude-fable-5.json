@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T17:57:07.358Z",
+  "recorded_at": "2026-10-15T20:08:20.322Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -33,6 +33,15 @@
       "pass": 27,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4959294,
+    "cached_tokens": 4958488,
+    "output_tokens": 99872,
+    "input_per_answer": 37570,
+    "cached_per_answer": 37564,
+    "output_per_answer": 757
   },
   "context_tokens_estimate": 3039,
   "evals": [

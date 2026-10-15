@@ -13,26 +13,35 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T06:23:33.022Z",
+  "recorded_at": "2026-10-15T20:07:38.140Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 22,
+      "pass": 23,
       "total": 26
     },
     "storing": {
-      "pass": 39,
+      "pass": 36,
       "total": 42
     },
     "building": {
-      "pass": 79,
+      "pass": 75,
       "total": 83
     },
     "operating": {
-      "pass": 22,
+      "pass": 27,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4112737,
+    "cached_tokens": 4107733,
+    "output_tokens": 122927,
+    "input_per_answer": 31157,
+    "cached_per_answer": 31119,
+    "output_per_answer": 931
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -48,7 +57,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -58,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
@@ -88,7 +97,7 @@
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -108,7 +117,7 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -143,7 +152,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -153,12 +162,12 @@
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -173,7 +182,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -188,7 +197,7 @@
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -228,7 +237,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
@@ -243,7 +252,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-browser-upload",
-      "pass": 4,
+      "pass": 2,
       "of": 4
     },
     {

@@ -13,26 +13,35 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T17:57:51.639Z",
+  "recorded_at": "2026-10-15T20:09:03.723Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 16,
+      "pass": 17,
       "total": 26
     },
     "storing": {
-      "pass": 25,
+      "pass": 24,
       "total": 42
     },
     "building": {
-      "pass": 33,
+      "pass": 34,
       "total": 83
     },
     "operating": {
-      "pass": 21,
+      "pass": 20,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 798153,
+    "cached_tokens": 797179,
+    "output_tokens": 148717,
+    "input_per_answer": 6047,
+    "cached_per_answer": 6039,
+    "output_per_answer": 1127
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -48,7 +57,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
@@ -58,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {
@@ -73,7 +82,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -93,7 +102,7 @@
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -103,12 +112,12 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -163,7 +172,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -228,7 +237,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {

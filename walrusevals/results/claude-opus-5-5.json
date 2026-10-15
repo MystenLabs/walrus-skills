@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:34:41.507Z",
+  "recorded_at": "2026-10-15T20:12:11.701Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,17 +22,26 @@
       "total": 26
     },
     "storing": {
-      "pass": 41,
+      "pass": 40,
       "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 82,
       "total": 83
     },
     "operating": {
-      "pass": 26,
+      "pass": 27,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4466792,
+    "cached_tokens": 4465806,
+    "output_tokens": 124513,
+    "input_per_answer": 33839,
+    "cached_per_answer": 33832,
+    "output_per_answer": 943
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -58,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
@@ -83,7 +92,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -198,7 +207,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {

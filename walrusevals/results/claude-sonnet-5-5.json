@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:35:53.053Z",
+  "recorded_at": "2026-10-15T20:12:11.436Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -26,13 +26,22 @@
       "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 79,
       "total": 83
     },
     "operating": {
-      "pass": 27,
+      "pass": 23,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4433757,
+    "cached_tokens": 4432771,
+    "output_tokens": 100219,
+    "input_per_answer": 33589,
+    "cached_per_answer": 33582,
+    "output_per_answer": 759
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -128,7 +137,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 4,
+      "pass": 2,
       "of": 4
     },
     {
@@ -233,7 +242,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {

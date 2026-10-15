@@ -13,26 +13,33 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T17:57:44.503Z",
+  "recorded_at": "2026-10-15T19:50:34.993Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 11,
+      "pass": 15,
       "total": 26
     },
     "storing": {
-      "pass": 17,
+      "pass": 19,
       "total": 42
     },
     "building": {
-      "pass": 24,
+      "pass": 23,
       "total": 83
     },
     "operating": {
       "pass": 14,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 366289,
+    "output_tokens": 49538,
+    "input_per_answer": 2775,
+    "output_per_answer": 375
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -48,7 +55,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -103,12 +110,12 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -143,7 +150,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -153,7 +160,7 @@
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {
@@ -163,7 +170,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -173,7 +180,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -198,17 +205,17 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {

@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T17:56:40.262Z",
+  "recorded_at": "2026-10-15T20:08:14.103Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,7 +22,7 @@
       "total": 26
     },
     "storing": {
-      "pass": 4,
+      "pass": 3,
       "total": 42
     },
     "building": {
@@ -30,9 +30,18 @@
       "total": 83
     },
     "operating": {
-      "pass": 5,
+      "pass": 2,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 1209749,
+    "cached_tokens": 380836,
+    "output_tokens": 116146,
+    "input_per_answer": 9165,
+    "cached_per_answer": 2885,
+    "output_per_answer": 880
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -53,17 +62,17 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -78,17 +87,17 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 1,
-      "of": 4
-    },
-    {
-      "id": "walrus-data-security/security-sovereignty",
       "pass": 0,
       "of": 4
     },
     {
+      "id": "walrus-data-security/security-sovereignty",
+      "pass": 1,
+      "of": 4
+    },
+    {
       "id": "walrus-data-security/security-access-control",
-      "pass": 3,
+      "pass": 1,
       "of": 5
     },
     {
@@ -148,7 +157,7 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -163,7 +172,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 2,
+      "pass": 3,
       "of": 5
     },
     {
@@ -203,7 +212,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -228,7 +237,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -238,7 +247,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
-      "pass": 1,
+      "pass": 0,
       "of": 6
     },
     {

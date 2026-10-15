@@ -13,16 +13,16 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:33:37.955Z",
+  "recorded_at": "2026-10-15T20:12:20.749Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 25,
+      "pass": 23,
       "total": 26
     },
     "storing": {
-      "pass": 37,
+      "pass": 38,
       "total": 42
     },
     "building": {
@@ -33,6 +33,15 @@
       "pass": 26,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 4579530,
+    "cached_tokens": 4578544,
+    "output_tokens": 126324,
+    "input_per_answer": 34693,
+    "cached_per_answer": 34686,
+    "output_per_answer": 957
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -58,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
@@ -118,12 +127,12 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -168,7 +177,7 @@
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -178,12 +187,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-quilts/quilts-store-with-tags",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -203,7 +212,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
