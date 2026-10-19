@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:27:03.136Z",
+  "recorded_at": "2026-10-16T02:31:56.966Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,17 +22,24 @@
       "total": 26
     },
     "storing": {
-      "pass": 4,
+      "pass": 3,
       "total": 42
     },
     "building": {
-      "pass": 6,
+      "pass": 5,
       "total": 83
     },
     "operating": {
-      "pass": 0,
+      "pass": 1,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 170006,
+    "output_tokens": 41602,
+    "input_per_answer": 1288,
+    "output_per_answer": 315
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -48,7 +55,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -58,12 +65,12 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -78,7 +85,7 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -248,7 +255,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

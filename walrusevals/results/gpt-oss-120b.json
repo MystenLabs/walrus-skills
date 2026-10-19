@@ -13,26 +13,33 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:28:28.813Z",
+  "recorded_at": "2026-10-16T01:32:52.959Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
+      "pass": 25,
       "total": 26
     },
     "storing": {
-      "pass": 32,
+      "pass": 37,
       "total": 42
     },
     "building": {
-      "pass": 71,
+      "pass": 77,
       "total": 83
     },
     "operating": {
       "pass": 21,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 5825985,
+    "output_tokens": 224365,
+    "input_per_answer": 44136,
+    "output_per_answer": 1700
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -48,7 +55,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -58,17 +65,17 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 2,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -118,7 +125,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -143,7 +150,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -178,12 +185,12 @@
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-quilts/quilts-store-with-tags",
-      "pass": 1,
+      "pass": 3,
       "of": 4
     },
     {
@@ -203,7 +210,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -243,12 +250,12 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-browser-upload",
-      "pass": 0,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 1,
+      "pass": 4,
       "of": 4
     },
     {

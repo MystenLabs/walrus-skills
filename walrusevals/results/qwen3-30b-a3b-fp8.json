@@ -13,32 +13,39 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:08:03.821Z",
+  "recorded_at": "2026-10-15T23:18:09.789Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 11,
+      "pass": 10,
       "total": 26
     },
     "storing": {
-      "pass": 14,
+      "pass": 12,
       "total": 42
     },
     "building": {
-      "pass": 37,
+      "pass": 24,
       "total": 83
     },
     "operating": {
-      "pass": 8,
+      "pass": 10,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 5264079,
+    "output_tokens": 212270,
+    "input_per_answer": 39879,
+    "output_per_answer": 1608
   },
   "context_tokens_estimate": 3039,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -48,7 +55,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
@@ -58,7 +65,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -68,42 +75,42 @@
     },
     {
       "id": "walrus-cli/cli-install",
-      "pass": 2,
+      "pass": 3,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 2,
-      "of": 4
-    },
-    {
-      "id": "walrus-data-security/security-access-control",
-      "pass": 0,
-      "of": 5
-    },
-    {
-      "id": "walrus-http-api/http-api-store-blob",
       "pass": 3,
       "of": 4
     },
     {
+      "id": "walrus-data-security/security-access-control",
+      "pass": 2,
+      "of": 5
+    },
+    {
+      "id": "walrus-http-api/http-api-store-blob",
+      "pass": 0,
+      "of": 4
+    },
+    {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -123,22 +130,22 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 0,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-memory/memory-python-quickstart",
-      "pass": 5,
+      "pass": 1,
       "of": 5
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
@@ -148,27 +155,27 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 4,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 0,
+      "pass": 5,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 0,
+      "pass": 1,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-which-tool",
-      "pass": 2,
+      "pass": 1,
       "of": 5
     },
     {
@@ -183,7 +190,7 @@
     },
     {
       "id": "walrus-quilts/quilts-store-with-tags",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -203,12 +210,12 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 4,
+      "pass": 0,
       "of": 4
     },
     {
@@ -233,7 +240,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 0,
+      "pass": 3,
       "of": 4
     },
     {

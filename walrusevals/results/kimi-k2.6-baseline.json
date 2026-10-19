@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:22:10.831Z",
+  "recorded_at": "2026-10-16T01:04:13.760Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,17 +22,24 @@
       "total": 26
     },
     "storing": {
-      "pass": 9,
+      "pass": 7,
       "total": 42
     },
     "building": {
-      "pass": 16,
+      "pass": 18,
       "total": 83
     },
     "operating": {
-      "pass": 15,
+      "pass": 10,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 175484,
+    "output_tokens": 184647,
+    "input_per_answer": 1329,
+    "output_per_answer": 1399
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -48,12 +55,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -83,17 +90,17 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 4,
+      "pass": 3,
       "of": 5
     },
     {
       "id": "walrus-http-api/http-api-store-blob",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -123,7 +130,7 @@
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -148,7 +155,7 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -158,12 +165,12 @@
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 1,
+      "pass": 2,
       "of": 5
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 3,
+      "pass": 2,
       "of": 5
     },
     {
@@ -198,7 +205,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -218,7 +225,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 2,
+      "pass": 1,
       "of": 3
     },
     {
@@ -228,12 +235,12 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-no-gas",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

@@ -12,8 +12,8 @@
     "ls"
   ],
   "samples": 3,
-  "empty_answers": 7,
-  "recorded_at": "2026-10-14T19:56:38.177Z",
+  "empty_answers": 1,
+  "recorded_at": "2026-10-15T20:46:02.928Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,19 +22,26 @@
       "total": 26
     },
     "storing": {
-      "pass": 10,
+      "pass": 14,
       "total": 42
     },
     "building": {
-      "pass": 15,
-      "total": 76
+      "pass": 19,
+      "total": 79
     },
     "operating": {
-      "pass": 8,
-      "total": 23
+      "pass": 12,
+      "total": 27
     }
   },
   "partial": true,
+  "usage": {
+    "answers": 131,
+    "input_tokens": 305975,
+    "output_tokens": 436076,
+    "input_per_answer": 2336,
+    "output_per_answer": 3329
+  },
   "context_tokens_estimate": 0,
   "evals": [
     {
@@ -44,7 +51,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -54,7 +61,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 0,
+      "pass": 2,
       "of": 4
     },
     {
@@ -64,7 +71,7 @@
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -79,12 +86,12 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -109,7 +116,7 @@
     },
     {
       "id": "walrus-http-api/http-api-sponsored-uploads",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -121,11 +128,6 @@
       "id": "walrus-memory/memory-ts-quickstart",
       "pass": 0,
       "of": 5
-    },
-    {
-      "id": "walrus-memory/memory-mcp-setup",
-      "pass": 0,
-      "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
@@ -149,7 +151,7 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -189,7 +191,7 @@
     },
     {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -198,13 +200,18 @@
       "of": 4
     },
     {
+      "id": "walrus-sites/sites-ci-duplicate",
+      "pass": 1,
+      "of": 3
+    },
+    {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -214,13 +221,18 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-tip-exceeded",
       "pass": 0,
       "of": 3
+    },
+    {
+      "id": "walrus-troubleshooting/troubleshoot-no-gas",
+      "pass": 3,
+      "of": 4
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
@@ -240,6 +252,11 @@
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
       "pass": 1,
+      "of": 4
+    },
+    {
+      "id": "walrus-ts-sdk/ts-sdk-verify-durable",
+      "pass": 0,
       "of": 4
     }
   ]

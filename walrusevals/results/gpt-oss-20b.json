@@ -8,8 +8,8 @@
   "grader": "judge",
   "tools": [],
   "samples": 3,
-  "empty_answers": 1,
-  "recorded_at": "2026-10-14T18:27:13.339Z",
+  "empty_answers": 0,
+  "recorded_at": "2026-10-16T01:45:25.188Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -18,28 +18,35 @@
       "total": 26
     },
     "storing": {
-      "pass": 6,
+      "pass": 2,
       "total": 42
     },
     "building": {
-      "pass": 10,
+      "pass": 8,
       "total": 83
     },
     "operating": {
-      "pass": 1,
+      "pass": 3,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 1109175,
+    "output_tokens": 196422,
+    "input_per_answer": 8403,
+    "output_per_answer": 1488
   },
   "context_tokens_estimate": 3039,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {
@@ -49,7 +56,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -74,12 +81,12 @@
     },
     {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -124,7 +131,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 2,
+      "pass": 0,
       "of": 4
     },
     {

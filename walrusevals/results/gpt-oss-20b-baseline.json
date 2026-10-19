@@ -8,13 +8,13 @@
   "grader": "judge",
   "tools": [],
   "samples": 3,
-  "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:26:45.591Z",
+  "empty_answers": 1,
+  "recorded_at": "2026-10-16T01:39:17.718Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 6,
+      "pass": 5,
       "total": 26
     },
     "storing": {
@@ -22,13 +22,20 @@
       "total": 42
     },
     "building": {
-      "pass": 7,
+      "pass": 11,
       "total": 83
     },
     "operating": {
-      "pass": 2,
+      "pass": 0,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 131,
+    "input_tokens": 1065473,
+    "output_tokens": 192962,
+    "input_per_answer": 8133,
+    "output_per_answer": 1473
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -44,7 +51,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
@@ -54,12 +61,12 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 1,
+      "pass": 0,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -69,7 +76,7 @@
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -79,12 +86,12 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 1,
+      "pass": 0,
       "of": 5
     },
     {
@@ -94,7 +101,7 @@
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 0,
+      "pass": 3,
       "of": 4
     },
     {
@@ -134,12 +141,12 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -159,7 +166,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 3,
+      "pass": 2,
       "of": 5
     },
     {
@@ -244,7 +251,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
