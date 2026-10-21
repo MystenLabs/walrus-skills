@@ -11,31 +11,38 @@
     "grep",
     "ls"
   ],
-  "samples": 1,
-  "empty_answers": 0,
-  "recorded_at": "2026-10-09T16:48:43.267Z",
+  "samples": 3,
+  "empty_answers": 39,
+  "recorded_at": "2026-10-15T21:03:21.891Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 26,
-      "total": 26
+      "pass": 11,
+      "total": 12
     },
     "storing": {
-      "pass": 37,
-      "total": 38
+      "pass": 28,
+      "total": 30
     },
     "building": {
-      "pass": 80,
-      "total": 83
+      "pass": 58,
+      "total": 59
     },
     "operating": {
       "pass": 22,
-      "total": 22
+      "total": 23
     }
   },
   "partial": true,
-  "context_tokens_estimate": 3063,
+  "usage": {
+    "answers": 93,
+    "input_tokens": 516867,
+    "output_tokens": 85919,
+    "input_per_answer": 5558,
+    "output_per_answer": 924
+  },
+  "context_tokens_estimate": 3116,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
@@ -53,13 +60,8 @@
       "of": 4
     },
     {
-      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 4,
-      "of": 4
-    },
-    {
       "id": "walrus-cli/cli-store-file",
-      "pass": 3,
+      "pass": 1,
       "of": 3
     },
     {
@@ -78,27 +80,17 @@
       "of": 4
     },
     {
-      "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 4,
-      "of": 4
-    },
-    {
       "id": "walrus-data-security/security-sovereignty",
       "pass": 4,
       "of": 4
     },
     {
-      "id": "walrus-http-api/http-api-store-blob",
-      "pass": 4,
-      "of": 4
+      "id": "walrus-data-security/security-access-control",
+      "pass": 5,
+      "of": 5
     },
     {
       "id": "walrus-http-api/http-api-read-blob",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-http-api/http-api-no-mainnet-publisher",
       "pass": 4,
       "of": 4
     },
@@ -114,16 +106,11 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 3,
+      "pass": 5,
       "of": 5
     },
     {
       "id": "walrus-memory/memory-mcp-setup",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-memory/memory-namespace-isolation",
       "pass": 4,
       "of": 4
     },
@@ -133,17 +120,7 @@
       "of": 5
     },
     {
-      "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 4,
-      "of": 4
-    },
-    {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-move-integration/move-read-blob-fields",
       "pass": 4,
       "of": 4
     },
@@ -158,33 +135,18 @@
       "of": 5
     },
     {
-      "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 5,
-      "of": 5
-    },
-    {
-      "id": "walrus-overview/overview-which-tool",
-      "pass": 5,
-      "of": 5
-    },
-    {
-      "id": "walrus-quilts/quilts-when-to-use",
+      "id": "walrus-quilts/quilts-store-with-tags",
       "pass": 4,
       "of": 4
     },
     {
-      "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 3,
-      "of": 4
-    },
-    {
       "id": "walrus-sites/sites-deploy-spa",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
       "id": "walrus-sites/sites-http-redirect",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -194,12 +156,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-storage-costs/costs-small-blob-expensive",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -224,18 +181,13 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-init",
       "pass": 6,
       "of": 6
-    },
-    {
-      "id": "walrus-ts-sdk/ts-sdk-browser-upload",
-      "pass": 4,
-      "of": 4
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",

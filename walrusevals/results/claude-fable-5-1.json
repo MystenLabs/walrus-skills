@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T20:12:44.292Z",
+  "recorded_at": "2026-10-18T07:16:52.261Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -26,7 +26,7 @@
       "total": 42
     },
     "building": {
-      "pass": 82,
+      "pass": 83,
       "total": 83
     },
     "operating": {
@@ -36,12 +36,12 @@
   },
   "usage": {
     "answers": 132,
-    "input_tokens": 4903898,
-    "cached_tokens": 4902872,
-    "output_tokens": 126954,
-    "input_per_answer": 37151,
-    "cached_per_answer": 37143,
-    "output_per_answer": 962
+    "input_tokens": 4764879,
+    "cached_tokens": 4763863,
+    "output_tokens": 125267,
+    "input_per_answer": 36098,
+    "cached_per_answer": 36090,
+    "output_per_answer": 949
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -127,7 +127,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {

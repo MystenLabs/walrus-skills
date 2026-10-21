@@ -12,8 +12,8 @@
     "ls"
   ],
   "samples": 3,
-  "empty_answers": 3,
-  "recorded_at": "2026-10-14T18:00:37.412Z",
+  "empty_answers": 6,
+  "recorded_at": "2026-10-15T19:58:25.111Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -23,7 +23,7 @@
     },
     "storing": {
       "pass": 1,
-      "total": 38
+      "total": 35
     },
     "building": {
       "pass": 6,
@@ -35,7 +35,14 @@
     }
   },
   "partial": true,
-  "context_tokens_estimate": 3028,
+  "usage": {
+    "answers": 126,
+    "input_tokens": 1236910,
+    "output_tokens": 21015,
+    "input_per_answer": 9817,
+    "output_per_answer": 167
+  },
+  "context_tokens_estimate": 3020,
   "evals": [
     {
       "id": "walrus-blob-lifecycle/lifecycle-extend",
@@ -49,13 +56,8 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
-      "pass": 0,
+      "pass": 1,
       "of": 4
-    },
-    {
-      "id": "walrus-cli/cli-store-file",
-      "pass": 0,
-      "of": 3
     },
     {
       "id": "walrus-cli/cli-json-mode",
@@ -169,7 +171,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

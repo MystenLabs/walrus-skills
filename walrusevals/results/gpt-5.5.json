@@ -13,33 +13,35 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T19:47:29.769Z",
+  "recorded_at": "2026-10-21T06:21:31.213Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 24,
+      "pass": 23,
       "total": 26
     },
     "storing": {
-      "pass": 35,
+      "pass": 33,
       "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 79,
       "total": 83
     },
     "operating": {
-      "pass": 24,
+      "pass": 22,
       "total": 27
     }
   },
   "usage": {
     "answers": 132,
-    "input_tokens": 840552,
-    "output_tokens": 54274,
-    "input_per_answer": 6368,
-    "output_per_answer": 411
+    "input_tokens": 3387385,
+    "cached_tokens": 2580480,
+    "output_tokens": 54671,
+    "input_per_answer": 25662,
+    "cached_per_answer": 19549,
+    "output_per_answer": 414
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -50,12 +52,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 4,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
@@ -90,12 +92,12 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 3,
+      "pass": 4,
       "of": 4
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 4,
+      "pass": 5,
       "of": 5
     },
     {
@@ -125,7 +127,7 @@
     },
     {
       "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 5,
+      "pass": 4,
       "of": 5
     },
     {
@@ -160,7 +162,7 @@
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -180,17 +182,17 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-quilts/quilts-read-by-identifier",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
       "id": "walrus-quilts/quilts-store-with-tags",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
@@ -210,7 +212,7 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -225,7 +227,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 3,
+      "pass": 0,
       "of": 3
     },
     {
@@ -240,7 +242,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {

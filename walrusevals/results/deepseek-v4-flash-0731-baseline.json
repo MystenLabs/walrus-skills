@@ -12,29 +12,36 @@
     "ls"
   ],
   "samples": 3,
-  "empty_answers": 14,
-  "recorded_at": "2026-10-14T20:39:00.165Z",
+  "empty_answers": 17,
+  "recorded_at": "2026-10-15T21:25:17.482Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 10,
-      "total": 26
+      "pass": 9,
+      "total": 23
     },
     "storing": {
-      "pass": 13,
-      "total": 42
+      "pass": 7,
+      "total": 38
     },
     "building": {
-      "pass": 14,
-      "total": 75
+      "pass": 11,
+      "total": 69
     },
     "operating": {
-      "pass": 5,
-      "total": 23
+      "pass": 10,
+      "total": 24
     }
   },
   "partial": true,
+  "usage": {
+    "answers": 115,
+    "input_tokens": 206323,
+    "output_tokens": 398111,
+    "input_per_answer": 1794,
+    "output_per_answer": 3462
+  },
   "context_tokens_estimate": 0,
   "evals": [
     {
@@ -44,12 +51,12 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 3,
+      "pass": 2,
       "of": 4
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 2,
+      "pass": 1,
       "of": 4
     },
     {
@@ -63,38 +70,33 @@
       "of": 3
     },
     {
-      "id": "walrus-cli/cli-json-mode",
-      "pass": 1,
-      "of": 4
-    },
-    {
       "id": "walrus-cli/cli-install",
       "pass": 0,
       "of": 3
     },
     {
       "id": "walrus-cli/cli-get-wal",
-      "pass": 4,
-      "of": 4
-    },
-    {
-      "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 2,
-      "of": 4
-    },
-    {
-      "id": "walrus-data-security/security-access-control",
-      "pass": 3,
-      "of": 5
-    },
-    {
-      "id": "walrus-http-api/http-api-store-blob",
       "pass": 1,
       "of": 4
     },
     {
-      "id": "walrus-http-api/http-api-read-blob",
+      "id": "walrus-data-security/security-encrypt-before-upload",
+      "pass": 3,
+      "of": 4
+    },
+    {
+      "id": "walrus-data-security/security-sovereignty",
+      "pass": 1,
+      "of": 4
+    },
+    {
+      "id": "walrus-data-security/security-access-control",
       "pass": 4,
+      "of": 5
+    },
+    {
+      "id": "walrus-http-api/http-api-store-blob",
+      "pass": 2,
       "of": 4
     },
     {
@@ -103,24 +105,24 @@
       "of": 4
     },
     {
-      "id": "walrus-memory/memory-what-is-it",
+      "id": "walrus-http-api/http-api-sponsored-uploads",
       "pass": 1,
+      "of": 4
+    },
+    {
+      "id": "walrus-memory/memory-what-is-it",
+      "pass": 0,
       "of": 5
     },
     {
-      "id": "walrus-memory/memory-ts-quickstart",
-      "pass": 0,
-      "of": 5
+      "id": "walrus-memory/memory-mcp-setup",
+      "pass": 1,
+      "of": 4
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
       "pass": 0,
       "of": 4
-    },
-    {
-      "id": "walrus-memory/memory-python-quickstart",
-      "pass": 0,
-      "of": 5
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
@@ -134,17 +136,17 @@
     },
     {
       "id": "walrus-move-integration/move-read-blob-fields",
-      "pass": 3,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-move-integration/move-lifecycle-functions",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
       "id": "walrus-overview/overview-what-is-walrus",
-      "pass": 3,
+      "pass": 2,
       "of": 5
     },
     {
@@ -189,27 +191,17 @@
     },
     {
       "id": "walrus-storage-costs/costs-how-much",
-      "pass": 0,
-      "of": 4
-    },
-    {
-      "id": "walrus-storage-costs/costs-small-blob-expensive",
       "pass": 1,
       "of": 4
     },
     {
-      "id": "walrus-storage-costs/costs-estimate-before-upload",
+      "id": "walrus-storage-costs/costs-small-blob-expensive",
       "pass": 0,
-      "of": 3
+      "of": 4
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-max-epochs",
-      "pass": 0,
-      "of": 3
-    },
-    {
-      "id": "walrus-troubleshooting/troubleshoot-tip-exceeded",
-      "pass": 0,
+      "pass": 1,
       "of": 3
     },
     {
@@ -219,7 +211,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {

@@ -13,26 +13,34 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-14T18:40:58.900Z",
+  "recorded_at": "2026-10-16T02:19:24.433Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
     "fundamentals": {
-      "pass": 5,
+      "pass": 3,
       "total": 26
     },
     "storing": {
-      "pass": 5,
-      "total": 42
+      "pass": 4,
+      "total": 38
     },
     "building": {
-      "pass": 7,
+      "pass": 9,
       "total": 83
     },
     "operating": {
-      "pass": 8,
+      "pass": 5,
       "total": 27
     }
+  },
+  "partial": true,
+  "usage": {
+    "answers": 130,
+    "input_tokens": 1023070,
+    "output_tokens": 309456,
+    "input_per_answer": 7870,
+    "output_per_answer": 2380
   },
   "context_tokens_estimate": 0,
   "evals": [
@@ -48,17 +56,17 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-what-happens-expired",
-      "pass": 2,
-      "of": 4
-    },
-    {
-      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
       "pass": 1,
       "of": 4
     },
     {
-      "id": "walrus-cli/cli-store-file",
+      "id": "walrus-blob-lifecycle/lifecycle-storage-pools",
       "pass": 0,
+      "of": 4
+    },
+    {
+      "id": "walrus-cli/cli-store-file",
+      "pass": 1,
       "of": 3
     },
     {
@@ -72,13 +80,8 @@
       "of": 3
     },
     {
-      "id": "walrus-cli/cli-get-wal",
-      "pass": 0,
-      "of": 4
-    },
-    {
       "id": "walrus-data-security/security-encrypt-before-upload",
-      "pass": 1,
+      "pass": 3,
       "of": 4
     },
     {
@@ -88,7 +91,7 @@
     },
     {
       "id": "walrus-data-security/security-access-control",
-      "pass": 3,
+      "pass": 1,
       "of": 5
     },
     {
@@ -113,7 +116,7 @@
     },
     {
       "id": "walrus-memory/memory-what-is-it",
-      "pass": 0,
+      "pass": 1,
       "of": 5
     },
     {
@@ -128,7 +131,7 @@
     },
     {
       "id": "walrus-memory/memory-namespace-isolation",
-      "pass": 0,
+      "pass": 1,
       "of": 4
     },
     {
@@ -138,7 +141,7 @@
     },
     {
       "id": "walrus-move-integration/move-wrap-blob",
-      "pass": 1,
+      "pass": 2,
       "of": 4
     },
     {
@@ -163,7 +166,7 @@
     },
     {
       "id": "walrus-overview/overview-blob-id-vs-object-id",
-      "pass": 2,
+      "pass": 0,
       "of": 5
     },
     {
@@ -223,7 +226,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-tip-exceeded",
-      "pass": 3,
+      "pass": 0,
       "of": 3
     },
     {
@@ -248,7 +251,7 @@
     },
     {
       "id": "walrus-ts-sdk/ts-sdk-vite-error",
-      "pass": 1,
+      "pass": 0,
       "of": 4
     },
     {

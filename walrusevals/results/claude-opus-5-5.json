@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T20:12:11.701Z",
+  "recorded_at": "2026-10-18T07:16:18.037Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,7 +22,7 @@
       "total": 26
     },
     "storing": {
-      "pass": 40,
+      "pass": 41,
       "total": 42
     },
     "building": {
@@ -36,12 +36,12 @@
   },
   "usage": {
     "answers": 132,
-    "input_tokens": 4466792,
-    "cached_tokens": 4465806,
-    "output_tokens": 124513,
-    "input_per_answer": 33839,
-    "cached_per_answer": 33832,
-    "output_per_answer": 943
+    "input_tokens": 4629940,
+    "cached_tokens": 4628930,
+    "output_tokens": 126272,
+    "input_per_answer": 35075,
+    "cached_per_answer": 35068,
+    "output_per_answer": 957
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -67,7 +67,7 @@
     },
     {
       "id": "walrus-cli/cli-store-file",
-      "pass": 1,
+      "pass": 2,
       "of": 3
     },
     {

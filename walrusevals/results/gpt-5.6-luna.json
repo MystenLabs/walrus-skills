@@ -13,7 +13,7 @@
   ],
   "samples": 3,
   "empty_answers": 0,
-  "recorded_at": "2026-10-15T19:51:46.780Z",
+  "recorded_at": "2026-10-21T13:46:07.277Z",
   "manifest": "60947078a44c",
   "eval_set": "60947078a44c",
   "pillars": {
@@ -22,17 +22,26 @@
       "total": 26
     },
     "storing": {
-      "pass": 32,
+      "pass": 30,
       "total": 42
     },
     "building": {
-      "pass": 81,
+      "pass": 78,
       "total": 83
     },
     "operating": {
-      "pass": 27,
+      "pass": 25,
       "total": 27
     }
+  },
+  "usage": {
+    "answers": 132,
+    "input_tokens": 3215797,
+    "cached_tokens": 3214606,
+    "output_tokens": 57028,
+    "input_per_answer": 24362,
+    "cached_per_answer": 24353,
+    "output_per_answer": 432
   },
   "context_tokens_estimate": 3039,
   "evals": [
@@ -43,7 +52,7 @@
     },
     {
       "id": "walrus-blob-lifecycle/lifecycle-delete-privacy",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -83,7 +92,7 @@
     },
     {
       "id": "walrus-data-security/security-sovereignty",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -103,7 +112,7 @@
     },
     {
       "id": "walrus-http-api/http-api-no-mainnet-publisher",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -143,7 +152,7 @@
     },
     {
       "id": "walrus-move-integration/move-testnet-deps",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
@@ -173,7 +182,7 @@
     },
     {
       "id": "walrus-quilts/quilts-when-to-use",
-      "pass": 2,
+      "pass": 3,
       "of": 4
     },
     {
@@ -183,7 +192,7 @@
     },
     {
       "id": "walrus-quilts/quilts-store-with-tags",
-      "pass": 4,
+      "pass": 2,
       "of": 4
     },
     {
@@ -198,7 +207,7 @@
     },
     {
       "id": "walrus-sites/sites-ci-duplicate",
-      "pass": 3,
+      "pass": 2,
       "of": 3
     },
     {
@@ -233,7 +242,7 @@
     },
     {
       "id": "walrus-troubleshooting/troubleshoot-intermittent-uploads",
-      "pass": 4,
+      "pass": 3,
       "of": 4
     },
     {
